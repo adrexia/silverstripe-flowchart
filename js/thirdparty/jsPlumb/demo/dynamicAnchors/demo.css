@@ -1,0 +1,22 @@
+/** ELEMENTS **/
+.window { 
+	width:5em; 
+	height:5em;
+	line-height:5em;
+	padding:0.5em;	
+}
+
+/** ELEMENT POSITIONS **/
+#window1 { top:5em;left:2em; }
+#window2 { top:8em; left:43em; }
+#window3 { top:28em;left:2em; }
+#window4 { top:16em; left:22em ;}
+#window5 { top:34em;left:26em; }
+#window6 { top:23em;left:56em; }
+#window7 { top:18em;left:40em; }
+#window8 { left:63em;top:32em; }
+
+/** JSPLUMB ARTEFACTS **/
+._jsPlumb_connector { z-index:4; }
+._jsPlumb_endpoint { z-index:5; }
+

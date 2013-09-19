@@ -1,0 +1,41 @@
+/** ELEMENT POSITIONS **/
+#window1 { top:6em;left:10%; }
+#window2 { top:8em; right:50%; }
+#window3 { top:30em; left:8%; }
+#window4 { top:33em; right:40%}
+
+/** ELEMENTS **/
+.window {  
+    font-size:0.9em;
+    font-family:serif;
+    font-style:italic;
+    padding-top:0.9em; 
+    line-height:1.5em;
+}
+
+/** LINKS IN WINDOWS **/
+.drag-locked { border:1px solid red; }
+.cmdLink { font-size:0.80em;}
+
+/** DRAG/DROP CLASSES **/
+.dragActive { border:2px dotted orange; }
+.dropHover { border:1px dotted red; }
+
+/** INFO WINDOW **/
+#list {
+    text-align:center;
+    display:none;
+    font-size:90%;
+    position:absolute;
+    width:250px;
+    left:30%;
+    top:100px;
+    background-color:white;
+    padding:5px;
+    border:1px solid #456;
+    opacity:0.8;
+    border-radius:8px;
+    color:#444;
+}
+#list table { width:100%;}
+#list table th, #list strong { color:black; font-size:12px;}

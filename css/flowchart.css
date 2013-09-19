@@ -1,0 +1,222 @@
+html, body, .flowchart-admin-wrap{
+  height:100%;
+}
+
+
+
+.item {
+  position: absolute;
+  top: 200px;
+  right:60px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  color:#333;
+  width:350px;
+  font-size:10px;
+}
+
+/* for admin interface only. Will be overridden on frontend*/
+        .columns.two{
+          width: 200px;
+        }
+
+        .columns.four{
+          width: 300px;
+        }
+
+        .columns.six{
+          width: 400px;
+        }
+
+        .columns.eight{
+          width: 500px;
+        }
+
+
+.drag-area{
+  border:2px dashed #ccc;
+  height:210px;
+  background: rgba(255,255,255,0.1);
+  
+}
+
+.label-connect{
+  width:150px;
+  background:#d8dcdf;
+  border:none;
+  position:absolute;
+  left:50px;
+  border-radius: 0 0 2px 2px;
+  box-shadow: 0 0 5px rgba(170, 178, 185, 0.2);
+  border: 1px solid #cccfd1;
+}
+
+.label-connect label{
+  font-weight:bold;
+  line-height:2em;
+  opacity:0.7;
+
+  display:block;
+  color:rgba(0,0,0,0.5);
+  text-align: center;
+  text-shadow: 0px -1px 1px #d8dcdf;
+}
+
+.new-states{
+  box-shadow: 0 0 5px rgba(170, 178, 185, 0.2);
+  border: 1px solid #cccfd1;
+  background:#d8dcdf;
+  height:300px;
+  width:370px;
+  position: absolute;
+  top: 100px;
+  right:40px;
+  border-radius:2px;
+  padding:10px;
+}
+
+.new-states h2{
+  opacity:0.7;
+    margin:0;
+    padding-top:10px;
+  display:block;
+  color:rgba(0,0,0,0.5);
+  text-align: center;
+  text-shadow: 0px -1px 1px #d8dcdf;
+}
+
+em.flowchart-em{
+  line-height:2.5em;
+  display:block;
+  font-size:11px;
+  text-align: center;
+  color:#97a0aa;
+  font-style:italic;
+}
+
+.item .drag-content{
+  /*z-index:-1;*/
+  line-height:1.5em;
+  padding:5px 20px;
+}
+
+.item:hover{
+    box-shadow: 0 0 5px rgba(170, 178, 185, 1);
+  border: 1px solid #bbb;
+}
+
+.item .num{
+  float:left;
+ /*  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;*/
+  background:#2a5883;
+  font-size:2em;
+  color:#fff;
+  width:40px;
+  text-align:center;
+  margin-right:10px;
+  margin-bottom:5px;
+}
+
+.drag-content:hover{
+  cursor: move;
+}
+
+.flowchart-container {
+  margin:0 auto;
+  border: 0px solid #f4f5f6;
+  width: 100%;
+  height: 100%;
+  background-color:#eaedef;
+}
+
+.flowchart-container h1{
+  margin:0;
+  display:block;
+  color:#ddd;
+  text-align: center;
+  text-shadow: 0px -1px 1px #eee;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.title {
+  padding: 10px;
+  cursor: move;
+}
+    
+.connect {
+  width: 100%;
+  height: 5px;
+  cursor: pointer;
+}
+
+
+
+
+/*     From the cms     */
+input.text, textarea, select, .TreeDropdownField {
+  margin-left: 10px;
+  width: 100%;
+  max-width: 512px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+input.text.description, textarea.description, select.description, .TreeDropdownField.description {
+  margin: 0;
+}
+
+input.text .description, textarea .description, select .description, .TreeDropdownField .description {
+  max-width: 512px;
+}
+
+input.text, textarea, .TreeDropdownField {
+  background: #fff;
+  border: 1px solid #b3b3b3;
+  padding: 7px 7px;
+  line-height: 16px;
+  margin: 0;
+  outline: none;
+  -moz-transition: 0.2s box-shadow ease-in;
+  -webkit-transition: 0.2s box-shadow ease-in;
+  -o-transition: 0.2s box-shadow ease-in;
+  transition: 0.2s box-shadow ease-in;
+  -moz-transition: 0.2s border ease-in;
+  -webkit-transition: 0.2s border ease-in;
+  -o-transition: 0.2s border ease-in;
+  transition: 0.2s border ease-in;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  -o-border-radius: 4px;
+  border-radius: 4px;
+  background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjUwJSIgeTE9IjAlIiB4Mj0iNTAlIiB5Mj0iMTAwJSI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2VhZWFlYSIvPjxzdG9wIG9mZnNldD0iMTAlIiBzdG9wLWNvbG9yPSIjZmZmZmZmIi8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNncmFkKSIgLz48L3N2Zz4g');
+  background-size: 100%;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #eaeaea), color-stop(10%, white));
+  background-image: -webkit-linear-gradient(#eaeaea, white 10%);
+  background-image: -moz-linear-gradient(#eaeaea, white 10%);
+  background-image: -o-linear-gradient(#eaeaea, white 10%);
+  background-image: linear-gradient(#eaeaea, white 10%);
+}
+
+input.text:focus, textarea:focus, .TreeDropdownField:focus {
+  border: 1px solid #9a9a9a;
+  border-top-color: gray;
+  -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2) inset;
+  -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2) inset;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2) inset;
+}
+
+#Action {
+  box-shadow: none;
+}
