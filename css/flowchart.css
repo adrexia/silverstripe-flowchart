@@ -1,5 +1,75 @@
+/* for testing only */
 html, body, .flowchart-admin-wrap{
   height:100%;
+}
+
+body {
+    padding:0;
+    margin:0;
+    background-color:white;    
+    font-family:'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;    
+    background-color:#eaedef;
+}
+
+/* <-- for testing only */
+
+.flowchart-admin-wrap{
+  position:relative;
+}
+
+.flowchart-toolbar{
+  width:100%;
+  background:#d8dcdf;
+  border:none;
+  border-radius: 0 0 2px 2px;
+  box-shadow: 0 0 5px rgba(170, 178, 185, 0.2);
+  border: 1px solid #cccfd1;
+}
+
+.flowchart-toolbar label{
+  font-weight:bold;
+  line-height:2em;
+  opacity:0.7;
+  float:left;
+  display:block;
+  color:rgba(0,0,0,0.5);
+  text-align: center;
+  text-shadow: 0px -1px 1px #d8dcdf;
+}
+
+.flowchart-toolbar .extra-label{
+  float:left; 
+  margin-left:10px;
+}
+
+.flowchart-toolbar input.text{
+  width:100px;
+  float:left;
+  margin-left:10px;
+}
+
+.flowchart-container {
+  margin:0 auto;
+  border: 0px solid #f4f5f6;
+  width: 100%;
+  height: 100%;
+  background-color:#eaedef;
+}
+
+.flowchart-container h1{
+  margin:0;
+  display:block;
+  color:#ddd;
+  padding-top:10px;
+  padding-left:20px;
+  text-align: left;
+  text-shadow: 0px -1px 1px #eee;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 
@@ -7,11 +77,10 @@ html, body, .flowchart-admin-wrap{
 .item {
   position: absolute;
   top: 200px;
-  right:60px;
+  right:40px;
   border: 1px solid #ccc;
   background-color: #fff;
   color:#333;
-  width:350px;
   font-size:10px;
 }
 
@@ -40,27 +109,6 @@ html, body, .flowchart-admin-wrap{
   
 }
 
-.label-connect{
-  width:150px;
-  background:#d8dcdf;
-  border:none;
-  position:absolute;
-  left:50px;
-  border-radius: 0 0 2px 2px;
-  box-shadow: 0 0 5px rgba(170, 178, 185, 0.2);
-  border: 1px solid #cccfd1;
-}
-
-.label-connect label{
-  font-weight:bold;
-  line-height:2em;
-  opacity:0.7;
-
-  display:block;
-  color:rgba(0,0,0,0.5);
-  text-align: center;
-  text-shadow: 0px -1px 1px #d8dcdf;
-}
 
 .new-states{
   box-shadow: 0 0 5px rgba(170, 178, 185, 0.2);
@@ -70,15 +118,15 @@ html, body, .flowchart-admin-wrap{
   width:370px;
   position: absolute;
   top: 100px;
-  right:40px;
+  right:20px;
   border-radius:2px;
   padding:10px;
 }
 
 .new-states h2{
   opacity:0.7;
-    margin:0;
-    padding-top:10px;
+  margin:0;
+  padding-top:10px;
   display:block;
   color:rgba(0,0,0,0.5);
   text-align: center;
@@ -107,12 +155,6 @@ em.flowchart-em{
 
 .item .num{
   float:left;
- /*  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;*/
   background:#2a5883;
   font-size:2em;
   color:#fff;
@@ -126,27 +168,6 @@ em.flowchart-em{
   cursor: move;
 }
 
-.flowchart-container {
-  margin:0 auto;
-  border: 0px solid #f4f5f6;
-  width: 100%;
-  height: 100%;
-  background-color:#eaedef;
-}
-
-.flowchart-container h1{
-  margin:0;
-  display:block;
-  color:#ddd;
-  text-align: center;
-  text-shadow: 0px -1px 1px #eee;
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-}
 
 .title {
   padding: 10px;
@@ -162,7 +183,7 @@ em.flowchart-em{
 
 
 
-/*     From the cms     */
+/*   Styles from the cms     */
 input.text, textarea, select, .TreeDropdownField {
   margin-left: 10px;
   width: 100%;

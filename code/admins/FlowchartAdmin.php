@@ -10,7 +10,7 @@
 	private static $url_segment = 'flowcharts';
 	private static $menu_title = 'Flowcharts';
 
-	public static $menu_icon = "flowchart/images/flowchart.png";
+	private static $menu_icon = "flowchart/images/flowchart.png";
 
 
 

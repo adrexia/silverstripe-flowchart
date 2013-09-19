@@ -17,10 +17,10 @@
 
 	 	<div class="flowchart-admin-wrap">
 
-			<fieldset class="label-connect">
+			<fieldset class="flowchart-toolbar">
 				<label for="label-name">Connection Label</label>
 				<input id="label-name" name="labelName" value="" class="text" aria-described-by="flowchart-admin-use" />
-				<em id="flowchart-admin-use" class="flowchart-em">
+				<em id="flowchart-admin-use" class="flowchart-em extra-label">
 					(e.g "Yes", "No", "Accepted")</em>
 			</fieldset>
 
@@ -32,9 +32,10 @@
 			<div id="container" class="flowchart-container">
 				<h1>Workspace</h1>
 
-				<% loop FlowStates %>
 
-				<div id="info_{$Pos}" class="item columns <% if $Size > 0 %>$Size<% else %>two<% end_if %>">
+
+				<% loop FlowStates %>
+				<div id="info_{$Pos}" class="item columns <% if $Size %>$Size<% else %>two<% end_if %>">
 					<div class="num">$Number</div>
 					<div class="drag-content">
 						$Description

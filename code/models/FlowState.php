@@ -5,30 +5,30 @@
 
 class FlowState extends DataObject implements PermissionProvider {
 
-	public static $db = array(
+	private static $db = array(
 		'Number'=>'Int',
 		'Description'=>'Text',
 		'Content'=>'HTMLText',
 		'Size'=>'Varchar(6)'
 	);
 
-	public static $has_one = array(
+	private static $has_one = array(
 		'Parent'=>'FlowchartPage'
 	);
 
-	public static $searchable_fields = array(
+	private static $searchable_fields = array(
 		'Number',
 		'Description',
 		'Content',
 	);
 
-	public static $summary_fields = array(
+	private static $summary_fields = array(
 		'Number'=>'Number',
 		'Description'=>'Title',
 		'Content.NoHTML'=>'Content'
 	);
 	
-	public static $default_sort = 'Number';
+	private static $default_sort = 'Number';
 
 	public function getCMSFields(){
 		$fields = parent::getCMSFields();
@@ -43,7 +43,7 @@ class FlowState extends DataObject implements PermissionProvider {
 		$title->setRightTitle("Displayed in flow state box");
 		$content->setDescription("Extra information related to state. May be displayed on hover, or click");
 
-		$spanOpt = array("two","four","six","eight");
+		$spanOpt = array("two"=>"two","four"=>"four","six"=>"six","eight"=>"eight");
 		$fields->insertAfter(new DropdownField('Size', "Relative display width", $spanOpt),'Description');
 
 		return $fields;
