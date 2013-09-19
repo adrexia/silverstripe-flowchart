@@ -1,6 +1,7 @@
 #Silverstripe Flowchart
 
-## Prototype for a graphical flowchart creator within Silverstripe
+> Prototype for a graphical flowchart creator within Silverstripe
+
 Currently in "proof of concept" stage. Does not yet do anything useful. Also, the code is more than a bit messy.
 
 ## Built with JSPlumb
