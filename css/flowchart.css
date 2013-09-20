@@ -65,7 +65,7 @@ button:active{
   margin-left:10px;
 }
 
-.flowchart-toolbar input.text{
+.flowchart-toolbar input.texxt{
   width:100px;
   float:left;
   margin-left:10px;
@@ -100,7 +100,7 @@ button:active{
   max-width: 180px;
   overflow:hidden;
   text-overflow:ellipsis;
-  height:30px;
+  height:27px;
 }
 
 .state.new-state .drag-content{
