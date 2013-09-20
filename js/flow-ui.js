@@ -16,12 +16,14 @@ jsPlumb.ready(function() {
 				width:8,
 				foldback:0.8
 			} ],
-			[ "Label", { label:makeLabel(), id:"label", cssClass:"empty" }]
+			[ "Label", { label:$('#label-name').val(), id:"label", cssClass:"empty" }]
 		]
 	});
 
+	//Handle update of label
 	$('#label-name').on('change paste keyup',function(){
-		if($('#label-name').val().length  >0 ){
+		var labelVal =$('#label-name').val();
+		if(labelVal.length  >0 ){
 			jsPlumb.Defaults.ConnectionOverlays = [
 				[ "Arrow", {
 						location:1,
@@ -30,7 +32,7 @@ jsPlumb.ready(function() {
 						width:8,
 						foldback:0.8
 					} ],
-					[ "Label", { label:makeLabel(), id:"label", cssClass:"aLabel" }]
+					[ "Label", { label:labelVal, id:"label", cssClass:"aLabel" }]
 				]
 		} else {
 			jsPlumb.Defaults.ConnectionOverlays = [
@@ -41,37 +43,35 @@ jsPlumb.ready(function() {
 						width:8,
 						foldback:0.8
 					} ],
-					[ "Label", { label:makeLabel(), id:"label", cssClass:"empty" }]
+					[ "Label", { label:'', id:"label", cssClass:"empty" }]
 				]
 		}
 	});
 
+	//Helper function to change display on states that 
+	//have been moved from original location
+	$('.state.new-state').on('click', function(){
+		$(this).removeClass('new-state');
+	});
 
 
-	//run through for loop
+	var states = $('#container .state'),
+		connect = $('<div>').addClass('connect');
 
-	function makeLabel(){
-		//return input
-		return $('#label-name').val();
-	}
-
-	var items = $('#container .item');
-	var connect = $('<div>').addClass('connect');
-
-	for(var i = 0; i < items.length; i = i + 1){
+	for(var i = 0; i < states.length; i = i + 1){
 		var connect = $('<div>').addClass('connect');
-		jsPlumb.makeTarget(items[i], {
+		jsPlumb.makeTarget(states[i], {
 			anchor: 'Continuous'
 		});
 
 		jsPlumb.makeSource(connect, {
-			parent: items[i]
+			parent: states[i]
 		});
 
-		$(items[i]).append(connect);
+		$(states[i]).append(connect);
 
 		//Make new state draggable
-		jsPlumb.draggable(items[i], {
+		jsPlumb.draggable(states[i], {
 			containment: 'parent' //Stay inside container
 		});
 

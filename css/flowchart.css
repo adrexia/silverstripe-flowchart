@@ -11,6 +11,27 @@ body {
     background-color:#eaedef;
 }
 
+button{
+  font-size:13px;
+  margin-right:50px;
+  border:1px solid #1f9433;
+  border-bottom-color: #166a24;
+  background-color:#1f9433;
+  background:linear-gradient(#93be42, #1f9433);
+  color:#fff;
+  border-radius:3px;
+  font-weight:bold;
+  float:right;
+  padding:5px 10px;
+}
+
+button:hover{
+  background:linear-gradient( #1f9433, #93be42);
+}
+button:active{
+  box-shadow:inset 0 1px 3px rgba(0,0,0, 0.4), 0 1px 0 rgba(255, 255, 255, 0.6);
+}
+
 /* <-- for testing only */
 
 .flowchart-admin-wrap{
@@ -18,12 +39,13 @@ body {
 }
 
 .flowchart-toolbar{
+  box-sizing: border-box;
+  margin:0;
   width:100%;
   background:#d8dcdf;
   border:none;
-  border-radius: 0 0 2px 2px;
   box-shadow: 0 0 5px rgba(170, 178, 185, 0.2);
-  border: 1px solid #cccfd1;
+  border-bottom: 1px solid #cccfd1;
 }
 
 .flowchart-toolbar label{
@@ -49,7 +71,8 @@ body {
 }
 
 .flowchart-container {
-  margin:0 auto;
+  margin:0;
+  padding:0;
   border: 0px solid #f4f5f6;
   width: 100%;
   height: 100%;
@@ -72,11 +95,23 @@ body {
   user-select: none;
 }
 
+.state.new-state{
+  max-width: 180px;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  height:30px;
+}
 
+.state.new-state .drag-content{
+  overflow:hidden;
+  white-space:nowrap;
+  text-overflow:ellipsis;
+  padding:5px 0;
+}
 
-.item {
+.state {
   position: absolute;
-  top: 200px;
+  top: 160px;
   right:40px;
   border: 1px solid #ccc;
   background-color: #fff;
@@ -104,20 +139,20 @@ body {
 
 .drag-area{
   border:2px dashed #ccc;
-  height:210px;
+  height:50px;
   background: rgba(255,255,255,0.1);
   
 }
 
 
 .new-states{
-  box-shadow: 0 0 5px rgba(170, 178, 185, 0.2);
+  /*box-shadow: 0 0 5px rgba(170, 178, 185, 0.2);
   border: 1px solid #cccfd1;
-  background:#d8dcdf;
-  height:300px;
-  width:370px;
+  background:#d8dcdf;*/
+  height:50px;
+  width:200px;
   position: absolute;
-  top: 100px;
+  top: 70px;
   right:20px;
   border-radius:2px;
   padding:10px;
@@ -142,18 +177,18 @@ em.flowchart-em{
   font-style:italic;
 }
 
-.item .drag-content{
+.state .drag-content{
   /*z-index:-1;*/
   line-height:1.5em;
   padding:5px 20px;
 }
 
-.item:hover{
+.state:hover{
     box-shadow: 0 0 5px rgba(170, 178, 185, 1);
   border: 1px solid #bbb;
 }
 
-.item .num{
+.state .num{
   float:left;
   background:#2a5883;
   font-size:2em;
@@ -176,8 +211,14 @@ em.flowchart-em{
     
 .connect {
   width: 100%;
-  height: 5px;
+  height: 10px;
   cursor: pointer;
+}
+
+
+/* Interface only */
+.state:hover .connect {
+  background:#efefef;
 }
 
 

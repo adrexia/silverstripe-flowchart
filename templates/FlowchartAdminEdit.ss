@@ -13,40 +13,10 @@
 		<link rel="stylesheet" href="flowchart/css/demo.css">
 		<link rel="stylesheet" href="flowchart/css/flowchart.css">
 	</head>
-	 <body>
+	<body>
 
-	 	<div class="flowchart-admin-wrap">
+		<% include FlowchartWorkspace %>
 
-			<fieldset class="label-connect">
-				<label for="label-name">Connection Label</label>
-				<input id="label-name" name="labelName" value="" class="text" />
-			</fieldset>
-
-			<div class="new-states">
-				<h2>New States</h2>
-				<p class="light">(Drag and drop into your workspace)</p>
-				<div class="drag-area"></div>
-			</div>
-			<div id="container">
-				<h1>Workspace</h1>
-
-				<% loop FlowStates %>
-
-				<div id="info_{$Pos}" class="item columns <% if $Size > 0 %>$Size<% else %>two<% end_if %>">
-					<div class="num">$Number</div>
-					<div class="drag-content">
-						$Description
-					</div>
-				</div>
-
-				<% end_loop %>
-
-			</div>
-		</div>
-
-
-		<div id="list"></div>
-	
 		<!-- DEP -->
 		<script src="flowchart/js/lib/jquery-1.9.0.js"></script>
 		<script src="flowchart/js/lib/jquery-ui-1.9.2-min.js"></script>
@@ -87,13 +57,9 @@
 		<script src="flowchart/js/thirdparty/jsPlumb/src/jquery.jsPlumb.js"></script>
 		<!-- /JS -->
 
-		<!--  demo code -->
-		<!--<script type="text/javascript" src="../js/demo-jquery.js"></script>-->
-		
-		<!--  demo list and helper code. you don't need this stuff if you're just copying the single demo. -->
-		<!--<script src="../js/demo-list.js"></script>
-		<script src="../js/demo-helper-jquery.js"></script> -->
+		<!--custom -->
+		<script src="flowchart/js/flow-saveload.js"></script>
+		<script src="flowchart/js/flow-ui.js"></script>
 
-		<script src="flowchart/js/flow.js"></script>
 	</body>
 </html>
