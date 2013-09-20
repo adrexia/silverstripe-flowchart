@@ -122,7 +122,7 @@ button:active{
 
 /* for admin interface only. Will be overridden on frontend*/
         .columns.two{
-          width: 200px;
+          width: 250px;
         }
 
         .columns.four{
@@ -130,11 +130,11 @@ button:active{
         }
 
         .columns.six{
-          width: 400px;
+          width: 450px;
         }
 
         .columns.eight{
-          width: 500px;
+          width: 600px;
         }
 
 
