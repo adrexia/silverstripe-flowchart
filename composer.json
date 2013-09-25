@@ -1,0 +1,23 @@
+{
+	"name": "adrexia/flowchart",
+	"description": "Prototype for a graphical flowchart creator within Silverstripe",
+	"type": "silverstripe-module",
+	"keywords": ["silverstripe"],
+	"license": "BSD-3-Clause",
+	"authors": [
+		{
+			"name": "Naomi Guyer",
+			"email": "naomi@silverstripe.com"
+		},
+		{
+			"name": "Mike Parkhill",
+			"email": "mike@silverstripe.com"
+		},
+
+	],
+	"require":
+	{
+		"silverstripe/framework": "~3.1",
+		"silverstripe/cms": "~3.1"
+	}
+}
