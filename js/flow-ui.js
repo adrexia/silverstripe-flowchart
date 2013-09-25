@@ -20,42 +20,8 @@ jsPlumb.ready(function() {
 		]
 	});
 
-	//Handle update of label
-	$('#label-name').on('change paste keyup',function(){
-		var labelVal =$('#label-name').val();
-		if(labelVal.length  >0 ){
-			jsPlumb.Defaults.ConnectionOverlays = [
-				[ "Arrow", {
-						location:1,
-						id:"arrow",
-						length:8,
-						width:8,
-						foldback:0.8
-					} ],
-					[ "Label", { label:labelVal, id:"label", cssClass:"aLabel" }]
-				]
-		} else {
-			jsPlumb.Defaults.ConnectionOverlays = [
-				[ "Arrow", {
-						location:1,
-						id:"arrow",
-						length:8,
-						width:8,
-						foldback:0.8
-					} ],
-					[ "Label", { label:'', id:"label", cssClass:"empty" }]
-				]
-		}
-	});
 
-	//Helper function to change display on states that 
-	//have been moved from original location
-	$('.state.new-state').on('click', function(){
-		$(this).removeClass('new-state');
-	});
-
-
-	var states = $('#container .state'),
+	var states = $('.flowchart-container .state'),
 		connect = $('<div>').addClass('connect');
 
 	for(var i = 0; i < states.length; i = i + 1){
@@ -75,6 +41,8 @@ jsPlumb.ready(function() {
 			containment: 'parent' //Stay inside container
 		});
 
-		jsPlumb.bind("click", jsPlumb.detach);
+		bindFlowEvents();
 	}
+
+
 });

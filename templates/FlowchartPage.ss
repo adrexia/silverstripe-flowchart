@@ -60,6 +60,7 @@
 		<!--custom -->
 		<script src="flowchart/js/flow-saveload.js"></script>
 		<script src="flowchart/js/flow-ui.js"></script>
+		<script src="flowchart/js/flow-event.js"></script>
 
 	</body>
 </html>

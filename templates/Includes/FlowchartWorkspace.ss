@@ -4,10 +4,16 @@
 		<input id="label-name" name="labelName" value="" class="text" aria-described-by="flowchart-admin-use" />
 		<em id="flowchart-admin-use" class="flowchart-em extra-label">
 			(e.g "Yes", "No", "Accepted")</em>
+
+		<input type="hidden" name="flow-chart-store" id="flow-chart-store" val="" />
+
 		<div class="actions">
-			<button id="save">Save</button>
+			
+			<button id="flow-chart-save">Save</button>
+			<button id="flow-chart-load">Load</button>
 		</div>
 	</fieldset>
+
 
 	<div class="new-states">
 		<h2>New States</h2>

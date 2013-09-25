@@ -27,8 +27,6 @@ class FlowchartPage extends Page {
 	}
 
 
-
-
 }
 
 class FlowchartPage_Controller extends Page_Controller {

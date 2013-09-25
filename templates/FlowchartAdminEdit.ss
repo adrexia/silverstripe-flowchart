@@ -15,7 +15,7 @@
 	</head>
 	<body>
 
-		<% include FlowchartWorkspace %>
+		$Layout
 
 		<!-- DEP -->
 		<script src="flowchart/js/lib/jquery-1.9.0.js"></script>
@@ -60,6 +60,7 @@
 		<!--custom -->
 		<script src="flowchart/js/flow-saveload.js"></script>
 		<script src="flowchart/js/flow-ui.js"></script>
+		<script src="flowchart/js/flow-event.js"></script>
 
 	</body>
 </html>
