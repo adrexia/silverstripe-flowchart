@@ -27,6 +27,18 @@ class FlowchartAdmin extends ModelAdmin {
 class FlowchartGridFieldDetailForm extends GridFieldDetailForm {
 
 	protected $template = 'FlowchartWorkspace';
+
+	protected static $css_files = array(
+		'flowchart/css/demo-all.css',
+		'flowchart/css/demo.css',
+		'flowchart/css/flowchart.css'
+	);
+
+	function __construct() {
+		parent::__construct();
+		Requirements::combine_files('flowchart.css', self::$css_files);
+	}
+
 }
 
 class FlowchartGridFieldDetailForm_ItemRequest extends GridFieldDetailForm_ItemRequest {
@@ -37,8 +49,7 @@ class FlowchartGridFieldDetailForm_ItemRequest extends GridFieldDetailForm_ItemR
 	 * @return Form
 	 */
 	public function ItemEditForm() {
-		return parent::ItemEditForm();
-		// TODO: implement breadcrumbs, save, cancel/back buttons here
+		// TODO: implement breadcrumbs, save, cancel/back buttons
 	}
 
 	/**
@@ -47,6 +58,6 @@ class FlowchartGridFieldDetailForm_ItemRequest extends GridFieldDetailForm_ItemR
 	 * @return Form
 	 */
 	public function doSave($data, $form) {
-		//TODO: implement this
+		//TODO: implement saving to FlowchartPage
 	}
 }
