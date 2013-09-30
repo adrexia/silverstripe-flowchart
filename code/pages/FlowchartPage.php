@@ -39,4 +39,3 @@ class FlowchartPage_Controller extends Page_Controller {
 		return FlowState::get()->filter(array('ParentID'=>$this->ID));
 	}
 }
-
