@@ -61,4 +61,16 @@ class FlowchartGridFieldDetailForm_ItemRequest extends GridFieldDetailForm_ItemR
 	public function getFlowstates() {
 		return FlowState::get()->filter('ParentID', $this->record->ID);
 	}
+
+	public function getFlowchartData() {
+		return $this->record->FlowchartData;
+	}
+
+	public function getFlowchartID() {
+		return $this->record->ID;
+	}
+
+	public function doSave($data, $form) {
+		die('saving');
+	}
 }
