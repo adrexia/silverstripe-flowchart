@@ -5,7 +5,7 @@
 		<em id="flowchart-admin-use" class="flowchart-em extra-label">
 			(e.g "Yes", "No", "Accepted")</em>
 
-		<input type="hidden" name="flow-chart-store" id="flow-chart-store" val="$FlowchartData" />
+		<input type="text" name="flow-chart-store" id="flow-chart-store" val="$FlowchartData" />
 
 		<div class="actions">
 
