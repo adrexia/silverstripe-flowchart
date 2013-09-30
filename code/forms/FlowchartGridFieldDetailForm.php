@@ -58,19 +58,22 @@ class FlowchartGridFieldDetailForm extends GridFieldDetailForm {
 
 class FlowchartGridFieldDetailForm_ItemRequest extends GridFieldDetailForm_ItemRequest {
 
+	private static $allowed_actions = array(
+		'doSave'
+	);
+
 	public function getFlowstates() {
 		return FlowState::get()->filter('ParentID', $this->record->ID);
 	}
 
 	public function getFlowchartData() {
-		return $this->record->FlowchartData;
-	}
-
-	public function getFlowchartID() {
-		return $this->record->ID;
+		// Need to strip the slashes that raw2SQL applies during the doSave function below
+		return stripslashes($this->record->FlowchartData);
 	}
 
 	public function doSave($data, $form) {
-		die('saving');
+		$this->record->FlowchartData = Convert::raw2SQL($data['flow-chart-store']);
+		$this->record->write();
+		Controller::curr()->redirect($this->Link());
 	}
 }

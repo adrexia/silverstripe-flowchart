@@ -1,20 +1,17 @@
 <div class="flowchart-admin-wrap cms-content center cms-tabset FlowChartAdmin LeftAndMain ui-tabs ui-widget ui-widget-content ui-corner-all">
-	<fieldset class="flowchart-toolbar">
-		<label for="label-name">Connection Label</label>
-		<input id="label-name" name="labelName" value="" class="text" aria-described-by="flowchart-admin-use" />
-		<em id="flowchart-admin-use" class="flowchart-em extra-label">
-			(e.g "Yes", "No", "Accepted")</em>
-
-		<input type="hidden" name="flow-chart-store" id="flow-chart-store" value='$FlowchartData' />
-		<input type="hidden" name="flow-chart-id" id="flow-chart-id" value="$FlowchartID"/>
-
-		<div class="actions">
-			<button id="flow-chart-save">Save</button>
-			<button id="flow-chart-load">Load</button>
-		</div>
-	</fieldset>
-
-
+	<form action="$Link(ItemEditForm)" method="POST" >
+		<fieldset class="flowchart-toolbar">
+			<label for="label-name">Connection Label</label>
+			<input id="label-name" name="labelName" value="" class="text" aria-described-by="flowchart-admin-use" />
+			<em id="flowchart-admin-use" class="flowchart-em extra-label">(e.g "Yes", "No", "Accepted")</em>
+			<input type="hidden" name="flow-chart-store" id="flow-chart-store" value='$FlowchartData' />
+			<input type='hidden' value='$SecurityID' name="SecurityID">
+			<div class="actions">
+				<button id="flow-chart-save" name='action_doSave'>Save</button>
+			</div>
+		</fieldset>
+	</form>
+	<button id="flow-chart-load">Load</button>
 	<div class="new-states">
 		<h2>New States</h2>
 		<em class="flowchart-em">(Drag and drop into your workspace)</em>
