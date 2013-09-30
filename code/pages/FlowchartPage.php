@@ -34,4 +34,9 @@ class FlowchartPage_Controller extends Page_Controller {
 	function init() {
 		parent::init();
 	}
+
+	public function getFlowStates(){
+		return FlowState::get('FooterHolder')->filter(array('ParentID'=>$this->ID));
+	}
 }
+

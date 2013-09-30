@@ -1,4 +1,4 @@
-<div class="flowchart-admin-wrap">
+<div class="flowchart-admin-wrap cms-content center cms-tabset FlowChartAdmin LeftAndMain ui-tabs ui-widget ui-widget-content ui-corner-all">
 	<fieldset class="flowchart-toolbar">
 		<label for="label-name">Connection Label</label>
 		<input id="label-name" name="labelName" value="" class="text" aria-described-by="flowchart-admin-use" />

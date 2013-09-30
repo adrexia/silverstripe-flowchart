@@ -15,11 +15,11 @@ class FlowchartAdmin extends ModelAdmin {
 	private static $tree_class = 'SS_Flowchart';
 
 	public function getEditForm($id = null, $fields = null){
-    	$form = parent::getEditForm($id, $fields);
-	    $gridField = $form->Fields()->fieldByName($this->sanitiseClassName($this->modelClass));
-	    $config = $gridField->getConfig();
-	    $config->removeComponentsByType('GridFieldDetailForm');
-	    $config->addComponent(new FlowchartGridFieldDetailForm());
-	    return $form;
+		$form = parent::getEditForm($id, $fields);
+		$gridField = $form->Fields()->fieldByName($this->sanitiseClassName($this->modelClass));
+		$config = $gridField->getConfig();
+		$config->removeComponentsByType('GridFieldDetailForm');
+		$config->addComponent(new FlowchartGridFieldDetailForm());
+		return $form;
 	}
 }
