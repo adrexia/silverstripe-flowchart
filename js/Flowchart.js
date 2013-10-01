@@ -106,8 +106,8 @@ jsPlumb.ready(function($) {
 					state = $(states[j]);
 					saveArray.states.push({
 						id: state.attr('id'),
-						x: state.offset().left,
-						y: state.offset().top
+						x: state.position().left,
+						y: state.position().top
 					});
 				}
 
