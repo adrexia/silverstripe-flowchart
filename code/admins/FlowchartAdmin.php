@@ -4,7 +4,7 @@
  */
 class FlowchartAdmin extends ModelAdmin {
 
- 	private static $managed_models = array('FlowchartPage');
+ 	private static $managed_models = array('FlowchartPage','FlowState');
 
 	private static $url_segment = 'flowcharts';
 
@@ -18,8 +18,15 @@ class FlowchartAdmin extends ModelAdmin {
 		$form = parent::getEditForm($id, $fields);
 		$gridField = $form->Fields()->fieldByName($this->sanitiseClassName($this->modelClass));
 		$config = $gridField->getConfig();
-		$config->removeComponentsByType('GridFieldDetailForm');
-		$config->addComponent(new FlowchartGridFieldDetailForm());
+
+		if($this->sanitiseClassName($this->modelClass) == "FlowchartPage"){
+			$config->removeComponentsByType('GridFieldDetailForm');
+			$config->addComponent(new GridFieldFlowchartDetailForm());
+		} else if($this->sanitiseClassName($this->modelClass) == "FlowState"){
+			$config->getComponentByType('GridFieldDataColumns')->setDisplayFields(
+				singleton($this->sanitiseClassName($this->modelClass))->getCurrentDisplayFields()
+			);
+		}
 		return $form;
 	}
 }

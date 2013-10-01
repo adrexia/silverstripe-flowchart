@@ -2,7 +2,7 @@
 /**
  * Graphical interface for creating basic flowcharts
  */
-class FlowchartGridFieldDetailForm extends GridFieldDetailForm {
+class GridFieldFlowchartDetailForm extends GridFieldDetailForm {
 
 	protected $template = 'Flowchart_EditForm';
 
@@ -57,7 +57,7 @@ class FlowchartGridFieldDetailForm extends GridFieldDetailForm {
 
 }
 
-class FlowchartGridFieldDetailForm_ItemRequest extends GridFieldDetailForm_ItemRequest {
+class GridFieldFlowchartDetailForm_ItemRequest extends GridFieldDetailForm_ItemRequest {
 
 	private static $allowed_actions = array(
 		'doSave'

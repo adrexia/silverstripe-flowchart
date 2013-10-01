@@ -30,10 +30,21 @@ class FlowState extends DataObject implements PermissionProvider {
 	
 	private static $default_sort = 'Number';
 
+	public function getCurrentDisplayFields(){
+		return array(
+			'Number'=>'Number',
+			'Description'=>'Title',
+			'Content.NoHTML'=>'Content',
+			'getParentName'=>'Flowchart Page'
+		);
+	}
+
+	public function getParentName(){
+		return FlowchartPage::get()->byID($this->ParentID)->Title;
+	}
+
 	public function getCMSFields(){
 		$fields = parent::getCMSFields();
-
-		$fields->removeByName('ParentID');
 
 		$number = $fields->dataFieldByName('Number');
 		$title = $fields->dataFieldByName('Description');
