@@ -155,7 +155,7 @@ jsPlumb.ready(function($) {
 						x = state.x;
 						y = state.y;
 
-						$('#'+id).css({left: x, top:y});
+						$('#'+id).css({left: x, top:y}).removeClass('new-state');
 					}
 				}
 

@@ -38,7 +38,6 @@
 	<div class="cms-content-actions cms-content-controls south flowchart-toolbar">
 		<div class="Actions">
 			<button id="flow-chart-save" name='action_doSave' value="save" class="action ss-ui-action-constructive ss-ui-button" data-icon="accept" role="button">Save</button>
-			<button id="flow-chart-load">Load</button>
 			<label for="label-name">Connection Label</label>
 			<input id="label-name" name="labelName" value="" class="text" aria-described-by="flowchart-admin-use" />
 			<em id="flowchart-admin-use" class="flowchart-em extra-label">(e.g "Yes", "No", "Accepted")</em>
