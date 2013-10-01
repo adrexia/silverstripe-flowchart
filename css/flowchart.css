@@ -1,91 +1,51 @@
-/* for testing only */
-html, body, .flowchart-admin-wrap{
-  height:100%;
+.flowchart-admin-wrap {
+  /* for admin interface only. Will be overridden on frontend*/
 }
-
-body {
-    padding:0;
-    margin:0;
-    background-color:white;    
-    font-family:'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;    
-    background-color:#eaedef;
-}
-
-button{
-  font-size:13px;
-  margin-right:50px;
-  border:1px solid #1f9433;
-  border-bottom-color: #166a24;
-  background-color:#1f9433;
-  background:linear-gradient(#93be42, #1f9433);
-  color:#fff;
-  border-radius:3px;
-  font-weight:bold;
-  float:right;
-  padding:5px 10px;
-}
-
-button:hover{
-  background:linear-gradient( #1f9433, #93be42);
-}
-button:active{
-  box-shadow:inset 0 1px 3px rgba(0,0,0, 0.4), 0 1px 0 rgba(255, 255, 255, 0.6);
-}
-
-/* <-- for testing only */
-
-.flowchart-admin-wrap{
-  position:relative;
-}
-
-.flowchart-toolbar{
+.flowchart-admin-wrap .flowchart-toolbar {
   box-sizing: border-box;
-  margin:0;
-  width:100%;
-  background:#d8dcdf;
-  border:none;
+  margin: 0;
+  width: 100%;
+  background: #d8dcdf;
+  border: none;
   box-shadow: 0 0 5px rgba(170, 178, 185, 0.2);
   border-bottom: 1px solid #cccfd1;
 }
-
-.flowchart-toolbar label{
-  font-weight:bold;
-  line-height:2em;
-  opacity:0.7;
-  float:left;
-  display:block;
-  color:rgba(0,0,0,0.5);
+.flowchart-admin-wrap .flowchart-toolbar label {
+  font-weight: bold;
+  line-height: 2em;
+  opacity: 0.7;
+  float: left;
+  display: block;
+  color: rgba(0, 0, 0, 0.5);
   text-align: center;
   text-shadow: 0px -1px 1px #d8dcdf;
-  margin-left:10px;
+  margin-left: 10px;
 }
-
-.flowchart-toolbar .extra-label{
-  float:left; 
-  margin-left:10px;
+.flowchart-admin-wrap .flowchart-toolbar .extra-label {
+  float: left;
+  margin-left: 10px;
 }
-
-.flowchart-toolbar input.text{
-  width:100px;
-  float:left;
-  margin-left:10px;
+.flowchart-admin-wrap .flowchart-toolbar input.text {
+  width: 100px;
+  float: left;
+  margin-left: 10px;
 }
-
-.flowchart-container {
-  margin:0;
-  padding:0;
-  border: 0px solid #f4f5f6;
+.flowchart-admin-wrap .flowchart-container {
+  float: left;
+  -webkit-box-shadow: rgba(248, 248, 248, 0.9) -1px 0 0 inset, 0 0 1px rgba(201, 205, 206, 0.8);
+  -moz-box-shadow: rgba(248, 248, 248, 0.9) -1px 0 0 inset, 0 0 1px rgba(201, 205, 206, 0.8);
+  box-shadow: rgba(248, 248, 248, 0.9) -1px 0 0 inset, 0 0 1px rgba(201, 205, 206, 0.8);
   width: 100%;
-  height: 100%;
-  background-color:#eaedef;
+  height: 1000px;
+  background-color: rgba(255, 255, 255, 0.4);
+  box-sizing: border-box;
 }
-
-.flowchart-container h1{
-  margin:0;
-  display:block;
-  color:#ddd;
-  padding-top:10px;
-  padding-left:20px;
+.flowchart-admin-wrap .flowchart-container h1 {
+  margin: 0;
+  display: block;
+  color: #ddd;
+  padding-top: 10px;
+  padding-left: 20px;
   text-align: left;
   text-shadow: 0px -1px 1px #eee;
   -webkit-touch-callout: none;
@@ -95,191 +55,112 @@ button:active{
   -ms-user-select: none;
   user-select: none;
 }
-
-.state.new-state{
-  max-width: 180px;
-  overflow:hidden;
-  text-overflow:ellipsis;
-  height:27px;
-}
-
-.state.new-state .drag-content{
-  overflow:hidden;
-  white-space:nowrap;
-  text-overflow:ellipsis;
-  padding:5px 0;
-}
-
-.state {
+.flowchart-admin-wrap .state {
+  z-index: 80;
+  min-height: 50px;
   position: absolute;
-  top: 160px;
-  right:40px;
   border: 1px solid #ccc;
   background-color: #fff;
-  color:#333;
-  font-size:10px;
+  color: #333;
+  font-size: 10px;
+  display: table;
 }
-
-/* for admin interface only. Will be overridden on frontend*/
-        .columns.two{
-          width: 250px;
-        }
-
-        .columns.four{
-          width: 300px;
-        }
-
-        .columns.six{
-          width: 450px;
-        }
-
-        .columns.eight{
-          width: 600px;
-        }
-
-
-.drag-area{
-  border:2px dashed #ccc;
-  height:50px;
-  background: rgba(255,255,255,0.1);
-  
+.flowchart-admin-wrap .state .drag-content {
+  line-height: 1.5em;
+  padding: 5px 20px;
 }
-
-
-.new-states{
-  /*box-shadow: 0 0 5px rgba(170, 178, 185, 0.2);
-  border: 1px solid #cccfd1;
-  background:#d8dcdf;*/
-  height:50px;
-  width:200px;
+.flowchart-admin-wrap .state.new-state {
+  top: 106px;
+  right: 15px;
+  width: 165px !important;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  height: 27px;
+}
+.flowchart-admin-wrap .state.new-state .drag-content {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  padding: 5px 0;
+}
+.flowchart-admin-wrap .state.new-state .drag-content:hover {
+  cursor: move;
+}
+.flowchart-admin-wrap .state:hover {
+  box-shadow: 0 0 5px #aab2b9;
+  border: 1px solid #bbb;
+}
+.flowchart-admin-wrap .state:hover .connect {
+  z-index: 100;
+  background: #efefef;
   position: absolute;
-  top: 70px;
-  right:20px;
-  border-radius:2px;
-  padding:10px;
+  bottom: 0;
+  left: 0;
 }
-
-.new-states h2{
-  opacity:0.7;
-  margin:0;
-  padding-top:10px;
-  display:block;
-  color:rgba(0,0,0,0.5);
+.flowchart-admin-wrap .state .num {
+  font-size: 2em;
+  color: #fff;
+  width: 50px;
+  text-align: center;
+  display: table-cell;
+  vertical-align: middle;
+}
+.flowchart-admin-wrap .state .num span {
+  background: #2D8896;
+  width: 40px;
+  height: 40px;
+  display: table-cell;
+  vertical-align: middle;
+}
+.flowchart-admin-wrap .columns.two {
+  width: 250px;
+}
+.flowchart-admin-wrap .columns.four {
+  width: 300px;
+}
+.flowchart-admin-wrap .columns.six {
+  width: 450px;
+}
+.flowchart-admin-wrap .columns.eight {
+  width: 600px;
+}
+.flowchart-admin-wrap .drag-area {
+  border: 2px dashed #ccc;
+  height: 60px;
+  background: rgba(255, 255, 255, 0.1);
+}
+.flowchart-admin-wrap .new-states {
+  z-index: 0;
+  height: 70px;
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  border-radius: 2px;
+  padding: 10px;
+}
+.flowchart-admin-wrap .new-states h2 {
+  opacity: 0.7;
+  margin: 0;
+  padding-top: 10px;
+  display: block;
+  color: rgba(0, 0, 0, 0.5);
   text-align: center;
   text-shadow: 0px -1px 1px #d8dcdf;
 }
-
-em.flowchart-em{
-  line-height:2.5em;
-  display:block;
-  font-size:11px;
+.flowchart-admin-wrap em.flowchart-em {
+  line-height: 2.5em;
+  display: block;
+  font-size: 11px;
   text-align: center;
-  color:#97a0aa;
-  font-style:italic;
+  color: #97a0aa;
+  font-style: italic;
 }
-
-.state .drag-content{
-  /*z-index:-1;*/
-  line-height:1.5em;
-  padding:5px 20px;
-}
-
-.state:hover{
-    box-shadow: 0 0 5px rgba(170, 178, 185, 1);
-  border: 1px solid #bbb;
-}
-
-.state .num{
-  float:left;
-  background:#2a5883;
-  font-size:2em;
-  color:#fff;
-  width:40px;
-  text-align:center;
-  margin-right:10px;
-  margin-bottom:5px;
-}
-
-.drag-content:hover{
-  cursor: move;
-}
-
-
-.title {
+.flowchart-admin-wrap .title {
   padding: 10px;
   cursor: move;
 }
-    
-.connect {
+.flowchart-admin-wrap .connect {
   width: 100%;
   height: 10px;
   cursor: pointer;
-}
-
-
-/* Interface only */
-.state:hover .connect {
-  background:#efefef;
-}
-
-
-
-
-/*   Styles from the cms     */
-input.text, textarea, select, .TreeDropdownField {
-  margin-left: 10px;
-  width: 100%;
-  max-width: 512px;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-}
-
-input.text.description, textarea.description, select.description, .TreeDropdownField.description {
-  margin: 0;
-}
-
-input.text .description, textarea .description, select .description, .TreeDropdownField .description {
-  max-width: 512px;
-}
-
-input.text, textarea, .TreeDropdownField {
-  background: #fff;
-  border: 1px solid #b3b3b3;
-  padding: 7px 7px;
-  line-height: 16px;
-  margin: 0;
-  outline: none;
-  -moz-transition: 0.2s box-shadow ease-in;
-  -webkit-transition: 0.2s box-shadow ease-in;
-  -o-transition: 0.2s box-shadow ease-in;
-  transition: 0.2s box-shadow ease-in;
-  -moz-transition: 0.2s border ease-in;
-  -webkit-transition: 0.2s border ease-in;
-  -o-transition: 0.2s border ease-in;
-  transition: 0.2s border ease-in;
-  -webkit-border-radius: 4px;
-  -moz-border-radius: 4px;
-  -ms-border-radius: 4px;
-  -o-border-radius: 4px;
-  border-radius: 4px;
-  background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjUwJSIgeTE9IjAlIiB4Mj0iNTAlIiB5Mj0iMTAwJSI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2VhZWFlYSIvPjxzdG9wIG9mZnNldD0iMTAlIiBzdG9wLWNvbG9yPSIjZmZmZmZmIi8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNncmFkKSIgLz48L3N2Zz4g');
-  background-size: 100%;
-  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #eaeaea), color-stop(10%, white));
-  background-image: -webkit-linear-gradient(#eaeaea, white 10%);
-  background-image: -moz-linear-gradient(#eaeaea, white 10%);
-  background-image: -o-linear-gradient(#eaeaea, white 10%);
-  background-image: linear-gradient(#eaeaea, white 10%);
-}
-
-input.text:focus, textarea:focus, .TreeDropdownField:focus {
-  border: 1px solid #9a9a9a;
-  border-top-color: gray;
-  -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2) inset;
-  -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2) inset;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2) inset;
-}
-
-#Action {
-  box-shadow: none;
 }
