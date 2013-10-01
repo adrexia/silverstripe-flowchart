@@ -26,18 +26,19 @@
   position: relative;
 }
 .flowchart-admin-wrap .flowchart-container {
-  -webkit-box-shadow: rgba(248, 248, 248, 0.9) -1px 0 0 inset, 0 0 1px rgba(201, 205, 206, 0.8);
-  -moz-box-shadow: rgba(248, 248, 248, 0.9) -1px 0 0 inset, 0 0 1px rgba(201, 205, 206, 0.8);
-  box-shadow: rgba(248, 248, 248, 0.9) -1px 0 0 inset, 0 0 1px rgba(201, 205, 206, 0.8);
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
   width: 100%;
-  height: 1500px;
-  overflow: auto;
   position: relative;
+  padding: 20px;
 }
 .flowchart-admin-wrap .flowchart-container h1 {
   margin: 0;
   display: block;
   color: #ddd;
+  font-size: 20px;
+  line-height: 30px;
   padding-top: 10px;
   padding-left: 20px;
   text-align: left;
@@ -48,6 +49,12 @@
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+}
+.flowchart-admin-wrap .flowchart-container .workspace {
+  height: 1500px;
+  width: 960px;
+  border: 2px dashed #ccc;
+  background: rgba(255, 255, 255, 0.1);
 }
 .flowchart-admin-wrap .state {
   z-index: 80;
@@ -118,17 +125,10 @@
 .flowchart-admin-wrap .columns.eight {
   width: 600px;
 }
-.flowchart-admin-wrap .drag-area {
-  border: 2px dashed #ccc;
-  height: 60px;
-  background: rgba(255, 255, 255, 0.1);
-}
 .flowchart-admin-wrap .new-states {
   z-index: 0;
   height: 70px;
-  position: absolute;
-  right: 20px;
-  top: 20px;
+  float: right;
   border-radius: 2px;
   padding: 10px;
 }

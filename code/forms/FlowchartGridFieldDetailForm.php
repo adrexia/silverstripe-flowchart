@@ -7,8 +7,7 @@ class FlowchartGridFieldDetailForm extends GridFieldDetailForm {
 	protected $template = 'Flowchart_EditForm';
 
 	protected static $css_files = array(
-		'flowchart/css/demo-all.css',
-		'flowchart/css/demo.css',
+		'flowchart/css/jsPlumb.css',
 		'flowchart/css/flowchart.css'
 	);
 
