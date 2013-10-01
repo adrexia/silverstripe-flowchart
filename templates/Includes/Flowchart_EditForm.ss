@@ -1,4 +1,4 @@
-<div id="flowchart-cms-content" class="flowchart-admin-wrap cms-content center cms-tabset FlowChartAdmin LeftAndMain center ui-tabs ui-widget ui-widget-content ui-corner-all" data-layout-type="border" data-pjax-fragment="Content">
+<form id="Form_ItemEditForm" action="$Link(ItemEditForm)" method="POST" class="cms-content cms-edit-form center cms-tabset flowchart-admin-wrap" data-pjax-fragment="CurrentForm Content" data-layout-type="border">
 	<% with $ItemEditForm %>
 	<div class="cms-content-header north">
 		<div class="cms-content-header-info">
@@ -9,15 +9,11 @@
 		</div>
 	</div>
 	<% end_with %>
-	<form action="$Link(ItemEditForm)" $FormAttributes method="POST" class="cms-content-fields center ui-widget-content cms-panel-padded">
-		<fieldset class="flowchart-toolbar">
-			<label for="label-name">Connection Label</label>
-			<input id="label-name" name="labelName" value="" class="text" aria-described-by="flowchart-admin-use" />
-			<em id="flowchart-admin-use" class="flowchart-em extra-label">(e.g "Yes", "No", "Accepted")</em>
+	<div class="cms-content-fields center">
+		<fieldset>
 			<input type="hidden" name="flow-chart-store" id="flow-chart-store" value='$FlowchartData' />
 			<input type='hidden' value='$SecurityID' name="SecurityID">	
-	
-			<button id="flow-chart-load">Load</button>
+
 			<div class="new-states">
 				<h2>New States</h2>
 				<em class="flowchart-em">(Drag and drop into your workspace)</em>
@@ -26,34 +22,26 @@
 			<div id="container" class="flowchart-container">
 
 				<h1>Workspace</h1>
-
 				<% loop FlowStates.Reverse %>
-				<div id="id_{$ID}" data-id="$ID" class="state columns new-state <% if $Size %>$Size<% else %>two<% end_if %>">
-			
+					<div id="id_{$ID}" data-id="$ID" class="state columns new-state <% if $Size %>$Size<% else %>two<% end_if %>">
 						<div class="num">
 							<span>$Number</span>
 						</div>
 						<div class="drag-content">
 							$Description
 						</div>
-			
-				</div>
+					</div>
 				<% end_loop %>
 			</div>
-
-			<div class="flowchart">
-				<div class="new-states">
-					<h2>New States</h2>
-					<em class="flowchart-em">(Drag and drop into your workspace)</em>
-					<div class="drag-area"></div>
-				</div>
-			</div>
 		</fieldset>
-
-		<div class="cms-content-actions cms-content-controls south">
-			<div class="Actions">
-				<button id="flow-chart-save" name='action_doSave'>Save</button>
-			</div>
+	</div>
+	<div class="cms-content-actions cms-content-controls south flowchart-toolbar">
+		<div class="Actions">
+			<button id="flow-chart-save" name='action_doSave' value="save" class="action ss-ui-action-constructive ss-ui-button" data-icon="accept" role="button">Save</button>
+			<button id="flow-chart-load">Load</button>
+			<label for="label-name">Connection Label</label>
+			<input id="label-name" name="labelName" value="" class="text" aria-described-by="flowchart-admin-use" />
+			<em id="flowchart-admin-use" class="flowchart-em extra-label">(e.g "Yes", "No", "Accepted")</em>
 		</div>
-	</form>
-</div>
+	</div>
+</form>

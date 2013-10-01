@@ -33,6 +33,7 @@ jsPlumb.ready(function($) {
 						[ "Label", { label:$('#label-name').val(), id:"label", cssClass:"empty", location:0.5 }]
 					]
 				});
+				$('.flowchart-container').loadFlowChart();
 				self.flowInit();
 			},
 			onunmatch: function(){
@@ -183,15 +184,9 @@ jsPlumb.ready(function($) {
 		});
 
 		$('#flow-chart-save').entwine({
-			onclick: function(){
+			onclick: function(e){
 				$('.flowchart-container').storeFlowChart();
-			}
-		});
-
-		$('#flow-chart-load').entwine({
-			onclick: function(){
-				$('.flowchart-container').loadFlowChart();
-				$('.flowchart-container').storeFlowChart(); //so the store is kept up to date
+				this._super(e);
 			}
 		});
 

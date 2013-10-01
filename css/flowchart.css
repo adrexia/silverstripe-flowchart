@@ -1,15 +1,6 @@
 .flowchart-admin-wrap {
   /* for admin interface only. Will be overridden on frontend*/
 }
-.flowchart-admin-wrap .flowchart-toolbar {
-  box-sizing: border-box;
-  margin: 0;
-  width: 100%;
-  background: #d8dcdf;
-  border: none;
-  box-shadow: 0 0 5px rgba(170, 178, 185, 0.2);
-  border-bottom: 1px solid #cccfd1;
-}
 .flowchart-admin-wrap .flowchart-toolbar label {
   font-weight: bold;
   line-height: 2em;
@@ -30,15 +21,18 @@
   float: left;
   margin-left: 10px;
 }
+.flowchart-admin-wrap .flow-tab {
+  overflow: scroll;
+  position: relative;
+}
 .flowchart-admin-wrap .flowchart-container {
-  float: left;
   -webkit-box-shadow: rgba(248, 248, 248, 0.9) -1px 0 0 inset, 0 0 1px rgba(201, 205, 206, 0.8);
   -moz-box-shadow: rgba(248, 248, 248, 0.9) -1px 0 0 inset, 0 0 1px rgba(201, 205, 206, 0.8);
   box-shadow: rgba(248, 248, 248, 0.9) -1px 0 0 inset, 0 0 1px rgba(201, 205, 206, 0.8);
   width: 100%;
-  height: 1000px;
-  background-color: rgba(255, 255, 255, 0.4);
-  box-sizing: border-box;
+  height: 1500px;
+  overflow: auto;
+  position: relative;
 }
 .flowchart-admin-wrap .flowchart-container h1 {
   margin: 0;
