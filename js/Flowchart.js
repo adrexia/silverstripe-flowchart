@@ -94,6 +94,19 @@ jsPlumb.ready(function($) {
 				});
 
 			},
+			/*
+			 * Helper method to determine if state is within bounds
+			 */
+			boundingBox: function(state, workspace){
+					var x1 = workspace.position().left,
+						x2 = workspace.width() + x1,
+						y1 = workspace.position().top,
+						y2 = workspace.height() + y1,
+						sx = state.position().left,
+						sy = state.position().top;
+
+					return sx > x1 && sx < x2 && sy > y1 && sy < y2;
+			},
 			storeFlowChart: function(){
 				var saveArray = {states: [], connections: []},
 					states = $('.state'),
@@ -109,19 +122,13 @@ jsPlumb.ready(function($) {
 				for(j = 0; j < states.length; j = j + 1){
 					state = $(states[j]);
 
-					//workspace
-					var x1 = workspace.position().left;
-					var x2 = workspace.width() + x1;
-					var y1 = workspace.position().top;
-					var y2 = workspace.height() + y1;
-
-				//	if(){
+					if(this.boundingBox(state, workspace)){
 						saveArray.states.push({
 							id: state.attr('id'),
 							x: state.position().left,
 							y: state.position().top
 						});
-				//	}
+					}
 				}
 
 				//For each connection convert to array and push into Connections

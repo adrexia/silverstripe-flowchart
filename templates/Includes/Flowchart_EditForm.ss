@@ -21,10 +21,7 @@
 					<div class="drag-area">
 					</div>
 				</div>
-			
-				<div class="workspace">
-					<h1>Workspace</h1>
-					<% loop FlowStates.Reverse %>
+				<% loop FlowStates.Reverse %>
 					<div id="id_{$ID}" data-id="$ID" class="state columns new-state <% if $Size %>$Size<% else %>two<% end_if %>">
 						<div class="num">
 							<span>$Number</span>
@@ -34,6 +31,8 @@
 						</div>
 					</div>
 				<% end_loop %>
+				<div class="workspace">
+					<h1>Workspace</h1>
 				</div>
 			</div>
 		</fieldset>
