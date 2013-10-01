@@ -60,6 +60,7 @@
 			width:960px;
 			border:2px dashed #ccc;
 			background: rgba(255,255,255,0.1);
+			margin-right:230px;
 		}
 	}
 
@@ -77,8 +78,9 @@
 			padding:5px 20px;
 		}
 		&.new-state{
-			top: 106px;
-			right:15px;
+			position:fixed;
+			top: 146px;
+			right:25px;
 			width: 165px !important;
 			overflow:hidden;
 			text-overflow:ellipsis;
@@ -106,15 +108,15 @@
 		}
 
 		.num{
-			font-size:2em;
+			font-size:1.8em;
 			color:#fff;
-			width:50px;
+			width:55px;
 			text-align:center;
 			display: table-cell;
 			vertical-align: middle;
 			span{
 				background:#2D8896;
-				width:40px;
+				width:45px;
 				height:40px;
 				display: table-cell;
 				vertical-align: middle;
@@ -139,11 +141,17 @@
 		width: 600px;
 	}
 	.new-states{
+		@include box-shadow(inset 1px 0 0 rgba(248, 248, 248, 0.9), 0 0 1px rgba(201, 205, 206, 0.8));
+		width:200px;
+		position:fixed;
+		right:0;
+		top:39px;
+		background:#ECEFF1;
+		height:100%;
 		z-index:0;
-		height:70px;
 		float:right;
 		border-radius:2px;
-		padding:10px;
+		padding:30px;
 		h2{
 			opacity:0.7;
 			margin:0;

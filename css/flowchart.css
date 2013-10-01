@@ -55,6 +55,7 @@
   width: 960px;
   border: 2px dashed #ccc;
   background: rgba(255, 255, 255, 0.1);
+  margin-right: 230px;
 }
 .flowchart-admin-wrap .state {
   z-index: 80;
@@ -71,8 +72,9 @@
   padding: 5px 20px;
 }
 .flowchart-admin-wrap .state.new-state {
-  top: 106px;
-  right: 15px;
+  position: fixed;
+  top: 146px;
+  right: 25px;
   width: 165px !important;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -99,16 +101,16 @@
   left: 0;
 }
 .flowchart-admin-wrap .state .num {
-  font-size: 2em;
+  font-size: 1.8em;
   color: #fff;
-  width: 50px;
+  width: 55px;
   text-align: center;
   display: table-cell;
   vertical-align: middle;
 }
 .flowchart-admin-wrap .state .num span {
   background: #2D8896;
-  width: 40px;
+  width: 45px;
   height: 40px;
   display: table-cell;
   vertical-align: middle;
@@ -126,11 +128,19 @@
   width: 600px;
 }
 .flowchart-admin-wrap .new-states {
+  -webkit-box-shadow: inset 1px 0 0 rgba(248, 248, 248, 0.9), 0 0 1px rgba(201, 205, 206, 0.8);
+  -moz-box-shadow: inset 1px 0 0 rgba(248, 248, 248, 0.9), 0 0 1px rgba(201, 205, 206, 0.8);
+  box-shadow: inset 1px 0 0 rgba(248, 248, 248, 0.9), 0 0 1px rgba(201, 205, 206, 0.8);
+  width: 200px;
+  position: fixed;
+  right: 0;
+  top: 39px;
+  background: #ECEFF1;
+  height: 100%;
   z-index: 0;
-  height: 70px;
   float: right;
   border-radius: 2px;
-  padding: 10px;
+  padding: 30px;
 }
 .flowchart-admin-wrap .new-states h2 {
   opacity: 0.7;

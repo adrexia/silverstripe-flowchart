@@ -209,6 +209,7 @@ jsPlumb.ready(function($) {
 			}
 		});
 
+
 		$('.flowchart-container .state').entwine({
 			onmatch: function(){
 				var self = this;
@@ -216,10 +217,16 @@ jsPlumb.ready(function($) {
 				this.on('drag', function(){
 					self.closest('.flowchart-container').storeFlowChart();
 				});
+				this.dblclick(function(e) {
+					jsPlumb.detachAllConnections($(this));
+					$(this).addClass('new-state').css({'right':'25px', 'top':'146px','left':'auto'});
+					e.stopPropagation();
+				});
 			},
 			onunmatch: function(){
 				this._super();
 			},
+
 		});
 
 		//Helper function to change display on states that 
@@ -228,15 +235,15 @@ jsPlumb.ready(function($) {
 			onmatch: function(){
 				var self = this;
 				this._super();
-				this.on('drag', function(){
-					$(self).removeClass('new-state');
+				this.on('mousedown', function(e){
+					if(self.hasClass('new-state')){
+						var scroll = $('.cms .cms-content-fields').scrollTop();
+						$(self).removeClass('new-state').css({'top':scroll + e.clientY, 'right':0});
+					}
 				});
 			},
 			onunmatch: function(){
 				this._super();
-			},
-			onclick: function(){
-				$(this).removeClass('new-state');
 			}
 		});
 	});
