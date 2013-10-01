@@ -100,16 +100,28 @@ jsPlumb.ready(function($) {
 					connections = jsPlumb.getConnections(),
 					state = {},	connection = {},
 					i = 0, j = 0, 
-					output;
+					output,
+					workspace = this.find('.workspace');
+
+
 
 				//For each state convert to array and push into States
 				for(j = 0; j < states.length; j = j + 1){
 					state = $(states[j]);
-					saveArray.states.push({
-						id: state.attr('id'),
-						x: state.position().left,
-						y: state.position().top
-					});
+
+					//workspace
+					var x1 = workspace.position().left;
+					var x2 = workspace.width() + x1;
+					var y1 = workspace.position().top;
+					var y2 = workspace.height() + y1;
+
+				//	if(){
+						saveArray.states.push({
+							id: state.attr('id'),
+							x: state.position().left,
+							y: state.position().top
+						});
+				//	}
 				}
 
 				//For each connection convert to array and push into Connections
