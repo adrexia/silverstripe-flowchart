@@ -6,7 +6,7 @@
 class FlowState extends DataObject implements PermissionProvider {
 
 	private static $db = array(
-		'Number'=>'Int',
+		'Number'=>'Float',
 		'Description'=>'Text',
 		'Content'=>'HTMLText',
 		'Size'=>'Varchar(6)'
