@@ -18,24 +18,8 @@ class FlowchartGridFieldDetailForm extends GridFieldDetailForm {
 		Requirements::combine_files('flowchart.js', $this->getJSRequirements());
 	}
 
-	/**
-	 * Builds an item edit form.  The arguments to getCMSFields() are the popupController and
-	 * popupFormName, however this is an experimental API and may change.
-	 * 
-	 * @todo In the future, we will probably need to come up with a tigher object representing a partially
-	 * complete controller with gaps for extra functionality.  This, for example, would be a better way
-	 * of letting Security/login put its log-in form inside a UI specified elsewhere.
-	 * 
-	 * @return Form 
-	 */
-	public function FlowchartItemEditForm() {
-		$form = parent::ItemEditForm();
-
-		$form->setTemplate('FlowchartWorkspace');
-		return $form;
-	}
-
 	public function getJSRequirements(){
+
 		return array(
 			// jsplumb util
 			'flowchart/js/thirdparty/jsPlumb/src/util.js',
