@@ -7,25 +7,25 @@ class FlowState extends DataObject implements PermissionProvider {
 
 	private static $db = array(
 		'Number'=>'Float',
-		'Description'=>'Text',
+		'Title'=>'Text',
 		'Content'=>'HTMLText',
 		'Size'=>'Varchar(6)'
 	);
 
 	private static $has_one = array(
-		'Parent'=>'FlowchartPage'
+		'Parent'=>'FlowchartPage',
+		'LinkedState'=>'FlowState'
 	);
 
 	private static $searchable_fields = array(
 		'Number',
-		'Description',
+		'Title',
 		'Content',
 	);
 
 	private static $summary_fields = array(
 		'Number'=>'Number',
-		'Description'=>'Title',
-		'Content.NoHTML'=>'Content'
+		'Title'=>'Title'
 	);
 	
 	private static $default_sort = 'Number';
@@ -33,21 +33,23 @@ class FlowState extends DataObject implements PermissionProvider {
 	public function getCurrentDisplayFields(){
 		return array(
 			'Number'=>'Number',
-			'Description'=>'Title',
-			'Content.NoHTML'=>'Content',
-			'getParentName'=>'Flowchart Page'
+			'Title'=>'Title',
+			'ParentName'=>'Flowchart Page'
 		);
 	}
 
 	public function getParentName(){
-		return FlowchartPage::get()->byID($this->ParentID)->Title;
+		$parent = FlowchartPage::get()->byID($this->ParentID);
+		if($parent){
+			return $parent->Title;
+		}
 	}
 
 	public function getCMSFields(){
 		$fields = parent::getCMSFields();
 
 		$number = $fields->dataFieldByName('Number');
-		$title = $fields->dataFieldByName('Description');
+		$title = $fields->dataFieldByName('Title');
 		$content = $fields->dataFieldByName('Content');
 
 		$number->setRightTitle("Displayed in flow state box");
