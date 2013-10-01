@@ -219,7 +219,7 @@ jsPlumb.ready(function($) {
 				});
 				this.dblclick(function(e) {
 					jsPlumb.detachAllConnections($(this));
-					$(this).addClass('new-state').css({'right':'25px', 'top':'146px','left':'auto'});
+					$(this).attr('style','').addClass('new-state').css({'right':'45px', 'top':'146px'});
 					e.stopPropagation();
 				});
 			},
