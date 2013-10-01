@@ -1,5 +1,5 @@
 <div class="flowchart-admin-wrap cms-content center cms-tabset FlowChartAdmin LeftAndMain ui-tabs ui-widget ui-widget-content ui-corner-all">
-	<fieldset class="flowchart-toolbar">
+	<fieldset class="flowchart-toolbar ">
 		<label for="label-name">Connection Label</label>
 		<input id="label-name" name="labelName" value="" class="text" aria-described-by="flowchart-admin-use" />
 		<em id="flowchart-admin-use" class="flowchart-em extra-label">
@@ -9,27 +9,37 @@
 		<input type="hidden" name="flow-chart-id" id="flow-chart-id" value="$FlowchartID"/>
 
 		<div class="actions">
+
 			<button id="flow-chart-save">Save</button>
 			<button id="flow-chart-load">Load</button>
 		</div>
 	</fieldset>
 
 
-	<div class="new-states">
-		<h2>New States</h2>
-		<em class="flowchart-em">(Drag and drop into your workspace)</em>
-		<div class="drag-area"></div>
-	</div>
-	<div id="container" class="flowchart-container">
+	
+
+	<div id="container" class="flowchart-container cms-edit-form center ui-tabs-panel ui-widget-content ui-corner-bottom cms-panel-padded">
 		<h1>Workspace</h1>
 
 		<% loop FlowStates.Reverse %>
 		<div id="id_{$ID}" data-id="$ID" class="state columns new-state <% if $Size %>$Size<% else %>two<% end_if %>">
-			<div class="num">$Number</div>
-			<div class="drag-content">
-				$Description
-			</div>
+	
+				<div class="num">
+					<span>$Number</span>
+				</div>
+				<div class="drag-content">
+					$Description
+				</div>
+	
 		</div>
 		<% end_loop %>
+	</div>
+
+	<div class="flowchart">
+		<div class="new-states">
+			<h2>New States</h2>
+			<em class="flowchart-em">(Drag and drop into your workspace)</em>
+			<div class="drag-area"></div>
+		</div>
 	</div>
 </div>

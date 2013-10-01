@@ -30,7 +30,7 @@ jsPlumb.ready(function($) {
 							width:8,
 							foldback:0.8
 						} ],
-						[ "Label", { label:$('#label-name').val(), id:"label", cssClass:"empty" }]
+						[ "Label", { label:$('#label-name').val(), id:"label", cssClass:"empty", location:0.5 }]
 					]
 				});
 				self.flowInit();

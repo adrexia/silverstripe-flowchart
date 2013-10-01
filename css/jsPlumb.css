@@ -1,0 +1,113 @@
+/** DISABLE TEXT SELECTION (SET ON BODY WHEN DRAGGING IS OCCURRING) **/
+.aLabel {
+  color: #fff;
+  background-color: #2D8896;
+  padding: 0.3em;
+  cursor: pointer;
+  -webkit-transition: background-color 0.25s ease-in;
+  -moz-transition: background-color 0.25s ease-in;
+  transition: background-color 0.25s ease-in;
+}
+.aLabel._jsPlumb_hover {
+  background: #E26F1E;
+  color: white;
+}
+
+._jsPlumb_source_hover, ._jsPlumb_target_hover {
+  background: #f7f8f9 !important;
+  color: white;
+}
+
+path, ._jsPlumb_endpoint {
+  cursor: pointer;
+}
+
+path:hover, ._jsPlumb_endpoint:hover {
+  background-color: black;
+}
+
+.dragHover {
+  border: 2px solid orange;
+}
+
+path {
+  cursor: pointer;
+}
+
+.cmd {
+  padding: 0.5em;
+  width: 60px;
+}
+.cmd:hover {
+  border: 2px solid #5c96bc;
+  background-color: #89bcde;
+  color: white;
+}
+.cmd:active {
+  border: 2px solid orange;
+  color: orange;
+}
+
+.label {
+  font-size: 13px;
+  padding: 8px;
+  padding: 8px;
+}
+
+.component {
+  border: 1px solid #346789;
+  border-radius: 0.5em;
+  opacity: 0.8;
+  filter: alpha(opacity=80);
+  background-color: white;
+  color: black;
+  padding: 0.5em;
+  font-size: 0.8em;
+}
+.component:hover {
+  border: 1px solid #123456;
+  box-shadow: 2px 2px 19px #444;
+  -o-box-shadow: 2px 2px 19px #444;
+  -webkit-box-shadow: 2px 2px 19px #444;
+  -moz-box-shadow: 2px 2px 19px #fff;
+  opacity: 0.9;
+  filter: alpha(opacity=90);
+}
+
+._jsPlumb_drag_select * {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: -moz-none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/** Z-INDEX **/
+._jsPlumb_connector {
+  z-index: 18;
+}
+
+._jsPlumb_endpoint {
+  z-index: 19;
+}
+
+._jsPlumb_overlay {
+  z-index: 20;
+}
+
+._jsPlumb_connector._jsPlumb_hover {
+  z-index: 21 !important;
+}
+
+._jsPlumb_endpoint._jsPlumb_hover {
+  z-index: 22 !important;
+}
+
+._jsPlumb_overlay._jsPlumb_hover {
+  z-index: 23 !important;
+}
+
+._jsPlumb_endpoint {
+  z-index: 3;
+}

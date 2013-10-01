@@ -4,13 +4,36 @@
  */
 class FlowchartGridFieldDetailForm extends GridFieldDetailForm {
 
-	protected $template = 'FlowchartWorkspace';
+	protected $template = 'Flowchart_EditForm';
 
 	protected static $css_files = array(
 		'flowchart/css/demo-all.css',
 		'flowchart/css/demo.css',
 		'flowchart/css/flowchart.css'
 	);
+
+	public function __construct($name = 'FlowchartDetailForm') {
+		parent::__construct($name);
+		Requirements::combine_files('flowchart.css', self::$css_files);
+		Requirements::combine_files('flowchart.js', $this->getJSRequirements());
+	}
+
+	/**
+	 * Builds an item edit form.  The arguments to getCMSFields() are the popupController and
+	 * popupFormName, however this is an experimental API and may change.
+	 * 
+	 * @todo In the future, we will probably need to come up with a tigher object representing a partially
+	 * complete controller with gaps for extra functionality.  This, for example, would be a better way
+	 * of letting Security/login put its log-in form inside a UI specified elsewhere.
+	 * 
+	 * @return Form 
+	 */
+	public function FlowchartItemEditForm() {
+		$form = parent::ItemEditForm();
+
+		$form->setTemplate('FlowchartWorkspace');
+		return $form;
+	}
 
 	public function getJSRequirements(){
 		return array(
@@ -49,11 +72,7 @@ class FlowchartGridFieldDetailForm extends GridFieldDetailForm {
 		);
 	}
 
-	public function __construct($name = 'FlowchartDetailForm') {
-		parent::__construct($name);
-		Requirements::combine_files('flowchart.css', self::$css_files);
-		Requirements::combine_files('flowchart.js', $this->getJSRequirements());
-	}
+
 }
 
 class FlowchartGridFieldDetailForm_ItemRequest extends GridFieldDetailForm_ItemRequest {
@@ -70,7 +89,8 @@ class FlowchartGridFieldDetailForm_ItemRequest extends GridFieldDetailForm_ItemR
 		return $this->record->ID;
 	}
 
-	public function doSave($data, $form) {
-		die('saving');
-	}
+//	public function doSave($data, $form) {
+	//	die('saving');
+	//}
 }
+
