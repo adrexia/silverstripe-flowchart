@@ -13,7 +13,6 @@ jsPlumb.ready(function($) {
 
 			onmatch: function(){
 				var self = this;
-
 				this._super();
 				jsPlumb.importDefaults({
 					Endpoint : ["Dot", {radius:1}],
@@ -34,10 +33,8 @@ jsPlumb.ready(function($) {
 						[ "Label", { label:$('#label-name').val(), id:"label", cssClass:"empty", location:0.5 }]
 					]
 				});
-				console.log('here');
-				$('.flowchart-container').loadFlowChart();
+				self.loadFlowChart();
 				self.flowInit();
-
 			},
 			onunmatch: function(){
 				this._super();
@@ -189,17 +186,19 @@ jsPlumb.ready(function($) {
 						to = connection.to;
 						label = connection.label;
 
-						newConnection = jsPlumb.connect({ source:to, target:from });
-						if(label === ""){
-							newConnection.getOverlay("label").setLabel(label);
-							newConnection.getOverlay("label").addClass("empty");
-							newConnection.getOverlay("label").removeClass("aLabel");
-						}else{
-							newConnection.getOverlay("label").setLabel(label);
-							newConnection.getOverlay("label").removeClass("empty");
-							newConnection.getOverlay("label").addClass("aLabel");
+						if($('#'+from).length > 0 && $('#'+to).length > 0){
+							newConnection = jsPlumb.connect({ source:to, target:from });
+							if(label === ""){
+								newConnection.getOverlay("label").setLabel(label);
+								newConnection.getOverlay("label").addClass("empty");
+								newConnection.getOverlay("label").removeClass("aLabel");
+							}else{
+								newConnection.getOverlay("label").setLabel(label);
+								newConnection.getOverlay("label").removeClass("empty");
+								newConnection.getOverlay("label").addClass("aLabel");
+							}
+							this.bindFlowEvents();
 						}
-						this.bindFlowEvents();
 					}
 				}
 			}
