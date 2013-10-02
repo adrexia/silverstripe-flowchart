@@ -4,6 +4,8 @@
 		<% loop FlowStates.Reverse %>
 		<% if $LinkedState %>
 			<a href="{$LinkedState.Parent.Link}#id_$LinkedStateID">
+		<% else_if $Content %>
+			<a href="#" class="switch" data-trigger="#modal_{$ID}">
 		<% end_if %>
 		<div id="id_{$ID}" data-id="$ID" class="state col new-state <% if $Size %>$Size<% else %>two<% end_if %>">
 			<div class="num">
@@ -13,7 +15,7 @@
 				$Title
 			</div>
 		</div>
-		<% if $LinkedState %>
+		<% if $LinkedState || $Content %>
 			</a>
 		<% end_if %>
 		<% end_loop %>

@@ -1,6 +1,7 @@
 /*jslint browser: true*/
 /*global $, jsPlumb, jQuery*/
 
+
 jsPlumb.ready(function($) {
 	'use strict';
 
