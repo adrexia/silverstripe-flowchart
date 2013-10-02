@@ -71,7 +71,4 @@ class FlowchartPage_Controller extends Page_Controller {
 		return stripslashes($this->failover->FlowchartData);
 	}
 
-	public function getFlowStates(){
-		return FlowState::get()->filter(array('ParentID'=>$this->ID));
-	}
 }

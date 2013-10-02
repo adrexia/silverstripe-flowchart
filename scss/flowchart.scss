@@ -5,8 +5,22 @@
 /*
 	Styles for the admin interface
 */
-.flowchart-admin-wrap{	
+.flowchart-admin-wrap{
+
+	.cms & .cms-content-fields{
+		overflow-y:visible;
+		overflow-x:scroll;
+		&.auto-height{
+			height:auto !important;
+			min-width: 1138px !important; //Enough room for workspace and panel
+		}
+		fieldset{
+			min-width: 1138px !important; //Enough room for workspace and panel
+		}
+	}
+
 	.flowchart-toolbar{
+		z-index:100;
 		label {
 			font-weight:bold;
 			line-height:2em;
@@ -36,8 +50,9 @@
 
 	.flowchart-container {
 		@include box-sizing(border-box);
-		width: 100%;
 		padding:20px;
+		height:100%;
+		overflow:auto;
 		h1{
 			margin:0;
 			display:block;
@@ -65,6 +80,40 @@
 			margin-right:230px;
 		}
 	}
+	.new-states{
+		@include box-shadow(inset 1px 0 0 rgba(248, 248, 248, 0.9), 0 0 1px rgba(201, 205, 206, 0.8));
+		width:200px;
+		height:100%;
+		background:#ECEFF1;
+		height:100%;
+		z-index:0;
+		float:right;
+		border-radius:2px;
+		padding:30px;
+		h2{
+			opacity:0.7;
+			margin:0;
+			padding-top:10px;
+			display:block;
+			color:rgba(0,0,0,0.5);
+			text-align: center;
+			text-shadow: 0px -1px 1px #d8dcdf;
+		}
+	}
+
+	em.flowchart-em{
+		line-height:2.5em;
+		display:block;
+		font-size:11px;
+		text-align: center;
+		color:#97a0aa;
+		font-style:italic;
+	}
+
+	.title {
+		cursor: move;
+	}
+
 }
 .flow-chart-view{
 	@include box-sizing(border-box);
@@ -98,7 +147,7 @@
 
 }
 .flowchart-container {
-	position:relative;
+	//position:relative;
 	.state {
 		z-index: 80;
 		min-height:50px;
@@ -117,7 +166,6 @@
 				display:none;
 			}
 			.flowchart-admin-wrap & {
-				position:fixed;
 				top: 146px;
 				right:25px;
 				width: 165px !important;
@@ -180,41 +228,6 @@
 
 	.col.eight{
 		width: 860px;
-	}
-	.new-states{
-		@include box-shadow(inset 1px 0 0 rgba(248, 248, 248, 0.9), 0 0 1px rgba(201, 205, 206, 0.8));
-		width:200px;
-		position:fixed;
-		right:0;
-		top:39px;
-		background:#ECEFF1;
-		height:100%;
-		z-index:0;
-		float:right;
-		border-radius:2px;
-		padding:30px;
-		h2{
-			opacity:0.7;
-			margin:0;
-			padding-top:10px;
-			display:block;
-			color:rgba(0,0,0,0.5);
-			text-align: center;
-			text-shadow: 0px -1px 1px #d8dcdf;
-		}
-	}
-
-	em.flowchart-em{
-		line-height:2.5em;
-		display:block;
-		font-size:11px;
-		text-align: center;
-		color:#97a0aa;
-		font-style:italic;
-	}
-
-	.title {
-		cursor: move;
 	}
 
 	.connect {

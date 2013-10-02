@@ -13,28 +13,27 @@
 		<fieldset>
 			<input type="hidden" name="flow-chart-store" id="flow-chart-store" value='$FlowchartData' />
 			<input type='hidden' value='$SecurityID' name="SecurityID">	
-
-			<div id="container" class="flowchart-container">
-				<div class="new-states">
+			<div class="new-states">
 					<h2>New States</h2>
 					<em class="flowchart-em">(Drag and drop into your workspace)</em>
 					<div class="drag-area">
 					</div>
 				</div>
+			<div id="container" class="flowchart-container">
 				
-				<div class="workspace">
-					<h1>Workspace</h1>
-					<% loop FlowStates.Reverse %>
-					<div id="id_{$ID}" data-id="$ID" class="state col new-state <% if $Size %>$Size<% else %>two<% end_if %>">
-						<div class="num">
-							<span>$Number</span>
+					<div class="workspace">
+						<h1>Workspace</h1>
+						<% loop FlowStates.Reverse %>
+						<div id="id_{$ID}" data-id="$ID" class="state col new-state <% if $Size %>$Size<% else %>two<% end_if %>">
+							<div class="num">
+								<span>$Number</span>
+							</div>
+							<div class="drag-content">
+								$Title
+							</div>
 						</div>
-						<div class="drag-content">
-							$Title
-						</div>
+						<% end_loop %>
 					</div>
-					<% end_loop %>
-				</div>
 			</div>
 		</fieldset>
 	</div>

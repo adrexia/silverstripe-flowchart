@@ -50,7 +50,12 @@ jsPlumb.ready(function($) {
 				});
 				self.loadFlowChart();
 
+				//TODO: on window resize too
 				if(this.closest('.flowchart-admin-wrap').length > 0){
+					var height = self.closest('.cms-content-fields').height();
+					self.height(height);
+					$('.new-states').height(height);
+					self.closest('.cms-content-fields').addClass('auto-height');
 					self.flowInit();
 				}
 			},
@@ -211,7 +216,7 @@ jsPlumb.ready(function($) {
 
 					}
 				}
-				
+
 				if(this.closest('.flow-chart-view').length > 0){
 					$('.flow-chart-view').height(height + 100); //height plus 100px padding
 				}
