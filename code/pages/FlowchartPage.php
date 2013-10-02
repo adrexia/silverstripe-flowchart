@@ -67,11 +67,7 @@ class FlowchartPage_Controller extends Page_Controller {
 	}
 
 	public function getFlowchartData() {
-		// Need to strip the slashes that raw2SQL applies during the doSave function below
+		// Strip the slashes that raw2SQL applies during the doSave function
 		return stripslashes($this->failover->FlowchartData);
-	}
-
-	public function getFlowStates(){
-		return FlowState::get()->filter(array('ParentID'=>$this->ID));
 	}
 }
