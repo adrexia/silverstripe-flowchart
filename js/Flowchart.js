@@ -12,6 +12,19 @@ jsPlumb.ready(function($) {
 
 		$('.flowchart-container').entwine({
 
+			setZoom: function(z) {
+				var p = [ "-webkit-", "-moz-", "-ms-", "-o-", "" ],
+					s = "scale(" + z + ")",
+					i;
+
+				for (i = 0; i < p.length; i = i+1){
+					this.css(p[i] + "transform", s);
+				}
+
+				this.parent().find('.zoom').attr('data-zoom', z);
+
+				jsPlumb.setZoom(z);
+			},
 			onmatch: function(){
 				var self = this;
 				this._super();
@@ -258,5 +271,20 @@ jsPlumb.ready(function($) {
 				this._super();
 			}
 		});
+
+		$('.flow-chart-view .zoom a').entwine({
+			onclick: function(){
+				var currentZoom = parseFloat(this.closest('.zoom').attr('data-zoom')),
+				container = $('.flowchart-container');
+				if(this.hasClass('zoom-in')){
+					container.setZoom(currentZoom + 0.1);
+				}else if(this.hasClass('zoom-out')){
+					container.setZoom(currentZoom - 0.1);
+				}
+				return false;
+			}
+		});
+
+	
 	});
 });

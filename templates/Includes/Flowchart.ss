@@ -1,5 +1,10 @@
 <div class="flow-chart-view">
+	<div class="zoom" data-zoom="1">
+		<a href="#" class="zoom-in"><i class="icon-plus"></i></a>
+		<a href="#" class="zoom-out"><i class="icon-minus"></i></a>
+	</div>
 	<div id="container" class="flowchart-container">
+	
 		<input type="hidden" name="flow-chart-store" id="flow-chart-store" value='$FlowchartData' />
 		<% loop FlowStates.Reverse %>
 		<% if $LinkedState %>

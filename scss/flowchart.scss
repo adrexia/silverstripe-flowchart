@@ -82,6 +82,19 @@
 	@include respond(all-phones){
 		zoom:0.7;
 	}
+	&:hover{
+		.zoom{
+			opacity:1;
+		}
+	}
+	.zoom{
+		float:right;
+		opacity:0;
+
+		i{
+
+		}
+	}
 
 }
 .flowchart-container {
