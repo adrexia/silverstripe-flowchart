@@ -2,6 +2,9 @@
 	<div id="container" class="flowchart-container">
 		<input type="hidden" name="flow-chart-store" id="flow-chart-store" value='$FlowchartData' />
 		<% loop FlowStates.Reverse %>
+		<% if $LinkedState %>
+			<a href="{$LinkedState.Parent.Link}#id_$LinkedStateID">
+		<% end_if %>
 		<div id="id_{$ID}" data-id="$ID" class="state col new-state <% if $Size %>$Size<% else %>two<% end_if %>">
 			<div class="num">
 				<span>$Number</span>
@@ -10,6 +13,9 @@
 				$Title
 			</div>
 		</div>
+		<% if $LinkedState %>
+			</a>
+		<% end_if %>
 		<% end_loop %>
 	</div>
 </div>
