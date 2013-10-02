@@ -7,7 +7,7 @@ class FlowState extends DataObject implements PermissionProvider {
 
 	private static $db = array(
 		'Number'=>'Float',
-		'Title'=>'Text',
+		'TitleText'=>'Text',
 		'Content'=>'HTMLText',
 		'Size'=>'Varchar(6)'
 	);
@@ -19,13 +19,13 @@ class FlowState extends DataObject implements PermissionProvider {
 
 	private static $searchable_fields = array(
 		'Number',
-		'Title',
+		'TitleText',
 		'Content',
 	);
 
 	private static $summary_fields = array(
 		'Number'=>'Number',
-		'Title'=>'Title'
+		'TitleText'=>'Title'
 	);
 	
 	private static $default_sort = 'Number';
@@ -49,7 +49,7 @@ class FlowState extends DataObject implements PermissionProvider {
 		$fields = parent::getCMSFields();
 
 		$number = $fields->dataFieldByName('Number');
-		$title = $fields->dataFieldByName('Title');
+		$title = $fields->dataFieldByName('TitleText');
 		$content = $fields->dataFieldByName('Content');
 
 		$number->setRightTitle("Displayed in flow state box");
@@ -57,10 +57,22 @@ class FlowState extends DataObject implements PermissionProvider {
 		$content->setDescription("Extra information related to state. May be displayed on hover, or click");
 
 		$spanOpt = array("two"=>"two","four"=>"four","six"=>"six","eight"=>"eight");
-		$fields->insertAfter(new DropdownField('Size', "Relative display width", $spanOpt),'Description');
+		$fields->insertAfter(new DropdownField('Size', "Relative display width", $spanOpt),'TitleText');
 
 		return $fields;
 	}
+
+	public function getTitle(){
+		$title = $this->TitleText;
+		if($title == ''){
+			$title = "New state";
+		}
+
+		$textObj = new Text('TitleText');
+		$textObj->setValue($title);
+		return $textObj->LimitWordCount(5);
+	}
+
 
 	public function providePermissions() {
 		return array(
