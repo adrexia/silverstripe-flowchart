@@ -1,6 +1,3 @@
-.flowchart-admin-wrap {
-  /* for admin interface only. Will be overridden on frontend*/
-}
 .flowchart-admin-wrap .flowchart-toolbar label {
   font-weight: bold;
   line-height: 2em;
@@ -30,7 +27,6 @@
   -moz-box-sizing: border-box;
   box-sizing: border-box;
   width: 100%;
-  position: relative;
   padding: 20px;
 }
 .flowchart-admin-wrap .flowchart-container h1 {
@@ -57,7 +53,12 @@
   background: rgba(255, 255, 255, 0.1);
   margin-right: 230px;
 }
-.flowchart-admin-wrap .state {
+
+.flowchart-container {
+  position: relative;
+  /* for admin interface only. Will be overridden on frontend*/
+}
+.flowchart-container .state {
   z-index: 80;
   min-height: 50px;
   position: absolute;
@@ -67,11 +68,14 @@
   font-size: 10px;
   display: table;
 }
-.flowchart-admin-wrap .state .drag-content {
+.flowchart-container .state .drag-content {
   line-height: 1.5em;
   padding: 5px 20px;
 }
-.flowchart-admin-wrap .state.new-state {
+.flow-chart-view .flowchart-container .state.new-state {
+  display: none;
+}
+.flowchart-admin-wrap .flowchart-container .state.new-state {
   position: fixed;
   top: 146px;
   right: 25px;
@@ -80,28 +84,28 @@
   text-overflow: ellipsis;
   height: 27px;
 }
-.flowchart-admin-wrap .state.new-state .drag-content {
+.flowchart-admin-wrap .flowchart-container .state.new-state .drag-content {
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
   padding: 5px 0;
   width: 100px;
 }
-.flowchart-admin-wrap .state.new-state .drag-content:hover {
+.flowchart-admin-wrap .flowchart-container .state.new-state .drag-content:hover {
   cursor: move;
 }
-.flowchart-admin-wrap .state:hover {
+.flowchart-container .state:hover {
   box-shadow: 0 0 5px #aab2b9;
   border: 1px solid #bbb;
 }
-.flowchart-admin-wrap .state:hover .connect {
+.flowchart-container .state:hover .connect {
   z-index: 100;
   background: #efefef;
   position: absolute;
   bottom: 0;
   left: 0;
 }
-.flowchart-admin-wrap .state .num {
+.flowchart-container .state .num {
   font-size: 1.8em;
   color: #fff;
   width: 55px;
@@ -109,26 +113,26 @@
   display: table-cell;
   vertical-align: middle;
 }
-.flowchart-admin-wrap .state .num span {
+.flowchart-container .state .num span {
   background: #2D8896;
   width: 45px;
   height: 40px;
   display: table-cell;
   vertical-align: middle;
 }
-.flowchart-admin-wrap .columns.two {
+.flowchart-container .columns.two {
   width: 250px;
 }
-.flowchart-admin-wrap .columns.four {
+.flowchart-container .columns.four {
   width: 300px;
 }
-.flowchart-admin-wrap .columns.six {
+.flowchart-container .columns.six {
   width: 450px;
 }
-.flowchart-admin-wrap .columns.eight {
+.flowchart-container .columns.eight {
   width: 600px;
 }
-.flowchart-admin-wrap .new-states {
+.flowchart-container .new-states {
   -webkit-box-shadow: inset 1px 0 0 rgba(248, 248, 248, 0.9), 0 0 1px rgba(201, 205, 206, 0.8);
   -moz-box-shadow: inset 1px 0 0 rgba(248, 248, 248, 0.9), 0 0 1px rgba(201, 205, 206, 0.8);
   box-shadow: inset 1px 0 0 rgba(248, 248, 248, 0.9), 0 0 1px rgba(201, 205, 206, 0.8);
@@ -143,7 +147,7 @@
   border-radius: 2px;
   padding: 30px;
 }
-.flowchart-admin-wrap .new-states h2 {
+.flowchart-container .new-states h2 {
   opacity: 0.7;
   margin: 0;
   padding-top: 10px;
@@ -152,7 +156,7 @@
   text-align: center;
   text-shadow: 0px -1px 1px #d8dcdf;
 }
-.flowchart-admin-wrap em.flowchart-em {
+.flowchart-container em.flowchart-em {
   line-height: 2.5em;
   display: block;
   font-size: 11px;
@@ -160,11 +164,11 @@
   color: #97a0aa;
   font-style: italic;
 }
-.flowchart-admin-wrap .title {
+.flowchart-container .title {
   padding: 10px;
   cursor: move;
 }
-.flowchart-admin-wrap .connect {
+.flowchart-container .connect {
   width: 100%;
   height: 10px;
   cursor: pointer;

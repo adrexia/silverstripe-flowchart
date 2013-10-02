@@ -13,6 +13,7 @@ jsPlumb.ready(function($) {
 
 			onmatch: function(){
 				var self = this;
+
 				this._super();
 				jsPlumb.importDefaults({
 					Endpoint : ["Dot", {radius:1}],
@@ -33,8 +34,10 @@ jsPlumb.ready(function($) {
 						[ "Label", { label:$('#label-name').val(), id:"label", cssClass:"empty", location:0.5 }]
 					]
 				});
+				console.log('here');
 				$('.flowchart-container').loadFlowChart();
 				self.flowInit();
+
 			},
 			onunmatch: function(){
 				this._super();

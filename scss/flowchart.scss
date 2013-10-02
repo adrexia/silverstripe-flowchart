@@ -34,7 +34,6 @@
 	.flowchart-container {
 		@include box-sizing(border-box);
 		width: 100%;
-		position:relative;
 		padding:20px;
 		h1{
 			margin:0;
@@ -64,6 +63,9 @@
 		}
 	}
 
+}
+.flowchart-container {
+	position:relative;
 	.state {
 		z-index: 80;
 		min-height:50px;
@@ -78,21 +80,26 @@
 			padding:5px 20px;
 		}
 		&.new-state{
-			position:fixed;
-			top: 146px;
-			right:25px;
-			width: 165px !important;
-			overflow:hidden;
-			text-overflow:ellipsis;
-			height:27px;
-			.drag-content{
+			.flow-chart-view &{
+				display:none;
+			}
+			.flowchart-admin-wrap & {
+				position:fixed;
+				top: 146px;
+				right:25px;
+				width: 165px !important;
 				overflow:hidden;
-				white-space:nowrap;
 				text-overflow:ellipsis;
-				padding:5px 0;
-				width:100px;
-				&:hover{
-					cursor: move;
+				height:27px;
+				.drag-content{
+					overflow:hidden;
+					white-space:nowrap;
+					text-overflow:ellipsis;
+					padding:5px 0;
+					width:100px;
+					&:hover{
+						cursor: move;
+					}
 				}
 			}
 		}
