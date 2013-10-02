@@ -98,7 +98,7 @@
   box-shadow: 0 0 5px #aab2b9;
   border: 1px solid #bbb;
 }
-.flowchart-container .state:hover .connect {
+.flowchart-admin-wrap .flowchart-container .state:hover .connect {
   z-index: 100;
   background: #efefef;
   position: absolute;
@@ -165,7 +165,6 @@
   font-style: italic;
 }
 .flowchart-container .title {
-  padding: 10px;
   cursor: move;
 }
 .flowchart-container .connect {

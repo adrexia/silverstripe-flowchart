@@ -106,7 +106,7 @@
 		&:hover{
 			box-shadow: 0 0 5px rgba(170, 178, 185, 1);
 			border: 1px solid #bbb;
-			.connect {
+			.flowchart-admin-wrap & .connect {
 				z-index:100;
 				background:#efefef;
 				position:absolute;
@@ -181,7 +181,6 @@
 	}
 
 	.title {
-		padding: 10px;
 		cursor: move;
 	}
 

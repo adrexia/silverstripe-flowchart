@@ -34,7 +34,10 @@ jsPlumb.ready(function($) {
 					]
 				});
 				self.loadFlowChart();
-				self.flowInit();
+
+				if(this.closest('.flowchart-admin-wrap').length > 0){
+					self.flowInit();
+				}
 			},
 			onunmatch: function(){
 				this._super();
@@ -62,6 +65,7 @@ jsPlumb.ready(function($) {
 					});
 
 					this.bindFlowEvents();
+					
 				}
 
 			},
@@ -151,6 +155,9 @@ jsPlumb.ready(function($) {
 				$('#flow-chart-store').val(output);
 			},
 			loadFlowChart: function(){
+				if($('#flow-chart-store').val() === ""){
+					return false;
+				}
 				var savedFlow = $.parseJSON($('#flow-chart-store').val()),
 					states = this.find('.state'),
 					state, connection, newConnection,
@@ -187,6 +194,7 @@ jsPlumb.ready(function($) {
 						label = connection.label;
 
 						if($('#'+from).length > 0 && $('#'+to).length > 0){
+							console.log('true');
 							newConnection = jsPlumb.connect({ source:to, target:from });
 							if(label === ""){
 								newConnection.getOverlay("label").setLabel(label);
@@ -197,7 +205,9 @@ jsPlumb.ready(function($) {
 								newConnection.getOverlay("label").removeClass("empty");
 								newConnection.getOverlay("label").addClass("aLabel");
 							}
-							this.bindFlowEvents();
+							if(this.closest('.flowchart-admin-wrap').length > 0){
+								this.bindFlowEvents();
+							}
 						}
 					}
 				}
@@ -212,7 +222,7 @@ jsPlumb.ready(function($) {
 		});
 
 
-		$('.flowchart-container .state').entwine({
+		$('.flowchart-admin-wrap .flowchart-container .state').entwine({
 			onmatch: function(){
 				var self = this;
 				this._super();
@@ -233,7 +243,7 @@ jsPlumb.ready(function($) {
 
 		//Helper function to change display on states that 
 		//have been moved from original location
-		$('.state.new-state').entwine({
+		$('.flowchart-admin-wrap .state.new-state').entwine({
 			onmatch: function(){
 				var self = this;
 				this._super();
