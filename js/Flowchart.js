@@ -194,7 +194,6 @@ jsPlumb.ready(function($) {
 						label = connection.label;
 
 						if($('#'+from).length > 0 && $('#'+to).length > 0){
-							console.log('true');
 							newConnection = jsPlumb.connect({ source:to, target:from });
 							if(label === ""){
 								newConnection.getOverlay("label").setLabel(label);
