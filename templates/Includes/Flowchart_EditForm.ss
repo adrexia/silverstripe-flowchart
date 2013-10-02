@@ -30,7 +30,7 @@
 							<span>$Number</span>
 						</div>
 						<div class="drag-content">
-							$Title
+							$TitleText
 						</div>
 					</div>
 					<% end_loop %>
