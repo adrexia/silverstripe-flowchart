@@ -178,7 +178,8 @@ jsPlumb.ready(function($) {
 					state, connection, newConnection,
 					i = 0,
 					id = 0, x = 0, y = 0,
-					from = '', to = '', label = '';
+					from = '', to = '', label = '',
+					height = 0, h;
 
 				//Cleans up the endpoints
 				states.each(function () {
@@ -195,9 +196,24 @@ jsPlumb.ready(function($) {
 						id = state.id;
 						x = state.x;
 						y = state.y;
+						h = 0;
 
 						$('#'+id).css({left: x, top:y}).removeClass('new-state');
+
+						if(this.closest('.flow-chart-view').length > 0){
+							if($('#'+id).length > 0){
+								h = $('#'+id).outerHeight();
+								if(h + y > height){
+									height = h + y;
+								}
+							}
+						}
+
 					}
+				}
+				
+				if(this.closest('.flow-chart-view').length > 0){
+					$('.flow-chart-view').height(height + 100); //height plus 100px padding
 				}
 
 				//Reconnect flowchart
