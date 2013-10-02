@@ -19,6 +19,7 @@ jsPlumb.ready(function($) {
 
 				for (i = 0; i < p.length; i = i+1){
 					this.css(p[i] + "transform", s);
+					this.css(p[i] + "transform-origin",  "0 0 0");
 				}
 
 				this.parent().find('.zoom').attr('data-zoom', z);
