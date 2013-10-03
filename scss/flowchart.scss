@@ -29,6 +29,15 @@
 		}
 	}
 
+	em.flowchart-em{
+		line-height:2.5em;
+		display:block;
+		font-size:11px;
+		text-align: center;
+		color:#97a0aa;
+		font-style:italic;
+	}
+
 	.flow-tab{
 		overflow:scroll;
 		position:relative;
@@ -55,6 +64,25 @@
 			-ms-user-select: none;
 			user-select: none;
 
+		}
+		//Connection area
+		.connect {
+			z-index:100;
+			position:absolute;
+			bottom:0;
+			left:0;
+		}
+		.state {
+			opacity:0.8;
+			&:hover{
+				background:#f7f8f9;
+				box-shadow: 0 0 5px rgba(170, 178, 185, 1);
+				border: 1px solid #bbb;
+				.connect {
+					background:#efefef;
+				}
+			}
+		
 		}
 
 		.workspace{
@@ -99,18 +127,21 @@
 }
 .flowchart-container {
 	position:relative;
+	a:hover .state{
+		background:#f7f8f9;
+	}
 	.state {
 		z-index: 80;
 		min-height:60px;
 		position: absolute;
-		border: 1px solid #ccc;
+		border: 1px solid #2D8896;
 		background-color: #fff;
 		color:#333;
 		font-size:14px;
 		display: table;
 		.drag-content{
 			line-height:1.5em;
-			padding:5px 0px;
+			padding:15px 30px 15px 5px;
 		}
 		&.new-state{
 			.flow-chart-view &{
@@ -136,17 +167,8 @@
 				}
 			}
 		}
-		&:hover{
-			box-shadow: 0 0 5px rgba(170, 178, 185, 1);
-			border: 1px solid #bbb;
-			.flowchart-admin-wrap & .connect {
-				z-index:100;
-				background:#efefef;
-				position:absolute;
-				bottom:0;
-				left:0;
-			}
-		}
+
+		
 
 		.num{
 			font-weight:bold;
@@ -202,15 +224,6 @@
 			text-align: center;
 			text-shadow: 0px -1px 1px #d8dcdf;
 		}
-	}
-
-	em.flowchart-em{
-		line-height:2.5em;
-		display:block;
-		font-size:11px;
-		text-align: center;
-		color:#97a0aa;
-		font-style:italic;
 	}
 
 	.title {
