@@ -25,7 +25,7 @@
 				<div class="workspace">
 					<h1>Workspace</h1>
 					<% loop FlowStates.Reverse %>
-					<div id="id_{$ID}" data-id="$ID" class="state col new-state <% if $Size %>$Size<% else %>two<% end_if %>">
+					<div id="id_{$ID}" data-id="$ID" class="state col new-state <% if $Size %>$Size<% else %>two<% end_if %>" tabindex="0">
 						<% if $Number %>
 						<div class="num">
 							<span>$Number</span>
