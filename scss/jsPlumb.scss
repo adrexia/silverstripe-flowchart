@@ -1,9 +1,12 @@
 /** DISABLE TEXT SELECTION (SET ON BODY WHEN DRAGGING IS OCCURRING) **/
 
 .aLabel {
+	font-size:12px;
+	font-weight:bold;
+	line-height:1.5em;
 	color: #fff;
-	background-color: #2D8896;
-	padding: 0.3em;
+	background-color: #555;
+	padding: 2px 8px;
 	cursor: pointer;
 	-webkit-transition: background-color 0.25s ease-in;
 	-moz-transition: background-color 0.25s ease-in;
