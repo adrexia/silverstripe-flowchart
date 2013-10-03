@@ -13,8 +13,8 @@ class FlowState extends DataObject implements PermissionProvider {
 	);
 
 	private static $has_one = array(
-		'Parent'=>'FlowchartPage',
-		'LinkedState'=>'FlowState'
+		'LinkedState'=>'FlowState',
+		'Parent'=>'FlowchartPage'
 	);
 
 	private static $searchable_fields = array(
@@ -58,6 +58,11 @@ class FlowState extends DataObject implements PermissionProvider {
 
 		$spanOpt = array("two"=>"two","four"=>"four","six"=>"six","eight"=>"eight");
 		$fields->insertAfter(new DropdownField('Size', "Relative display width", $spanOpt),'TitleText');
+
+		// If within a flowchart page remove parentID
+		if(!(Controller::curr() instanceof FlowchartAdmin)) {
+			$fields->removeByName('ParentID');
+		}
 
 		return $fields;
 	}
