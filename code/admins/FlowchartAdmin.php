@@ -21,6 +21,7 @@ class FlowchartAdmin extends ModelAdmin {
 
 		if($this->sanitiseClassName($this->modelClass) == "FlowchartPage"){
 			$config->removeComponentsByType('GridFieldDetailForm');
+			$config->removeComponentsByType('GridFieldAddNewButton');
 			$config->addComponent(new GridFieldFlowchartDetailForm());
 		} else if($this->sanitiseClassName($this->modelClass) == "FlowState"){
 			$config->getComponentByType('GridFieldDataColumns')->setDisplayFields(
