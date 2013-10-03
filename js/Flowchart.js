@@ -36,7 +36,7 @@ jsPlumb.ready(function($) {
 					HoverPaintStyle : {strokeStyle:"#E26F1E", lineWidth:1 },
 					Connector :[ "Flowchart", { cornerRadius:0 } ],
 					RenderMode : "svg",
-					Anchors : ["BottomCenter", "TopCenter"],
+					Anchor : 'Continuous',
 					ConnectionOverlays : [
 						[ "Arrow", {
 							location:1,
@@ -69,7 +69,8 @@ jsPlumb.ready(function($) {
 					});
 
 					jsPlumb.makeSource(connect, {
-						parent: states[i]
+						parent: states[i],
+						anchor: 'Continuous'
 					});
 
 					$(states[i]).append(connect);
@@ -267,7 +268,7 @@ jsPlumb.ready(function($) {
 			},
 			onunmatch: function(){
 				this._super();
-			},
+			}
 
 		});
 
