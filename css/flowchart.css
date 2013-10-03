@@ -150,7 +150,6 @@
   box-sizing: border-box;
   margin-top: -20px;
   margin-left: -20px;
-  position: relative;
   height: 1500px;
   overflow: auto;
 }
@@ -171,6 +170,10 @@
 }
 .flow-chart-view:hover .zoom {
   opacity: 1;
+}
+.flow-chart-view .flowchart-container {
+  position: relative;
+  float: left;
 }
 .flow-chart-view .zoom {
   float: right;

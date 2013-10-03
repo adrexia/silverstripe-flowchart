@@ -163,7 +163,6 @@
 	@include box-sizing(border-box);
 	margin-top:-20px;
 	margin-left:-20px;
-	position:relative;
 	height:1500px;
 	overflow:auto;
 	@include respond(large-screens){
@@ -179,6 +178,10 @@
 		.zoom{
 			opacity:1;
 		}
+	}
+	.flowchart-container{
+		position:relative;
+		float:left;
 	}
 	.zoom{
 		float:right;
