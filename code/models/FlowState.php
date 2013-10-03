@@ -70,7 +70,7 @@ class FlowState extends DataObject implements PermissionProvider {
 
 		$textObj = new Text('TitleText');
 		$textObj->setValue($title);
-		return $textObj->LimitWordCount(5);
+		return $textObj->LimitWordCount(10);
 	}
 
 
