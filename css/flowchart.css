@@ -132,7 +132,7 @@
 }
 .flowchart-container .state .drag-content {
   line-height: 1.5em;
-  padding: 15px 30px 15px 5px;
+  padding: 10px 30px 10px 5px;
 }
 .flow-chart-view .flowchart-container .state.new-state {
   display: none;
