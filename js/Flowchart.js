@@ -36,6 +36,7 @@ jsPlumb.ready(function($) {
 				$('input[data-chart-storage=true]')
 					.filter(':first')
 					.val(JSON.stringify(value));
+			
 				return this;
 			},
 
@@ -191,7 +192,7 @@ jsPlumb.ready(function($) {
 				this.setChartData(saveArray);
 			},
 			loadFlowChart: function(){
-				if(this.getChartData() === ""){
+				if(this.getChartData() === null){
 					return false;
 				}
 				
