@@ -10,25 +10,6 @@ jsPlumb.ready(function($) {
 
 	$.entwine('ss', function($){
 		
-		/**
-		 * Enable save buttons upon detecting changes to content.
-		 * "changed" class is added by jQuery.changetracker.
-		 */
-		$('.cms-edit-form.changed').entwine({
-			onmatch: function(e) {
-				this.find('button[name=action_doSave]').button('option', 'showingAlternate', true);
-				this.find('button[name=action_publish]').button('option', 'showingAlternate', true);
-				this._super(e);
-			},
-			onunmatch: function(e) {
-				var saveButton = this.find('button[name=action_doSave]');
-				if(saveButton.data('button')) saveButton('option', 'showingAlternate', false);
-				var publishButton = this.find('button[name=action_publish]');
-				if(publishButton.data('button')) publishButton('option', 'showingAlternate', false);
-				this._super(e);
-			}
-		});
-
 		$('.flowchart-container').entwine({
 			
 			/**
@@ -74,8 +55,6 @@ jsPlumb.ready(function($) {
 				jsPlumb.setZoom(z);
 			},
 			onmatch: function(){
-				
-
 				var self = this;
 				this._super();
 				jsPlumb.importDefaults({
@@ -100,21 +79,22 @@ jsPlumb.ready(function($) {
 				self.loadFlowChart();
 
 				if(this.closest('.flowchart-admin-wrap').length > 0){
-					var height = self.closest('.cms-content-fields').height();
-					self.find('.flowchart-wrap').height(height);
-					$('.new-states').height(height);
-					self.closest('.cms-content-fields').addClass('auto-height');
-					self.flowInit();
+					self.workspaceInit();
 				}
 			},
 			
 			onunmatch: function(){
 				this._super();
 			},
-			flowInit: function(){
+			workspaceInit: function(){
 				var states = this.find('.state'),
 					connect,
-					i;
+					i,
+					height = this.closest('.cms-content-fields').height();
+
+				this.find('.flowchart-wrap').height(height);
+				$('.new-states').height(height);
+				this.closest('.cms-content-fields').addClass('auto-height');
 
 				for(i = 0; i < states.length; i = i + 1){
 					connect = $('<div>').addClass('connect');
@@ -236,13 +216,16 @@ jsPlumb.ready(function($) {
 					from = '', to = '', label = '',
 					height = 0, h;
 
+
+				//Turns off jsPlumb listeners
+				jsPlumb.unbind();
+
 				//Cleans up the endpoints
 				states.each(function () {
 					jsPlumb.removeAllEndpoints($(this));
 				});
 
-				//Turns off jsPlumb listeners
-				jsPlumb.unbind();
+				
 
 				//Set state positions
 				for(i in savedFlow.states){
@@ -295,9 +278,6 @@ jsPlumb.ready(function($) {
 								newConnection.getOverlay("label").removeClass("empty");
 								newConnection.getOverlay("label").addClass("aLabel");
 							}
-							if(this.closest('.flowchart-admin-wrap').length > 0){
-								this.bindFlowEvents();
-							}
 						}
 					}
 				}
@@ -345,29 +325,16 @@ jsPlumb.ready(function($) {
 
 		//Helper function to change display on states that 
 		//have been moved from original location
-		$('.flowchart-admin-wrap .new-states .state.new-state').entwine({
-			onmatch: function(){
-				var self = this;
-				this._super();
-				this.on( "dragcreate", function( event, ui ) {
-					self.draggable( "option", "revert", "invalid" );
-					self.draggable( "option", "containment", "body" );
-				});
-
-			},
-			onunmatch: function(){
-				this._super();
-			}
-		});
-
-		//Helper function to change display on states that 
-		//have been moved from original location
 		$('.flowchart-admin-wrap .state.new-state').entwine({
 			onmatch: function(){
 				var self = this;
 				this._super();
 				self.on( "dragcreate", function( event, ui ) {
 					self.draggable( "option", "scroll", true );
+				});
+				this.on( "dragcreate", function( event, ui ) {
+					self.draggable( "option", "revert", "invalid" );
+					self.draggable( "option", "containment", "body" );
 				});
 			},
 			onunmatch: function(){
@@ -399,8 +366,26 @@ jsPlumb.ready(function($) {
 					scope.find('.flowchart-wrap').height(height);
 					$('.new-states').height(height);
 					$('.cms-content-fields').addClass('auto-height');
-					//scope.flowInit();
 				}
+			}
+		});
+
+		/**
+		 * Enable save buttons upon detecting changes to content.
+		 * "changed" class is added by jQuery.changetracker.
+		 */
+		$('.cms-edit-form.changed').entwine({
+			onmatch: function(e) {
+				this.find('button[name=action_doSave]').button('option', 'showingAlternate', true);
+				this.find('button[name=action_publish]').button('option', 'showingAlternate', true);
+				this._super(e);
+			},
+			onunmatch: function(e) {
+				var saveButton = this.find('button[name=action_doSave]');
+				if(saveButton.data('button')) saveButton('option', 'showingAlternate', false);
+				var publishButton = this.find('button[name=action_publish]');
+				if(publishButton.data('button')) publishButton('option', 'showingAlternate', false);
+				this._super(e);
 			}
 		});
 
