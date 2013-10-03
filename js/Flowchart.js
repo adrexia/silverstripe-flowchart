@@ -11,6 +11,33 @@ jsPlumb.ready(function($) {
 	$.entwine('ss', function($){
 
 		$('.flowchart-container').entwine({
+			
+			/**
+			 * Get the chart data from an input field, return a deserialized
+			 * json ready for usage.
+			 * 
+			 * @returns Object
+			 */
+			getChartData: function() {
+				var val = $('input[data-chart-storage=true]')
+					.filter(':first')
+					.val();
+				return $.parseJSON(val);
+			},
+			
+			/**
+			 * Save the object passed in as a JSON serialized value in an input
+			 * field.
+			 * 
+			 * @param Object value
+			 * @returns self
+			 */
+			setChartData: function(value) {
+				$('input[data-chart-storage=true]')
+					.filter(':first')
+					.val(JSON.stringify(value));
+				return this;
+			},
 
 			setZoom: function(z) {
 				var p = [ "-webkit-", "-moz-", "-ms-", "-o-", "" ],
@@ -111,6 +138,7 @@ jsPlumb.ready(function($) {
 
 				jsPlumb.bind("connectionDetached", function(newConnection) {
 					self.storeFlowChart(newConnection);
+					self.markFormAsUnsaved();
 				});
 
 			},
@@ -133,10 +161,7 @@ jsPlumb.ready(function($) {
 					connections = jsPlumb.getConnections(),
 					state = {},	connection = {},
 					i = 0, j = 0, 
-					output,
 					workspace = this.find('.workspace');
-
-
 
 				//For each state convert to array and push into States
 				for(j = 0; j < states.length; j = j + 1){
@@ -162,19 +187,15 @@ jsPlumb.ready(function($) {
 						});
 					}
 				}
-
-				//Turn array into JSON
-				output = JSON.stringify(saveArray);
-
-				// Needs to save this in silverstripe if save is pressed, 
-				// but for now, just store the value for reload
-				$('#flow-chart-store').val(output);
+				//Save the data
+				this.setChartData(saveArray);
 			},
 			loadFlowChart: function(){
-				if($('#flow-chart-store').val() === ""){
+				if(this.getChartData() === ""){
 					return false;
 				}
-				var savedFlow = $.parseJSON($('#flow-chart-store').val()),
+				
+				var savedFlow = this.getChartData(),
 					states = this.find('.state'),
 					state, connection, newConnection,
 					i = 0,
@@ -242,16 +263,14 @@ jsPlumb.ready(function($) {
 						}
 					}
 				}
+			},
+			
+			markFormAsUnsaved: function() {
+				this.addClass('dirty');
+				$('#Form_ItemEditForm_action_doSave').button({showingAlternate: true});
+				$('#Form_ItemEditForm_action_publish').button({showingAlternate: true});
 			}
 		});
-
-		$('#flow-chart-save').entwine({
-			onclick: function(e){
-				$('.flowchart-container').storeFlowChart();
-				this._super(e);
-			}
-		});
-
 
 		$('.flowchart-admin-wrap .flowchart-container .state').entwine({
 			onmatch: function(){
@@ -259,17 +278,19 @@ jsPlumb.ready(function($) {
 				this._super();
 				this.on('drag', function(){
 					self.closest('.flowchart-container').storeFlowChart();
+					self.closest('.flowchart-container').markFormAsUnsaved();
 				});
 				this.dblclick(function(e) {
 					jsPlumb.detachAllConnections($(this));
 					$(this).attr('style','').addClass('new-state').css({'right':'45px', 'top':'146px'});
+					self.closest('.flowchart-container').storeFlowChart();
+					self.closest('.flowchart-container').markFormAsUnsaved();
 					e.stopPropagation();
 				});
 			},
 			onunmatch: function(){
 				this._super();
 			}
-
 		});
 
 		//Helper function to change display on states that 
@@ -302,7 +323,5 @@ jsPlumb.ready(function($) {
 				return false;
 			}
 		});
-
-	
 	});
 });
