@@ -13,9 +13,11 @@
 			<a href="#" class="switch" data-trigger="#modal_{$ID}">
 		<% end_if %>
 		<div id="id_{$ID}" data-id="$ID" class="state col new-state <% if $Size %>$Size<% else %>two<% end_if %>">
+			<% if $Number %>
 			<div class="num">
 				<span>$Number</span>
 			</div>
+			<% end_if %>
 			<div class="drag-content">
 				$TitleText
 			</div>
