@@ -1,5 +1,4 @@
-<form id="Form_ItemEditForm" action="$Link(ItemEditForm)" method="POST" class="cms-content cms-edit-form center cms-tabset flowchart-admin-wrap" data-pjax-fragment="CurrentForm Content" data-layout-type="border">
-	<% with $ItemEditForm %>
+<form id="Form_ItemEditForm" action="$FormAction" method="POST" class="cms-content cms-edit-form center cms-tabset flowchart-admin-wrap" data-pjax-fragment="CurrentForm Content" data-layout-type="border">
 	<div class="cms-content-header north">
 		<div class="cms-content-header-info">
 			<% include BackLink_Button %>
@@ -8,12 +7,17 @@
 			<% end_with %>
 		</div>
 	</div>
-	<% end_with %>
+	
 	<div class="cms-content-fields center">
+		<% if $Message %>
+		<p id="{$FormName}_error" class="message $MessageType">$Message</p>
+		<% else %>
+		<p id="{$FormName}_error" class="message $MessageType" style="display: none"></p>
+		<% end_if %>
 		<fieldset>
-			<input type="hidden" name="flow-chart-store" id="flow-chart-store" value='$FlowchartData' />
-			<input type='hidden' value='$SecurityID' name="SecurityID">	
-
+			<% loop $Fields %>
+				$FieldHolder
+			<% end_loop %>
 			<div id="container" class="flowchart-container">
 				<div class="new-states">
 					<h2>New States</h2>
@@ -24,7 +28,7 @@
 				
 				<div class="workspace">
 					<h1>Workspace</h1>
-					<% loop FlowStates.Reverse %>
+					<% loop $Record.FlowStates.Reverse %>
 					<div id="id_{$ID}" data-id="$ID" class="state col new-state <% if $Size %>$Size<% else %>two<% end_if %>" tabindex="0">
 						<% if $Number %>
 						<div class="num">
@@ -41,11 +45,15 @@
 		</fieldset>
 	</div>
 	<div class="cms-content-actions cms-content-controls south flowchart-toolbar">
+		<% if $Actions %>
 		<div class="Actions">
-			<button id="flow-chart-save" name='action_doSave' value="save" class="action ss-ui-action-constructive ss-ui-button" data-icon="accept" role="button">Save</button>
+			<% loop $Actions %>
+				$Field
+			<% end_loop %>
 			<label for="label-name">Connection Label</label>
 			<input id="label-name" name="labelName" value="" class="text" aria-described-by="flowchart-admin-use" />
 			<em id="flowchart-admin-use" class="flowchart-em extra-label">(e.g "Yes", "No", "Accepted")</em>
 		</div>
+		<% end_if %>
 	</div>
 </form>

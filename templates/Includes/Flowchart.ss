@@ -4,8 +4,10 @@
 		<a href="#" class="zoom-out"><i class="icon-minus"></i></a>
 	</div>
 	<div id="container" class="flowchart-container">
-	
-		<input type="hidden" name="flow-chart-store" id="flow-chart-store" value='$FlowchartData' />
+
+		<form>
+			<input type="hidden" name="flow-chart-store" id="flow-chart-store" value='$FlowchartData'  data-chart-storage="true" />
+		</form>
 		<% loop FlowStates.Reverse %>
 		<% if $LinkedState %>
 			<a href="{$LinkedState.Parent.Link}#id_$LinkedStateID">

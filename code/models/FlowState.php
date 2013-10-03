@@ -1,6 +1,5 @@
 <?php
 /*
-
 **/
 
 class FlowState extends DataObject implements PermissionProvider {
