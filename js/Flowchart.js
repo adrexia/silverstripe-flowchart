@@ -9,6 +9,25 @@ jsPlumb.ready(function($) {
 	$ = jQuery.noConflict();
 
 	$.entwine('ss', function($){
+		
+		/**
+		 * Enable save buttons upon detecting changes to content.
+		 * "changed" class is added by jQuery.changetracker.
+		 */
+		$('.cms-edit-form.changed').entwine({
+			onmatch: function(e) {
+				this.find('button[name=action_doSave]').button('option', 'showingAlternate', true);
+				this.find('button[name=action_publish]').button('option', 'showingAlternate', true);
+				this._super(e);
+			},
+			onunmatch: function(e) {
+				var saveButton = this.find('button[name=action_doSave]');
+				if(saveButton.data('button')) saveButton('option', 'showingAlternate', false);
+				var publishButton = this.find('button[name=action_publish]');
+				if(publishButton.data('button')) publishButton('option', 'showingAlternate', false);
+				this._super(e);
+			}
+		});
 
 		$('.flowchart-container').entwine({
 			
@@ -36,7 +55,7 @@ jsPlumb.ready(function($) {
 				$('input[data-chart-storage=true]')
 					.filter(':first')
 					.val(JSON.stringify(value));
-			
+				$('input[data-chart-storage=true]').trigger('change');
 				return this;
 			},
 
@@ -55,6 +74,8 @@ jsPlumb.ready(function($) {
 				jsPlumb.setZoom(z);
 			},
 			onmatch: function(){
+				
+
 				var self = this;
 				this._super();
 				jsPlumb.importDefaults({
@@ -139,7 +160,6 @@ jsPlumb.ready(function($) {
 
 				jsPlumb.bind("connectionDetached", function(newConnection) {
 					self.storeFlowChart(newConnection);
-					self.markFormAsUnsaved();
 				});
 
 			},
@@ -265,12 +285,6 @@ jsPlumb.ready(function($) {
 					}
 				}
 			},
-			
-			markFormAsUnsaved: function() {
-				this.addClass('dirty');
-				$('#Form_ItemEditForm_action_doSave').button({showingAlternate: true});
-				$('#Form_ItemEditForm_action_publish').button({showingAlternate: true});
-			}
 		});
 
 		$('.flowchart-admin-wrap .flowchart-container .state').entwine({
@@ -279,13 +293,11 @@ jsPlumb.ready(function($) {
 				this._super();
 				this.on('drag', function(){
 					self.closest('.flowchart-container').storeFlowChart();
-					self.closest('.flowchart-container').markFormAsUnsaved();
 				});
 				this.dblclick(function(e) {
 					jsPlumb.detachAllConnections($(this));
 					$(this).attr('style','').addClass('new-state').css({'right':'45px', 'top':'146px'});
 					self.closest('.flowchart-container').storeFlowChart();
-					self.closest('.flowchart-container').markFormAsUnsaved();
 					e.stopPropagation();
 				});
 			},
