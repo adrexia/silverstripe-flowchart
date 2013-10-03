@@ -82,11 +82,10 @@
 					background:#efefef;
 				}
 			}
-		
 		}
 
 		.workspace{
-			height: 1500px; //TODO: Make height and width configurable
+			height: 3000px; //TODO: Make height and width configurable
 			width:870px;
 			border:2px dashed #ccc;
 			background: rgba(255,255,255,0.1) url(../../flowchart/images/grid.png);
