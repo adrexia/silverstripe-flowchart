@@ -100,9 +100,14 @@ jsPlumb.ready(function($) {
 				self.loadFlowChart();
 
 				if(this.closest('.flowchart-admin-wrap').length > 0){
+					var height = self.closest('.cms-content-fields').height();
+					self.find('.flowchart-wrap').height(height);
+					$('.new-states').height(height);
+					self.closest('.cms-content-fields').addClass('auto-height');
 					self.flowInit();
 				}
 			},
+			
 			onunmatch: function(){
 				this._super();
 			},
@@ -122,12 +127,18 @@ jsPlumb.ready(function($) {
 						anchor: 'Continuous'
 					});
 
+
 					$(states[i]).append(connect);
 
 					//Make new state draggable
 					jsPlumb.draggable(states[i], {
 						containment: 'parent' //Stay inside container
 					});
+
+					if(this.closest('.workspace').length > 0){
+						$(states[i]).draggable( "option", "containment", "parent" );
+					}
+
 
 					this.bindFlowEvents();
 					
@@ -216,7 +227,8 @@ jsPlumb.ready(function($) {
 					return false;
 				}
 				
-				var savedFlow = this.getChartData(),
+				var self = this,
+					savedFlow = this.getChartData(),
 					states = this.find('.state'),
 					state, connection, newConnection,
 					i = 0,
@@ -242,6 +254,11 @@ jsPlumb.ready(function($) {
 						h = 0;
 
 						$('#'+id).css({left: x, top:y}).removeClass('new-state');
+						
+						if(self.closest('.flowchart-admin-wrap').length > 0){
+							//move to workspace if exists in json
+							$('#'+id).appendTo($('.flowchart-admin-wrap .workspace'));
+						}
 
 						if(this.closest('.flow-chart-view').length > 0){
 							if($('#'+id).length > 0){
@@ -287,6 +304,24 @@ jsPlumb.ready(function($) {
 			},
 		});
 
+		$('.flowchart-admin-wrap .workspace').entwine({
+			onmatch: function(){
+				this.droppable({ accept: ".state" });
+
+				this.on("drop", function( e, ui ) {
+					if($(ui.draggable).hasClass('new-state')){
+						ui.draggable.appendTo($('.flowchart-admin-wrap .workspace')).removeClass('new-state');
+						$(ui.draggable).draggable( "option", "containment", "parent" );
+
+
+						var scroll = $('.cms .flowchart-wrap').scrollTop();
+						$(ui.draggable).css({'top':scroll + e.clientY, 'right':0});
+
+					}
+				} );
+			}
+		});
+
 		$('.flowchart-admin-wrap .flowchart-container .state').entwine({
 			onmatch: function(){
 				var self = this;
@@ -296,10 +331,29 @@ jsPlumb.ready(function($) {
 				});
 				this.dblclick(function(e) {
 					jsPlumb.detachAllConnections($(this));
-					$(this).attr('style','').addClass('new-state').css({'right':'45px', 'top':'146px'});
+					$(this).appendTo(self.closest('.flowchart-admin-wrap').find('.new-states'));
+					$(this).attr('style','').addClass('new-state');
+					$(this).draggable( "option", "containment", "body" );
 					self.closest('.flowchart-container').storeFlowChart();
 					e.stopPropagation();
 				});
+			},
+			onunmatch: function(){
+				this._super();
+			}
+		});
+
+		//Helper function to change display on states that 
+		//have been moved from original location
+		$('.flowchart-admin-wrap .new-states .state.new-state').entwine({
+			onmatch: function(){
+				var self = this;
+				this._super();
+				this.on( "dragcreate", function( event, ui ) {
+					self.draggable( "option", "revert", "invalid" );
+					self.draggable( "option", "containment", "body" );
+				});
+
 			},
 			onunmatch: function(){
 				this._super();
@@ -312,11 +366,8 @@ jsPlumb.ready(function($) {
 			onmatch: function(){
 				var self = this;
 				this._super();
-				this.on('mousedown', function(e){
-					if(self.hasClass('new-state')){
-						var scroll = $('.cms .cms-content-fields').scrollTop();
-						$(self).removeClass('new-state').css({'top':scroll + e.clientY, 'right':0});
-					}
+				self.on( "dragcreate", function( event, ui ) {
+					self.draggable( "option", "scroll", true );
 				});
 			},
 			onunmatch: function(){
@@ -336,5 +387,22 @@ jsPlumb.ready(function($) {
 				return false;
 			}
 		});
+
+		//This is a hack. TODO: Make this more elegant
+		$('.cms .cms-container').entwine({
+			redraw: function(){
+				this._super();
+				var scope = $('.flowchart-admin-wrap .flowchart-container');
+				if(scope.length > 0){
+
+					var height = $('.cms-content-fields').removeClass('auto-height').height();
+					scope.find('.flowchart-wrap').height(height);
+					$('.new-states').height(height);
+					$('.cms-content-fields').addClass('auto-height');
+					//scope.flowInit();
+				}
+			}
+		});
+
 	});
 });

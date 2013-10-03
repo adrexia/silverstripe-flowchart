@@ -19,15 +19,9 @@
 				$FieldHolder
 			<% end_loop %>
 			<div id="container" class="flowchart-container">
-				<div class="new-states">
+			<div class="new-states">
 					<h2>New States</h2>
 					<em class="flowchart-em">(Drag and drop into your workspace)</em>
-					<div class="drag-area">
-					</div>
-				</div>
-				
-				<div class="workspace">
-					<h1>Workspace</h1>
 					<% loop $Record.FlowStates.Reverse %>
 					<div id="id_{$ID}" data-id="$ID" class="state col new-state <% if $Size %>$Size<% else %>two<% end_if %>" tabindex="0">
 						<% if $Number %>
@@ -40,6 +34,12 @@
 						</div>
 					</div>
 					<% end_loop %>
+				</div>
+			<div class="flowchart-wrap">
+				
+				
+				<div class="workspace">
+					<h1>Workspace</h1>
 				</div>
 			</div>
 		</fieldset>
