@@ -1,4 +1,4 @@
-/*jslint browser: true*/
+/*jslint browser: true, nomen: true */
 /*global $, jsPlumb, jQuery*/
 
 
@@ -11,7 +11,9 @@ jsPlumb.ready(function($) {
 	$.entwine('ss', function($){
 		
 		$('.flowchart-container').entwine({
-
+			/*
+			 * Set JSPlumb defaults settings
+			 */
 			jsPlumbDefaults: function(){
 				jsPlumb.importDefaults({
 					Endpoint : ["Dot", {radius:1}],
@@ -74,6 +76,33 @@ jsPlumb.ready(function($) {
 				$('input[data-chart-storage=true]').trigger('change');
 				return this;
 			},
+			/*
+			 * Adjust overlays on a connection instance
+			 * Currently only sets the label overlay
+			 *
+			 * @parem JSPlumbConnection connectionInstance, String label
+			 */
+			setOverlays: function(connectionInstance, label){
+				var overlayLabel = connectionInstance.getOverlay("label");
+
+				if(label === ""){
+					overlayLabel.setLabel(label);
+					overlayLabel.addClass("empty");
+					overlayLabel.removeClass("aLabel");
+				} else {
+					overlayLabel.setLabel(label);
+					overlayLabel.removeClass("empty");
+					overlayLabel.addClass("aLabel");
+				}
+			},
+
+			/**
+			 * Set jsPlumb zoom property. Takes an integer value and zoom to that value
+			 *
+			 * NOTE: and unzoomed state is 1, 0.9 is zoomed out by 90%
+			 * 
+			 * @param Int
+			 */
 			setZoom: function(z) {
 				var p = [ "-webkit-", "-moz-", "-ms-", "-o-", "" ],
 					s = "scale(" + z + ")",
@@ -89,18 +118,9 @@ jsPlumb.ready(function($) {
 				jsPlumb.setZoom(z);
 			},
 			/*
-			 * Helper method to determine if state is within bounds
+			 * Set up special layout for flowchart construction interface
+			 * TO DO: Put user config values here for workspace size (currently in css)
 			 */
-			boundingBox: function(state, workspace){
-					var x1 = workspace.position().left,
-						x2 = workspace.width() + x1,
-						y1 = workspace.position().top,
-						y2 = workspace.height() + y1,
-						sx = state.position().left,
-						sy = state.position().top;
-
-					return sx > x1 && sx < x2 && sy > y1 && sy < y2;
-			},
 			layoutAdmin: function(){
 				var contentFields = this.closest('.cms-content-fields'),
 					height = contentFields.removeClass('auto-height').height();
@@ -109,20 +129,18 @@ jsPlumb.ready(function($) {
 				this.find('.flowchart-wrap').height(height);
 				this.find('.new-states').height(height);
 				contentFields.addClass('auto-height');
-
-
-				// var height = $('.cms-content-fields').removeClass('auto-height').height();
-					// scope.find('.flowchart-wrap').height(height);
-					// $('.new-states').height(height);
-					// $('.cms-content-fields').addClass('auto-height');
 			},
 			/* 
-			 * Initialise admin interface specifics
+			 * Initialise admin interface specifics:
+			 *  * Call to setup layout
+			 *  * jsPlumb events
+			 *  * State events
 			 */
 			workspaceInit: function(){
 				var states = this.find('.state'),
 					connect,
-					i;
+					i,
+					self = this;
 
 				this.layoutAdmin();
 
@@ -148,49 +166,46 @@ jsPlumb.ready(function($) {
 						$(states[i]).draggable( "option", "containment", "parent" );
 					}
 				}
-				this.bindFlowEvents();
-			},
-			makeConnection: function(newConnection){
-				var label = $('#label-name').val(),
-					overlayLabel = newConnection.connection.getOverlay("label");
 
-				if(label === ""){
-					overlayLabel.setLabel(label);
-					overlayLabel.addClass("empty");
-					overlayLabel.removeClass("aLabel");
-				}else{
-					overlayLabel.setLabel(label);
-					overlayLabel.removeClass("empty");
-					overlayLabel.addClass("aLabel");
-				}
-				this.storeFlowChart();
-			},
-			bindFlowEvents: function(){
-				var self = this;
+				// JS plumb event hooks  
 
+				// Detach connections on click
 				jsPlumb.bind("click", jsPlumb.detach);
 
+				// Set overlays on new connections and save values to json
 				jsPlumb.bind("connection", function(newConnection) {
-					self.makeConnection(newConnection);
+					var label = $('#label-name').val();
+					self.setOverlays(newConnection.connection, label);
+					self.storeFlowChart();
 				});
 
+				// When Connection detached, update json
 				jsPlumb.bind("connectionDetached", function(newConnection) {
 					self.storeFlowChart(newConnection);
 				});
 			},
+
+		
+			/*
+			 * Responsible for updating the JSON object that will be sent to the 
+			 * db on save. Constructs arrays from state positions and label info.
+			 *
+			 * Filters states by those within the workspace. 
+			 *
+			 */
 			storeFlowChart: function(){
 				var saveArray = {states: [], connections: []},
 					states = $('.state'),
 					connections = jsPlumb.getConnections(),
 					state = {},	connection = {},
-					i = 0, j = 0, 
-					workspace = this.find('.workspace');
+					i = 0, j = 0;
 
-				//For each state convert to array and push into States
+				//convert each state position into array, with id.
+				//push into saveArray.states
 				for(j = 0; j < states.length; j = j + 1){
 					state = $(states[j]);
 
-					if(this.boundingBox(state, workspace)){
+					if($(states[j]).closest('.workspace').length > 0){
 						saveArray.states.push({
 							id: state.attr('id'),
 							x: state.position().left,
@@ -199,7 +214,8 @@ jsPlumb.ready(function($) {
 					}
 				}
 
-				//For each connection convert to array and push into Connections
+				//convert important connection values into array
+				//push into saveArray.connections
 				for(i in connections){
 					if(connections.hasOwnProperty(i)){
 						connection = connections[i];
@@ -213,12 +229,13 @@ jsPlumb.ready(function($) {
 				//Save the data
 				this.setChartData(saveArray);
 			},
-			
+			/*
+			 * Responsible for updating the flowchart state objects with previously saved JSON data
+			 *
+			 * Moves and positions states found in JSON
+			 * Calls methods to apply connections and initializes events if needed
+			 */
 			loadFlowChart: function(){
-				if(this.getChartData() === null){
-					return false;
-				}
-				
 				var self = this,
 					savedFlow = this.getChartData(),
 					states = this.find('.state'),
@@ -228,12 +245,18 @@ jsPlumb.ready(function($) {
 					from = '', to = '', label = '',
 					height = 0, h;
 
+				//If this is a new chart, quit out of this function
+				if(savedFlow === null){
+					return false;
+				}
+
+				//Apply jsplumb defaults
 				this.jsPlumbDefaults();
 
 				//Turns off jsPlumb listeners
 				jsPlumb.unbind();
 
-				//Cleans up the endpoints
+				//Cleans up the endpoints so jsPlumb won't know about them
 				states.each(function () {
 					jsPlumb.removeAllEndpoints($(this));
 				});
@@ -247,13 +270,15 @@ jsPlumb.ready(function($) {
 						y = state.y;
 						h = 0;
 
-						$('#'+id).css({left: x, top:y}).removeClass('new-state');
-						
 						if(self.closest('.flowchart-admin-wrap').length > 0){
-							//move to workspace if exists in json
+							//in create mode, move to workspace if exists in json
 							$('#'+id).appendTo($('.flowchart-admin-wrap .workspace'));
 						}
 
+						// Position states
+						$('#'+id).css({left: x, top:y}).removeClass('new-state');
+
+						// Calculate height needed in view mode
 						if(this.closest('.flow-chart-view').length > 0){
 							if($('#'+id).length > 0){
 								h = $('#'+id).outerHeight();
@@ -262,15 +287,15 @@ jsPlumb.ready(function($) {
 								}
 							}
 						}
-
 					}
 				}
 				
+				// set height needed in view mode
 				if(this.closest('.flow-chart-view').length > 0){
-					$('.flow-chart-view').height(height + 100); //height plus 100px padding
+					$('.flow-chart-view').height(height + 100); //lowest flowstate plus 100px padding
 				}
 
-				//Reconnect flowchart
+				//Reconnect flowchart. Miust check that both end points still exist
 				for(i in savedFlow.connections){
 					if(savedFlow.connections.hasOwnProperty(i)){
 						connection = savedFlow.connections[i];
@@ -280,53 +305,63 @@ jsPlumb.ready(function($) {
 
 						if($('#'+from).length > 0 && $('#'+to).length > 0){
 							newConnection = jsPlumb.connect({ source:to, target:from });
-							if(label === ""){
-								newConnection.getOverlay("label").setLabel(label);
-								newConnection.getOverlay("label").addClass("empty");
-								newConnection.getOverlay("label").removeClass("aLabel");
-							}else{
-								newConnection.getOverlay("label").setLabel(label);
-								newConnection.getOverlay("label").removeClass("empty");
-								newConnection.getOverlay("label").addClass("aLabel");
-							}
+							this.setOverlays(newConnection, label);
 						}
 					}
 				}
-			},
-		});
-
-		$('.flowchart-admin-wrap .workspace').entwine({
-			onmatch: function(){
-				this.droppable({ accept: ".state" });
-
-				this.on("drop", function( e, ui ) {
-					if($(ui.draggable).hasClass('new-state')){
-						ui.draggable.appendTo($('.flowchart-admin-wrap .workspace')).removeClass('new-state');
-						$(ui.draggable).draggable( "option", "containment", "parent" );
-
-
-						var scroll = $('.cms .flowchart-wrap').scrollTop();
-						$(ui.draggable).css({'top':scroll + e.clientY, 'right':0});
-
-					}
-				} );
 			}
 		});
 
-		$('.flowchart-admin-wrap .flowchart-container .state').entwine({
+		/*
+		 * Make workspace droppable
+		 */
+		$('.flowchart-admin-wrap .workspace').entwine({
+			onmatch: function(){
+				this.droppable({
+					accept: ".state"
+				});	
+
+				this.on("drop", function(e, ui) {
+					if($(ui.draggable).hasClass('new-state')){
+						var scroll = $('.cms .flowchart-wrap').scrollTop();
+						//Move object to the workspace
+						ui.draggable.appendTo($('.flowchart-admin-wrap .workspace')).removeClass('new-state');
+						
+						//Reset draggable parent to new container
+						$(ui.draggable).draggable( "option", "containment", "parent" );
+
+						//Account for scrolled workspace
+						$(ui.draggable).css({'top':scroll + e.clientY, 'right':0});
+					}
+				});
+			}
+		});
+
+		/*
+		 * Attach special event handlers to states within the construction view
+		 */
+		$('.flowchart-admin-wrap .state').entwine({
 			onmatch: function(){
 				var self = this;
 				this._super();
-				this.on('drag', function(){
+				this.on('dragstop', function(){
 					self.closest('.flowchart-container').storeFlowChart();
 				});
 				this.dblclick(function(e) {
+					e.stopPropagation();
+
+					//Tell jsPlumb that the connections are gone
 					jsPlumb.detachAllConnections($(this));
+
+					//Move object back into new states panel, reset styles, and apply new-state class
 					$(this).appendTo(self.closest('.flowchart-admin-wrap').find('.new-states'));
 					$(this).attr('style','').addClass('new-state');
-					$(this).draggable( "option", "containment", "body" );
+
+					//Shift containment to the wider container, so item can be dragged into workspace
+					$(this).draggable( "option", "containment", ".flowchart-container");
+					
+					//Update model
 					self.closest('.flowchart-container').storeFlowChart();
-					e.stopPropagation();
 				});
 			},
 			onunmatch: function(){
@@ -334,16 +369,12 @@ jsPlumb.ready(function($) {
 			}
 		});
 
-		//Helper function to change display on states that 
-		//have been moved from original location
+		//Helper function to set specific options on new state draggables
 		$('.flowchart-admin-wrap .state.new-state').entwine({
 			onmatch: function(){
 				var self = this;
 				this._super();
-				self.on( "dragcreate", function( event, ui ) {
-					self.draggable( "option", "scroll", true );
-				});
-				this.on( "dragcreate", function( event, ui ) {
+				this.on( "dragcreate", function(){
 					self.draggable( "option", "revert", "invalid" );
 					self.draggable( "option", "containment", "body" );
 				});
@@ -353,6 +384,8 @@ jsPlumb.ready(function($) {
 			}
 		});
 
+
+		// Zoom event handler
 		$('.flow-chart-view .zoom a').entwine({
 			onclick: function(){
 				var currentZoom = parseFloat(this.closest('.zoom').attr('data-zoom')),
@@ -366,15 +399,14 @@ jsPlumb.ready(function($) {
 			}
 		});
 
-		//This is a hack. TODO: Make this more elegant
+		// This is a hack to apply layout on redraw. 
+		// TODO: Make this more elegant
 		$('.cms .cms-container').entwine({
 			redraw: function(){
 				this._super();
 				var scope = $('.flowchart-admin-wrap .flowchart-container');
 				if(scope.length > 0){
 					scope.layoutAdmin();
-
-					
 				}
 			}
 		});
@@ -390,10 +422,14 @@ jsPlumb.ready(function($) {
 				this._super(e);
 			},
 			onunmatch: function(e) {
-				var saveButton = this.find('button[name=action_doSave]');
-				if(saveButton.data('button')) saveButton('option', 'showingAlternate', false);
-				var publishButton = this.find('button[name=action_publish]');
-				if(publishButton.data('button')) publishButton('option', 'showingAlternate', false);
+				var saveButton = this.find('button[name=action_doSave]'),
+					publishButton = this.find('button[name=action_publish]');
+				if(saveButton.data('button')) {
+					saveButton('option', 'showingAlternate', false);
+				}
+				if(publishButton.data('button')) {
+					publishButton('option', 'showingAlternate', false);
+				}
 				this._super(e);
 			}
 		});
