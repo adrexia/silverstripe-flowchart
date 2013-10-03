@@ -163,7 +163,7 @@
 	@include box-sizing(border-box);
 	margin-top:-20px;
 	margin-left:-20px;
-	
+	position:relative;
 	height:1500px;
 	overflow:auto;
 	@include respond(large-screens){
