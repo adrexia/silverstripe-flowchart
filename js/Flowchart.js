@@ -11,7 +11,42 @@ jsPlumb.ready(function($) {
 	$.entwine('ss', function($){
 		
 		$('.flowchart-container').entwine({
+
+			jsPlumbDefaults: function(){
+				jsPlumb.importDefaults({
+					Endpoint : ["Dot", {radius:1}],
+					EndpointStyle : {strokeStyle:'transparent' },
+					PaintStyle: {strokeStyle:"#0C768E", lineWidth:1 },
+					HoverPaintStyle : {strokeStyle:"#E26F1E", lineWidth:1 },
+					Connector :[ "Flowchart", { cornerRadius:0 } ],
+					RenderMode : "svg",
+					Anchor : 'Continuous',
+					ConnectionOverlays : [
+						[ "Arrow", {
+							location:1,
+							id:"arrow",
+							length:8,
+							width:8,
+							foldback:0.8
+						} ],
+						[ "Label", { label:$('#label-name').val(), id:"label", cssClass:"empty", location:0.5 }]
+					]
+				});
+			},
+			onmatch: function(){
+				var self = this;
+				this._super();
+				self.loadFlowChart();
+
+				if(this.closest('.flowchart-admin-wrap').length > 0){
+					self.workspaceInit();
+				}
+			},
 			
+			onunmatch: function(){
+				this._super();
+			},
+
 			/**
 			 * Get the chart data from an input field, return a deserialized
 			 * json ready for usage.
@@ -39,7 +74,6 @@ jsPlumb.ready(function($) {
 				$('input[data-chart-storage=true]').trigger('change');
 				return this;
 			},
-
 			setZoom: function(z) {
 				var p = [ "-webkit-", "-moz-", "-ms-", "-o-", "" ],
 					s = "scale(" + z + ")",
@@ -54,48 +88,45 @@ jsPlumb.ready(function($) {
 
 				jsPlumb.setZoom(z);
 			},
-			onmatch: function(){
-				var self = this;
-				this._super();
-				jsPlumb.importDefaults({
-					Endpoint : ["Dot", {radius:1}],
-					EndpointStyle : {strokeStyle:'transparent' },
-					PaintStyle: {strokeStyle:"#0C768E", lineWidth:1 },
-					HoverPaintStyle : {strokeStyle:"#E26F1E", lineWidth:1 },
-					Connector :[ "Flowchart", { cornerRadius:0 } ],
-					RenderMode : "svg",
-					Anchor : 'Continuous',
-					ConnectionOverlays : [
-						[ "Arrow", {
-							location:1,
-							id:"arrow",
-							length:8,
-							width:8,
-							foldback:0.8
-						} ],
-						[ "Label", { label:$('#label-name').val(), id:"label", cssClass:"empty", location:0.5 }]
-					]
-				});
-				self.loadFlowChart();
+			/*
+			 * Helper method to determine if state is within bounds
+			 */
+			boundingBox: function(state, workspace){
+					var x1 = workspace.position().left,
+						x2 = workspace.width() + x1,
+						y1 = workspace.position().top,
+						y2 = workspace.height() + y1,
+						sx = state.position().left,
+						sy = state.position().top;
 
-				if(this.closest('.flowchart-admin-wrap').length > 0){
-					self.workspaceInit();
-				}
+					return sx > x1 && sx < x2 && sy > y1 && sy < y2;
 			},
-			
-			onunmatch: function(){
-				this._super();
+			layoutAdmin: function(){
+				var contentFields = this.closest('.cms-content-fields'),
+					height = contentFields.removeClass('auto-height').height();
+
+				// Layout set-up
+				this.find('.flowchart-wrap').height(height);
+				this.find('.new-states').height(height);
+				contentFields.addClass('auto-height');
+
+
+				// var height = $('.cms-content-fields').removeClass('auto-height').height();
+					// scope.find('.flowchart-wrap').height(height);
+					// $('.new-states').height(height);
+					// $('.cms-content-fields').addClass('auto-height');
 			},
+			/* 
+			 * Initialise admin interface specifics
+			 */
 			workspaceInit: function(){
 				var states = this.find('.state'),
 					connect,
-					i,
-					height = this.closest('.cms-content-fields').height();
+					i;
 
-				this.find('.flowchart-wrap').height(height);
-				$('.new-states').height(height);
-				this.closest('.cms-content-fields').addClass('auto-height');
+				this.layoutAdmin();
 
+				// State set-up
 				for(i = 0; i < states.length; i = i + 1){
 					connect = $('<div>').addClass('connect');
 					jsPlumb.makeTarget(states[i], {
@@ -107,23 +138,17 @@ jsPlumb.ready(function($) {
 						anchor: 'Continuous'
 					});
 
-
 					$(states[i]).append(connect);
 
 					//Make new state draggable
-					jsPlumb.draggable(states[i], {
-						containment: 'parent' //Stay inside container
-					});
+					jsPlumb.draggable(states[i], {});
 
-					if(this.closest('.workspace').length > 0){
+					// If within workspace, contain
+					if($(states[i]).closest('.workspace').length > 0){
 						$(states[i]).draggable( "option", "containment", "parent" );
 					}
-
-
-					this.bindFlowEvents();
-					
 				}
-
+				this.bindFlowEvents();
 			},
 			makeConnection: function(newConnection){
 				var label = $('#label-name').val(),
@@ -152,20 +177,6 @@ jsPlumb.ready(function($) {
 				jsPlumb.bind("connectionDetached", function(newConnection) {
 					self.storeFlowChart(newConnection);
 				});
-
-			},
-			/*
-			 * Helper method to determine if state is within bounds
-			 */
-			boundingBox: function(state, workspace){
-					var x1 = workspace.position().left,
-						x2 = workspace.width() + x1,
-						y1 = workspace.position().top,
-						y2 = workspace.height() + y1,
-						sx = state.position().left,
-						sy = state.position().top;
-
-					return sx > x1 && sx < x2 && sy > y1 && sy < y2;
 			},
 			storeFlowChart: function(){
 				var saveArray = {states: [], connections: []},
@@ -202,6 +213,7 @@ jsPlumb.ready(function($) {
 				//Save the data
 				this.setChartData(saveArray);
 			},
+			
 			loadFlowChart: function(){
 				if(this.getChartData() === null){
 					return false;
@@ -216,6 +228,7 @@ jsPlumb.ready(function($) {
 					from = '', to = '', label = '',
 					height = 0, h;
 
+				this.jsPlumbDefaults();
 
 				//Turns off jsPlumb listeners
 				jsPlumb.unbind();
@@ -224,8 +237,6 @@ jsPlumb.ready(function($) {
 				states.each(function () {
 					jsPlumb.removeAllEndpoints($(this));
 				});
-
-				
 
 				//Set state positions
 				for(i in savedFlow.states){
@@ -361,11 +372,9 @@ jsPlumb.ready(function($) {
 				this._super();
 				var scope = $('.flowchart-admin-wrap .flowchart-container');
 				if(scope.length > 0){
+					scope.layoutAdmin();
 
-					var height = $('.cms-content-fields').removeClass('auto-height').height();
-					scope.find('.flowchart-wrap').height(height);
-					$('.new-states').height(height);
-					$('.cms-content-fields').addClass('auto-height');
+					
 				}
 			}
 		});
