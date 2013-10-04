@@ -25,3 +25,8 @@ http://jsplumbtoolkit.com/
 * ~Make design more generic~
 * ~Fix title issue (getTitle)~
 
+##Screen Shots
+
+![](images/constructed-chart.png)
+![](images/chart.png)
+
