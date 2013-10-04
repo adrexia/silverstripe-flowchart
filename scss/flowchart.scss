@@ -21,6 +21,9 @@
 		}
 		fieldset{
 			min-width: 1138px !important; //Enough room for workspace and panel
+			fieldset{
+				min-width: 0 !important;
+			}
 		}
 	}
 
@@ -32,27 +35,18 @@
 		left:0;
 	}
 
-	.flowchart-toolbar{
-		z-index:100;
-		label {
-			font-weight:bold;
-			line-height:2em;
-			opacity:0.7;
-			float:left;
-			display:block;
-			color:rgba(0,0,0,0.5);
-			text-align: center;
-			text-shadow: 0px -1px 1px #d8dcdf;
-			margin-left:10px;
-		}
-		.extra-label{
-			float:left; 
-			margin-left:10px;
+	.label-name-field{
+		@include border-radius(3px);
+		@include box-shadow(none);
+		padding:10px 20px;
+		margin-top:0;
+		border-bottom:0;
+		label{
+			clear:both;
+			margin-top:5px;
 		}
 		input.text{
-			width:100px;
-			float:left;
-			margin-left:10px;
+			clear:both;
 		}
 	}
 
@@ -62,6 +56,7 @@
 	}
 	.state {
 		opacity:0.8;
+
 		&:hover{
 			background:#f7f8f9;
 			box-shadow: 0 0 5px rgba(170, 178, 185, 1);
@@ -71,12 +66,30 @@
 			}
 		}
 		&.new-state{
-			top: 146px;
-			right:25px;
-			width: 165px !important;
+			min-height:30px;
+			padding:0;
+			top: 100px;
+			left:20px;
+			width: 155px !important;
 			overflow:hidden;
 			text-overflow:ellipsis;
 			height:27px;
+			@for $i from 0 through 10{
+				&.order_#{$i}{
+					top: 220px + 35px * $i;
+				}
+			}
+			.connect {
+				display:none;
+			}
+			.num{
+				span{
+					font-size:0.8em;
+					background:#333;
+					width:25px;
+					height:25px;
+				}
+			}
 			.drag-content{
 				overflow:hidden;
 				white-space:nowrap;
@@ -89,10 +102,10 @@
 			}
 		}
 	}
-
 	.flowchart-wrap {
 		@include box-sizing(border-box);
 		padding:20px;
+		margin-right:2px;
 		height:100%;
 		overflow:auto;
 		h1{
@@ -111,9 +124,7 @@
 			-moz-user-select: none;
 			-ms-user-select: none;
 			user-select: none;
-
-		}
-	
+		}	
 
 		.workspace{
 			position:relative;
@@ -124,23 +135,28 @@
 			margin-right:230px;
 		}
 	}
+
 	.new-states{
-		@include box-shadow(inset 1px 0 0 rgba(248, 248, 248, 0.9), 0 0 1px rgba(201, 205, 206, 0.8));
+		@include box-shadow(rgba(248, 248, 248, 0.9) -1px 0 0 inset, 0 0 1px rgba(201, 205, 206, 0.8));
 		width:200px;
-		height:100%;
 		background:#ECEFF1;
 		height:100%;
-		z-index:0;
-		float:right;
+		z-index:2;
+		float:left;
 		border-radius:2px;
-		padding:30px;
-		h2{
-			opacity:0.7;
-			margin:0;
-			padding-top:10px;
+		padding:0px;
+		overflow:visible;
+	/*	overflow-y:auto;
+		overflow-x:hidden; unfortunately these stop the drag action from working */
+		.cms-panel-header{
+			padding:0 20px;
+			margin-bottom:0;
+		}
+		h3{
+			&.states-heading{
+				margin-top:50px;
+			}
 			display:block;
-			color:rgba(0,0,0,0.5);
-			text-align: center;
 			text-shadow: 0px -1px 1px #d8dcdf;
 		}
 	}

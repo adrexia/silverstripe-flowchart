@@ -19,11 +19,17 @@
 				$FieldHolder
 			<% end_loop %>
 			<div id="container" class="flowchart-container">
-			<div class="new-states">
-					<h2>New States</h2>
-					<em class="flowchart-em">(Drag and drop into your workspace)</em>
-					<% loop $Record.FlowStates.Reverse %>
-					<div id="id_{$ID}" data-id="$ID" class="state col new-state <% if $Size %>$Size<% else %>two<% end_if %>" tabindex="0">
+			<div class="new-states cms-content-tools">
+				<h3 class="cms-panel-header">Tools</h3>
+				<fieldset class="field label-name-field">
+					<label for="label-name" class="left">Connection Label</label>
+					
+					<input id="label-name" name="labelName" value="" class="text" aria-described-by="flowchart-admin-use" />
+					<em id="flowchart-admin-use" class="flowchart-em extra-label">(e.g "Yes", "No", "Accepted")</em>
+				</fieldset>
+				<h3 class="cms-panel-header states-heading">New States</h3>
+				<% loop $Record.FlowStates.Reverse %>
+					<div id="id_{$ID}" data-id="$ID" class="order_$Modulus(6) state col new-state <% if $Size %>$Size<% else %>two<% end_if %>" tabindex="0">
 						<% if $Number %>
 						<div class="num">
 							<span>$Number</span>
@@ -33,8 +39,8 @@
 							$TitleText
 						</div>
 					</div>
-					<% end_loop %>
-				</div>
+				<% end_loop %>
+			</div>
 			<div class="flowchart-wrap">
 				
 				
@@ -50,9 +56,6 @@
 			<% loop $Actions %>
 				$Field
 			<% end_loop %>
-			<label for="label-name">Connection Label</label>
-			<input id="label-name" name="labelName" value="" class="text" aria-described-by="flowchart-admin-use" />
-			<em id="flowchart-admin-use" class="flowchart-em extra-label">(e.g "Yes", "No", "Accepted")</em>
 		</div>
 		<% end_if %>
 	</div>
