@@ -161,8 +161,6 @@
 }
 .flow-chart-view{
 	@include box-sizing(border-box);
-	margin-top:-20px;
-	margin-left:-20px;
 	height:1500px;
 	overflow:auto;
 	@include respond(large-screens){
