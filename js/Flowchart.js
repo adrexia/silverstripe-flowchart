@@ -417,18 +417,18 @@ jsPlumb.ready(function($) {
 		 */
 		$('.cms-edit-form.changed').entwine({
 			onmatch: function(e) {
-				this.find('button[name=action_doSave]').button('option', 'showingAlternate', true);
-				this.find('button[name=action_publish]').button('option', 'showingAlternate', true);
+				this.find('button[name=action_doSave]').button('option', 'showingAlternate', true).addClass('ss-ui-action-constructive');
+				this.find('button[name=action_publish]').button('option', 'showingAlternate', true).addClass('ss-ui-action-constructive');
 				this._super(e);
 			},
 			onunmatch: function(e) {
 				var saveButton = this.find('button[name=action_doSave]'),
 					publishButton = this.find('button[name=action_publish]');
 				if(saveButton.data('button')) {
-					saveButton('option', 'showingAlternate', false);
+					saveButton('option', 'showingAlternate', false).removeClass('ss-ui-action-constructive');
 				}
 				if(publishButton.data('button')) {
-					publishButton('option', 'showingAlternate', false);
+					publishButton('option', 'showingAlternate', false).removeClass('ss-ui-action-constructive');
 				}
 				this._super(e);
 			}

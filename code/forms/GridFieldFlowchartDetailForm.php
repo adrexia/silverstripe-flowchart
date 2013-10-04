@@ -84,10 +84,14 @@ class GridFieldFlowchartDetailForm_ItemRequest extends GridFieldDetailForm_ItemR
 		$existsOnLive = $this->record->getExistsOnLive();
 		
 		// Create the action buttons
-		$actions = new FieldList();
+		
+
+		$majorActions = CompositeField::create()->setName('MajorActions')->setTag('fieldset')->addExtraClass('ss-ui-buttonset');
+		
+		$actions = new FieldList(array($majorActions));
 		
 		if($this->record->canEdit()) {
-			$actions->push(FormAction::create('doSave', _t('SiteTree.BUTTONSAVED', 'Saved'))
+			$majorActions->push(FormAction::create('doSave', _t('SiteTree.BUTTONSAVED', 'Saved'))
 				->setAttribute('data-icon', 'accept')
 				->setAttribute('data-icon-alternate', 'addpage')
 				->setAttribute('data-text-alternate', _t('CMSMain.SAVEDRAFT','Save draft'))
@@ -97,7 +101,7 @@ class GridFieldFlowchartDetailForm_ItemRequest extends GridFieldDetailForm_ItemR
 		
 		if($this->record->canPublish() && !$this->record->IsDeletedFromStage) {
 			// "publish", as with "save", it supports an alternate state to show when action is needed.
-			$actions->push(
+			$majorActions->push(
 				$publish = FormAction::create('publish', _t('SiteTree.BUTTONPUBLISHED', 'Published'))
 					->setAttribute('data-icon', 'accept')
 					->setAttribute('data-icon-alternate', 'disk')
@@ -110,6 +114,8 @@ class GridFieldFlowchartDetailForm_ItemRequest extends GridFieldDetailForm_ItemR
 				$publish->addExtraClass('ss-ui-alternate');
 			}
 		}
+
+		//$actions->addExtraClass('ss-ui-buttonset');
 		
 		$form = new Form($this, 'ItemEditForm', $fields, $actions);
 		$form->loadDataFrom($this->record);
