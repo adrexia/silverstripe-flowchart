@@ -1,9 +1,17 @@
 <?php
-/*
-**/
-
+/**
+ * Represents one item on a {@link FlowchartPage} flowchart diagram
+ *
+ * @package cms
+ * @category admin
+ * @author scienceninjas@silverstripe.com
+ */
 class FlowState extends DataObject implements PermissionProvider {
 
+	/**
+	 * @var array
+	 * @static
+	 */
 	private static $db = array(
 		'Number'=>'Float',
 		'TitleText'=>'Text',
@@ -11,24 +19,46 @@ class FlowState extends DataObject implements PermissionProvider {
 		'Size'=>'Varchar(6)'
 	);
 
+	/**
+	 * @var array
+	 * @static
+	 */
 	private static $has_one = array(
 		'LinkedState'=>'FlowState',
 		'Parent'=>'FlowchartPage'
 	);
 
+	/**
+	 * @var array
+	 * @static
+	 */
 	private static $searchable_fields = array(
 		'Number',
 		'TitleText',
 		'Content',
 	);
 
+	/**
+	 * @var array
+	 * @static
+	 */
 	private static $summary_fields = array(
 		'Number'=>'Number',
 		'TitleText'=>'Title'
 	);
-	
+
+	/**
+	 * @var string
+	 * @static
+	 */
 	private static $default_sort = 'Number';
 
+	/**
+	 * Returns an array of the current display fields
+	 * @TODO explain this better, or rename the funciton to be more meaningful
+	 *
+	 * @return array
+	 */
 	public function getCurrentDisplayFields(){
 		return array(
 			'Number'=>'Number',
@@ -37,6 +67,10 @@ class FlowState extends DataObject implements PermissionProvider {
 		);
 	}
 
+	/**
+	 * Get the name of the {@link FlowchartPage} parent object
+	 * @return string
+	 */
 	public function getParentName(){
 		$parent = FlowchartPage::get()->byID($this->ParentID);
 		if($parent){
@@ -44,6 +78,11 @@ class FlowState extends DataObject implements PermissionProvider {
 		}
 	}
 
+	/**
+	 * Returns the {@Link FieldList} of cms form fields for editing this object
+	 *
+	 * @return FieldList
+	 */
 	public function getCMSFields(){
 		$fields = parent::getCMSFields();
 
@@ -66,6 +105,11 @@ class FlowState extends DataObject implements PermissionProvider {
 		return $fields;
 	}
 
+	/**
+	 * Get the Title of the FlowState
+	 *
+	 * @return string
+	 */
 	public function getTitle(){
 		$title = $this->TitleText;
 		if($title == ''){
@@ -77,7 +121,11 @@ class FlowState extends DataObject implements PermissionProvider {
 		return $textObj->LimitWordCount(10);
 	}
 
-
+	/**
+	 * Get an array of {@link Permission} definitions that this object supports
+	 *
+	 * @return array
+	 */
 	public function providePermissions() {
 		return array(
 			'PROCESS_FLOW_VIEW' => array(
@@ -98,5 +146,4 @@ class FlowState extends DataObject implements PermissionProvider {
 			)
 		);
 	}
-
 }

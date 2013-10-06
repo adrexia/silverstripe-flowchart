@@ -1,30 +1,46 @@
 <?php
 /**
- * Graphical interface for creating basic flowcharts
+ * Graphical interface for editing flowcharts.
+ *
+ * Provides a custom form for placing and linking {@link FlowState} objects on a {@link FlowchartPage}.
+ *
+ * @package cms
+ * @category form
+ * @author scienceninjas@silverstripe.com
  */
 class GridFieldFlowchartDetailForm extends GridFieldDetailForm {
 
 	/**
+	 * Constructs the form and adds the required CSS and JavaScript resources
 	 *
-	 * @var array
+	 * @return GridFieldFlowchartDetailForm
 	 */
-	protected static $css_files = array(
-		'flowchart/css/jsPlumb.css',
-		'flowchart/css/flowchart.css'
-	);
-
 	public function __construct($name = 'FlowchartDetailForm') {
 		parent::__construct($name);
-		Requirements::combine_files('flowchart.css', self::$css_files);
-		Requirements::combine_files('flowchart.js', $this->getJSRequirements());
+		Requirements::combine_files('flowchart.css', self::css_requirements());
+		Requirements::combine_files('flowchart.js', self::js_requirements());
 	}
 
 	/**
-	 * 
+	 * Returns an array of the CSS requirements for the form
+	 *
 	 * @return array
+	 * @static
 	 */
-	public function getJSRequirements(){
+	public static function css_requirements() {
+		return array(
+			'flowchart/css/jsPlumb.css',
+			'flowchart/css/flowchart.css'
+		);
+	}
 
+	/**
+	 * Returns an array of the JavaScript requirements for the form
+	 *
+	 * @return array
+	 * @static
+	 */
+	public static function js_requirements() {
 		return array(
 			'flowchart/js/thirdparty/jsPlumb/src/util.js',
 			'flowchart/js/thirdparty/jsPlumb/src/dom-adapter.js',
@@ -43,14 +59,22 @@ class GridFieldFlowchartDetailForm extends GridFieldDetailForm {
 			'flowchart/js/Flowchart.js'
 		);
 	}
-
 }
 
+/**
+ * Replaces the default gridfield ItemEditForm for a FlowchartPage to inject
+ * the custom workspace editing form when the gridfield detail form is requested.
+ * see {@link: GridFieldFlowchartDetailForm}
+ *
+ * @package cms
+ * @category form
+ * @author scienceninjas@silverstripe.com
+ */
 class GridFieldFlowchartDetailForm_ItemRequest extends GridFieldDetailForm_ItemRequest {
 
 	/**
-	 *
 	 * @var array
+	 * @static
 	 */
 	private static $allowed_actions = array(
 		'edit',
@@ -58,14 +82,14 @@ class GridFieldFlowchartDetailForm_ItemRequest extends GridFieldDetailForm_ItemR
 		'ItemEditForm',
 		'publish'
 	);
-	
+
 	/**
-	 * Builds an item edit form. 
-	 * 
-	 * @return Form 
+	 * Builds an item edit form.
+	 *
+	 * @return Form
 	 */
 	public function ItemEditForm() {
-		
+
 		// If there are no record set, redirect back to the "main" model admin
 		if (empty($this->record) || $this->record->ID == 0) {
 			$controller = Controller::curr();
@@ -73,23 +97,20 @@ class GridFieldFlowchartDetailForm_ItemRequest extends GridFieldDetailForm_ItemR
 			$controller->getResponse()->removeHeader('Location');   //clear the existing redirect
 			return $controller->redirect($noActionURL, 302);
 		}
-		
+
 		// Create form field
 		$fields = new FieldList();
 		$chartData = new HiddenField('FlowchartData');
 		$chartData->setAttribute('data-chart-storage', 'true');
 		$fields->push($chartData);
-		
-		
-		$existsOnLive = $this->record->getExistsOnLive();
-		
-		// Create the action buttons
-		
 
+
+		$existsOnLive = $this->record->getExistsOnLive();
+
+		// Create the action buttons
 		$majorActions = CompositeField::create()->setName('MajorActions')->setTag('fieldset')->addExtraClass('ss-ui-buttonset');
-		
 		$actions = new FieldList(array($majorActions));
-		
+
 		if($this->record->canEdit()) {
 			$majorActions->push(FormAction::create('doSave', _t('SiteTree.BUTTONSAVED', 'Saved'))
 				->setAttribute('data-icon', 'accept')
@@ -98,7 +119,7 @@ class GridFieldFlowchartDetailForm_ItemRequest extends GridFieldDetailForm_ItemR
 				->setUseButtonTag(true)
 			);
 		}
-		
+
 		if($this->record->canPublish() && !$this->record->IsDeletedFromStage) {
 			// "publish", as with "save", it supports an alternate state to show when action is needed.
 			$majorActions->push(
@@ -115,19 +136,17 @@ class GridFieldFlowchartDetailForm_ItemRequest extends GridFieldDetailForm_ItemR
 			}
 		}
 
-		//$actions->addExtraClass('ss-ui-buttonset');
-		
 		$form = new Form($this, 'ItemEditForm', $fields, $actions);
 		$form->loadDataFrom($this->record);
 		$form->Backlink = $this->getBackLink();
 		$form->setTemplate('Flowchart_EditForm');
 		return $form;
 	}
-	
+
 	/**
-	 * This method tries to blend DetailForm::doSave behaviour with CMSMain 
+	 * This method tries to blend DetailForm::doSave behaviour with CMSMain
 	 * publish behaviour. It might not be rock solid..
-	 * 
+	 *
 	 * @param array $data
 	 * @param Form $form
 	 * @return SS_HTTPResponse
@@ -136,7 +155,7 @@ class GridFieldFlowchartDetailForm_ItemRequest extends GridFieldDetailForm_ItemR
 		if(!$this->record->canPublish()) {
 			return $controller->httpError(403);
 		}
-		
+
 		$controller = Controller::curr();
 		$list = $this->gridField->getList();
 		if($list instanceof ManyManyList) {
@@ -145,7 +164,7 @@ class GridFieldFlowchartDetailForm_ItemRequest extends GridFieldDetailForm_ItemR
 		} else {
 			$extraData = null;
 		}
-		
+
 		try {
 			$this->record->writeWithoutVersion();
 			$form->saveInto($this->record);
@@ -167,10 +186,10 @@ class GridFieldFlowchartDetailForm_ItemRequest extends GridFieldDetailForm_ItemR
 			}
 			return $responseNegotiator->respond($controller->getRequest());
 		}
-		
+
 		$link = '"' . $this->record->Title . '"';
 		$message = _t(
-			'GridFieldDetailForm.Saved', 
+			'GridFieldDetailForm.Saved',
 			'Saved {name} {link}',
 			array(
 				'name' => $this->record->i18n_singular_name(),

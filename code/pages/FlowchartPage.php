@@ -1,5 +1,11 @@
 <?php
-
+/**
+ * Graphical interface for creating basic flowcharts
+ *
+ * @package cms
+ * @category page
+ * @author scienceninjas@silverstripe.com
+ */
 class FlowchartPage extends Page {
 
 	private static $icon = "flowchart/images/flowchart.png";
@@ -31,21 +37,48 @@ class FlowchartPage extends Page {
 
 class FlowchartPage_Controller extends Page_Controller {
 
+	/**
+	 * Initialises the controller and combines the script and css requirements
+	 *
+	 * @return void
+	 */
 	function init() {
 		parent::init();
-		Requirements::combine_files('flowchart.css', $this->getCSSRequirements());
-		Requirements::combine_files('flowchart.js', $this->getJSRequirements());
+		Requirements::combine_files('flowchart.css', self::css_requirements());
+		Requirements::combine_files('flowchart.js', self::js_requirements());
 	}
 
-	public function getCSSRequirements(){
+	/**
+	 * Returns the json_encoded flowchart data
+	 *
+	 * @return string
+	 */
+	public function getFlowchartData() {
+		// Strip the slashes that raw2SQL applies during saving in {@link GridFieldFlowchartDetailForm}
+		return stripslashes($this->failover->FlowchartData);
+	}
+
+
+	/**
+	 * Returns an array of the CSS requirements for the form
+	 *
+	 * @return array
+	 * @static
+	 */
+	private static function css_requirements() {
 		return array(
 			'flowchart/css/jsPlumb.css',
 			'flowchart/css/flowchart.css'
 		);
 	}
 
-	public function getJSRequirements(){
-
+	/**
+	 * Returns an array of the JavaScript {@link Requirements} for displaying the {@link FlowchartPage}
+	 *
+	 * @return array
+	 * @static
+	 */
+	private static function js_requirements(){
 		return array(
 			FRAMEWORK_DIR . '/thirdparty/jquery-entwine/dist/jquery.entwine-dist.js',
 			'flowchart/js/thirdparty/jsPlumb/src/util.js',
@@ -64,10 +97,5 @@ class FlowchartPage_Controller extends Page_Controller {
 			'flowchart/js/thirdparty/jsPlumb/src/jquery.jsPlumb.js',
 			'flowchart/js/Flowchart.js'
 		);
-	}
-
-	public function getFlowchartData() {
-		// Strip the slashes that raw2SQL applies during the doSave function
-		return stripslashes($this->failover->FlowchartData);
 	}
 }

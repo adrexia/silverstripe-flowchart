@@ -1,31 +1,67 @@
 <?php
 /**
  * Graphical interface for creating basic flowcharts
+ *
+ * @package cms
+ * @category admin
+ * @author scienceninjas@silverstripe.com
  */
 class FlowchartAdmin extends ModelAdmin {
 
+	/**
+	 * @var array
+	 * @static
+	 */
  	private static $managed_models = array('FlowchartPage','FlowState');
 
+	/**
+	 * @var string
+	 * @static
+	 */
 	private static $url_segment = 'flowcharts';
 
+	/**
+	 * @var string
+	 * @static
+	 */
 	private static $menu_title = 'Flowcharts';
 
+	/**
+	 * @var string
+	 * @static
+	 */
 	private static $menu_icon = "flowchart/images/flowchart.png";
 
+	/**
+	 * @var string
+	 * @static
+	 */
 	private static $tree_class = 'SS_Flowchart';
 
-	public function getEditForm($id = null, $fields = null){
+	/**
+	 * Returns the cms edit form for the managed model.
+	 * - FlowchartPage forms are replaced with the custom flowchart editing workspace form, see {@link: GridFieldFlowchartDetailForm}
+	 * - FlowState forms are default cms generated.
+	 *
+	 * @return GridFieldDetailForm
+	 */
+	public function getEditForm($id = null, $fields = null) {
 		$form = parent::getEditForm($id, $fields);
-		$gridField = $form->Fields()->fieldByName($this->sanitiseClassName($this->modelClass));
+		$sanitisedClassName = $this->sanitiseClassName($this->modelClass);
+		$gridField = $form->Fields()->fieldByName($sanitisedClassName);
 		$config = $gridField->getConfig();
 
-		if($this->sanitiseClassName($this->modelClass) == "FlowchartPage"){
+		// If editing a FlowchartPage, replace the default gridfield detail form
+		// with the custom flowchart workspace editing form
+		if($sanitisedClassName == "FlowchartPage") {
 			$config->removeComponentsByType('GridFieldDetailForm');
 			$config->removeComponentsByType('GridFieldAddNewButton');
 			$config->addComponent(new GridFieldFlowchartDetailForm());
-		} else if($this->sanitiseClassName($this->modelClass) == "FlowState"){
+		}
+		// If editing a FlowState, show its default junk
+		else if($sanitisedClassName == "FlowState") {
 			$config->getComponentByType('GridFieldDataColumns')->setDisplayFields(
-				singleton($this->sanitiseClassName($this->modelClass))->getCurrentDisplayFields()
+				singleton($sanitisedClassName)->getCurrentDisplayFields()
 			);
 		}
 		return $form;
