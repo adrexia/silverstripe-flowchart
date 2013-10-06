@@ -121,6 +121,22 @@ class FlowState extends DataObject implements PermissionProvider {
 		return $textObj->LimitWordCount(10);
 	}
 
+	public function canCreate($member = null) {
+		return Permission::check('FLOWCHART_VIEW');
+	}
+
+	public function canEdit($member = null) {
+		return Permission::check('FLOWCHART_EDIT');
+	}
+
+	public function canDelete($member = null) {
+		return Permission::check('FLOWCHART_DELETE');
+	}
+
+	public function canView($member = null) {
+		return Permission::check('FLOWCHART_CREATE');
+	}
+
 	/**
 	 * Get an array of {@link Permission} definitions that this object supports
 	 *
@@ -128,21 +144,21 @@ class FlowState extends DataObject implements PermissionProvider {
 	 */
 	public function providePermissions() {
 		return array(
-			'PROCESS_FLOW_VIEW' => array(
-				'name' => 'View process map admin',
-				'category' => 'Process Maps',
+			'FLOWCHART_VIEW' => array(
+				'name' => 'View flowchart admin',
+				'category' => 'Flowcharts',
 			),
-			'PROCESS_FLOW_EDIT' => array(
-				'name' => 'Edit process flows',
-				'category' => 'Process Maps',
+			'FLOWCHART_EDIT' => array(
+				'name' => 'Edit flowcharts',
+				'category' => 'Flowcharts',
 			),
-			'PROCESS_FLOW_DELETE' => array(
-				'name' => 'Delete from process flows',
-				'category' => 'Process Maps',
+			'FLOWCHART_DELETE' => array(
+				'name' => 'Delete flowcharts',
+				'category' => 'Flowcharts',
 			),
-			'PROCESS_FLOW_CREATE' => array(
-				'name' => 'Create process maps',
-				'category' => 'Process Maps'
+			'FLOWCHART_CREATE' => array(
+				'name' => 'Create flowcharts',
+				'category' => 'Flowcharts'
 			)
 		);
 	}

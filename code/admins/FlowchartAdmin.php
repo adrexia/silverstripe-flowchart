@@ -66,4 +66,20 @@ class FlowchartAdmin extends ModelAdmin {
 		}
 		return $form;
 	}
+
+	public function canCreate($member = null) {
+		return Permission::check('FLOWCHART_VIEW');
+	}
+
+	public function canEdit($member = null) {
+		return Permission::check('FLOWCHART_EDIT');
+	}
+
+	public function canDelete($member = null) {
+		return Permission::check('FLOWCHART_DELETE');
+	}
+
+	public function canView($member = null) {
+		return Permission::check('FLOWCHART_CREATE');
+	}
 }
