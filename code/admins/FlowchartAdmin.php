@@ -2,9 +2,8 @@
 /**
  * Graphical interface for creating basic flowcharts
  *
- * @package cms
+ * @package silverstripe-flowchart
  * @category admin
- * @author scienceninjas@silverstripe.com
  */
 class FlowchartAdmin extends ModelAdmin {
 

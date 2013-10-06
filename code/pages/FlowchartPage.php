@@ -2,9 +2,8 @@
 /**
  * Graphical interface for creating basic flowcharts
  *
- * @package cms
+ * @package silverstripe-flowchart
  * @category page
- * @author scienceninjas@silverstripe.com
  */
 class FlowchartPage extends Page {
 
@@ -35,6 +34,12 @@ class FlowchartPage extends Page {
 	}
 }
 
+/**
+ * Graphical interface for creating basic flowcharts
+ *
+ * @package silverstripe-flowchart
+ * @category controller
+ */
 class FlowchartPage_Controller extends Page_Controller {
 
 	/**
@@ -44,8 +49,8 @@ class FlowchartPage_Controller extends Page_Controller {
 	 */
 	function init() {
 		parent::init();
-		Requirements::combine_files('flowchart.css', self::css_requirements());
-		Requirements::combine_files('flowchart.js', self::js_requirements());
+		Requirements::combine_files('flowchart.css', $this->getCSSRequirements());
+		Requirements::combine_files('flowchart.js', $this->getJSRequirements());
 	}
 
 	/**
@@ -58,14 +63,12 @@ class FlowchartPage_Controller extends Page_Controller {
 		return stripslashes($this->failover->FlowchartData);
 	}
 
-
 	/**
 	 * Returns an array of the CSS requirements for the form
 	 *
 	 * @return array
-	 * @static
 	 */
-	private static function css_requirements() {
+	public function getCSSRequirements() {
 		return array(
 			'flowchart/css/jsPlumb.css',
 			'flowchart/css/flowchart.css'
@@ -76,9 +79,8 @@ class FlowchartPage_Controller extends Page_Controller {
 	 * Returns an array of the JavaScript {@link Requirements} for displaying the {@link FlowchartPage}
 	 *
 	 * @return array
-	 * @static
 	 */
-	private static function js_requirements(){
+	public function getJSRequirements() {
 		return array(
 			FRAMEWORK_DIR . '/thirdparty/jquery-entwine/dist/jquery.entwine-dist.js',
 			'flowchart/js/thirdparty/jsPlumb/src/util.js',

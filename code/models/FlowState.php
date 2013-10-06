@@ -2,9 +2,8 @@
 /**
  * Represents one item on a {@link FlowchartPage} flowchart diagram
  *
- * @package cms
- * @category admin
- * @author scienceninjas@silverstripe.com
+ * @package silverstripe-flowchart
+ * @category model
  */
 class FlowState extends DataObject implements PermissionProvider {
 
@@ -54,8 +53,7 @@ class FlowState extends DataObject implements PermissionProvider {
 	private static $default_sort = 'Number';
 
 	/**
-	 * Returns an array of the current display fields
-	 * @TODO explain this better, or rename the funciton to be more meaningful
+	 * Returns an array of the field names for displaying FlowStates in an admin gridflield summary view
 	 *
 	 * @return array
 	 */

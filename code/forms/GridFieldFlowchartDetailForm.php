@@ -4,9 +4,8 @@
  *
  * Provides a custom form for placing and linking {@link FlowState} objects on a {@link FlowchartPage}.
  *
- * @package cms
+ * @package silverstripe-flowchart
  * @category form
- * @author scienceninjas@silverstripe.com
  */
 class GridFieldFlowchartDetailForm extends GridFieldDetailForm {
 
@@ -17,17 +16,16 @@ class GridFieldFlowchartDetailForm extends GridFieldDetailForm {
 	 */
 	public function __construct($name = 'FlowchartDetailForm') {
 		parent::__construct($name);
-		Requirements::combine_files('flowchart.css', self::css_requirements());
-		Requirements::combine_files('flowchart.js', self::js_requirements());
+		Requirements::combine_files('flowchart.css', $this->getCSSRequirements());
+		Requirements::combine_files('flowchart.js', $this->getJSRequirements());
 	}
 
 	/**
 	 * Returns an array of the CSS requirements for the form
 	 *
 	 * @return array
-	 * @static
 	 */
-	public static function css_requirements() {
+	public function getCSSRequirements() {
 		return array(
 			'flowchart/css/jsPlumb.css',
 			'flowchart/css/flowchart.css'
@@ -38,9 +36,8 @@ class GridFieldFlowchartDetailForm extends GridFieldDetailForm {
 	 * Returns an array of the JavaScript requirements for the form
 	 *
 	 * @return array
-	 * @static
 	 */
-	public static function js_requirements() {
+	public function getJSRequirements() {
 		return array(
 			'flowchart/js/thirdparty/jsPlumb/src/util.js',
 			'flowchart/js/thirdparty/jsPlumb/src/dom-adapter.js',
@@ -84,12 +81,11 @@ class GridFieldFlowchartDetailForm_ItemRequest extends GridFieldDetailForm_ItemR
 	);
 
 	/**
-	 * Builds an item edit form.
+	 * Builds an item edit form
 	 *
 	 * @return Form
 	 */
 	public function ItemEditForm() {
-
 		// If there are no record set, redirect back to the "main" model admin
 		if (empty($this->record) || $this->record->ID == 0) {
 			$controller = Controller::curr();
@@ -103,7 +99,6 @@ class GridFieldFlowchartDetailForm_ItemRequest extends GridFieldDetailForm_ItemR
 		$chartData = new HiddenField('FlowchartData');
 		$chartData->setAttribute('data-chart-storage', 'true');
 		$fields->push($chartData);
-
 
 		$existsOnLive = $this->record->getExistsOnLive();
 
