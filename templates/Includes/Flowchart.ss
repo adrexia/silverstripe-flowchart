@@ -1,10 +1,9 @@
-<div class="flow-chart-view">
-	<div class="zoom" data-zoom="1">
-		<a href="#" class="zoom-in"><i class="icon-plus"></i></a>
-		<a href="#" class="zoom-out"><i class="icon-minus"></i></a>
-	</div>
+<div class="flowchart-zoom" data-zoom="1">
+		<a href="#" class="zoom-in" title="zoom in"><i class="icon-plus"></i></a>
+		<a href="#" class="zoom-out" title="zoom out"><i class="icon-minus"></i></a>
+</div>
+<div class="flowchart-view">
 	<div id="container" class="flowchart-container">
-
 		<form>
 			<input type="hidden" name="flow-chart-store" id="flow-chart-store" value='$FlowchartData'  data-chart-storage="true" />
 		</form>

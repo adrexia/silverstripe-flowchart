@@ -99,7 +99,7 @@ jsPlumb.ready(function($) {
 			/**
 			 * Set jsPlumb zoom property. Takes an integer value and zoom to that value
 			 *
-			 * NOTE: and unzoomed state is 1, 0.9 is zoomed out by 90%
+			 * NOTE: and unzoomed state is 1, 0.9 is zoomed out by 10%
 			 * 
 			 * @param Int
 			 */
@@ -113,7 +113,7 @@ jsPlumb.ready(function($) {
 					this.css(p[i] + "transform-origin",  "0 0 0");
 				}
 
-				this.parent().find('.zoom').attr('data-zoom', z);
+				$('.flowchart-zoom').attr('data-zoom', z);
 
 				jsPlumb.setZoom(z);
 			},
@@ -279,7 +279,7 @@ jsPlumb.ready(function($) {
 						$('#'+id).css({left: x, top:y}).removeClass('new-state');
 
 						// Calculate height needed in view mode
-						if(this.closest('.flow-chart-view').length > 0){
+						if(this.closest('.flowchart-view').length > 0){
 							if($('#'+id).length > 0){
 								h = $('#'+id).outerHeight();
 								if(h + y > height){
@@ -291,8 +291,8 @@ jsPlumb.ready(function($) {
 				}
 				
 				// set height needed in view mode
-				if(this.closest('.flow-chart-view').length > 0){
-					$('.flow-chart-view').height(height + 100); //lowest flowstate plus 100px padding
+				if(this.closest('.flowchart-view').length > 0){
+					$('.flowchart-view ').height(height + 100); //lowest flowstate plus 100px padding
 				}
 
 				//Reconnect flowchart. Miust check that both end points still exist
@@ -386,9 +386,9 @@ jsPlumb.ready(function($) {
 
 
 		// Zoom event handler
-		$('.flow-chart-view .zoom a').entwine({
+		$('.flowchart-zoom a').entwine({
 			onclick: function(){
-				var currentZoom = parseFloat(this.closest('.zoom').attr('data-zoom')),
+				var currentZoom = parseFloat(this.closest('.flowchart-zoom').attr('data-zoom')),
 				container = $('.flowchart-container');
 				if(this.hasClass('zoom-in')){
 					container.setZoom(currentZoom + 0.1);

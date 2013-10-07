@@ -2,7 +2,7 @@
 /**
  * Represents one item on a {@link FlowchartPage} flowchart diagram
  *
- * @package silverstripe-flowchart
+ * @package flowchart
  * @category model
  */
 class FlowState extends DataObject implements PermissionProvider {
@@ -12,7 +12,7 @@ class FlowState extends DataObject implements PermissionProvider {
 	 * @static
 	 */
 	private static $db = array(
-		'Number'=>'Float',
+		'Number'=>'Varchar(255)',
 		'TitleText'=>'Text',
 		'Content'=>'HTMLText',
 		'Size'=>'Varchar(6)'

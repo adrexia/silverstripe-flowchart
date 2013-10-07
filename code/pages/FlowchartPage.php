@@ -2,7 +2,7 @@
 /**
  * Graphical interface for creating basic flowcharts
  *
- * @package silverstripe-flowchart
+ * @package flowchart
  * @category page
  */
 class FlowchartPage extends Page {

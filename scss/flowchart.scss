@@ -146,8 +146,6 @@
 		border-radius:2px;
 		padding:0px;
 		overflow:visible;
-	/*	overflow-y:auto;
-		overflow-x:hidden; unfortunately these stop the drag action from working */
 		.cms-panel-header{
 			padding:0 20px;
 			margin-bottom:0;
@@ -175,10 +173,15 @@
 	}
 
 }
-.flow-chart-view{
+.flowchart-zoom{
+	float:right;
+}
+.flowchart-view{
 	@include box-sizing(border-box);
-	height:1500px;
+	height:auto;
+	position:relative;
 	overflow:auto;
+	clear:both;
 	@include respond(large-screens){
 		zoom:1.1;
 	}
@@ -188,29 +191,17 @@
 	@include respond(all-phones){
 		zoom:0.7;
 	}
-	&:hover{
-		.zoom{
-			opacity:1;
-		}
-	}
 	.flowchart-container{
 		position:relative;
 		float:left;
-	}
-	.zoom{
-		float:right;
-		opacity:0;
-
-		i{
-
-		}
+		width:100%;
 	}
 	.state.new-state{
 		display:none;
 	}
 
 }
-.flow-chart-view, .flowchart-admin-wrap{
+.flowchart-view, .flowchart-admin-wrap{
 	a:hover .state{
 		background:#f7f8f9;
 	}

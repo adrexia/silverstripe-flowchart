@@ -4,7 +4,7 @@
  *
  * Provides a custom form for placing and linking {@link FlowState} objects on a {@link FlowchartPage}.
  *
- * @package silverstripe-flowchart
+ * @package flowchart
  * @category form
  */
 class GridFieldFlowchartDetailForm extends GridFieldDetailForm {
