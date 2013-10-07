@@ -185,6 +185,9 @@
 	@include respond(large-screens){
 		zoom:1.1;
 	}
+	@include respond(tablets){
+		zoom:0.8;
+	}
 	@include respond(portrait-tablets){
 		zoom:0.8;
 	}
