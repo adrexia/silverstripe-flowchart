@@ -7,18 +7,38 @@
  */
 class FlowchartPage extends Page {
 
+	/**
+	 *
+	 * @var string
+	 */
 	private static $icon = "flowchart/images/flowchart.png";
 
+	/**
+	 *
+	 * @var string
+	 */
 	private static $description = 'A page for storing data and displaying flowcharts';
 
+	/**
+	 *
+	 * @var array
+	 */
 	private static $db = array(
 		'FlowchartData' => 'Text'
 	);
 
+	/**
+	 *
+	 * @var array
+	 */
 	private static $has_many = array(
 		"FlowStates" => "FlowState"
 	);
 
+	/**
+	 * 
+	 * @return FieldList
+	 */
 	public function getCMSFields() {
 		$fields = parent::getCMSFields();
 

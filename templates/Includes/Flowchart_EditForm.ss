@@ -42,8 +42,6 @@
 				<% end_loop %>
 			</div>
 			<div class="flowchart-wrap">
-				
-				
 				<div class="workspace">
 					<h1>Workspace</h1>
 				</div>

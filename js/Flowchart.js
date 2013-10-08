@@ -80,7 +80,7 @@ jsPlumb.ready(function($) {
 			 * Adjust overlays on a connection instance
 			 * Currently only sets the label overlay
 			 *
-			 * @parem JSPlumbConnection connectionInstance, String label
+			 * @param JSPlumbConnection connectionInstance, String label
 			 */
 			setOverlays: function(connectionInstance, label){
 				var overlayLabel = connectionInstance.getOverlay("label");
@@ -119,7 +119,7 @@ jsPlumb.ready(function($) {
 			},
 			/*
 			 * Set up special layout for flowchart construction interface
-			 * TO DO: Put user config values here for workspace size (currently in css)
+			 * @todo Put user config values here for workspace size (currently in css)
 			 */
 			layoutAdmin: function(){
 				var contentFields = this.closest('.cms-content-fields'),
@@ -400,7 +400,7 @@ jsPlumb.ready(function($) {
 		});
 
 		// This is a hack to apply layout on redraw. 
-		// TODO: Make this more elegant
+		// @todo Make this more elegant
 		$('.cms .cms-container').entwine({
 			redraw: function(){
 				this._super();
