@@ -1,5 +1,8 @@
 /** DISABLE TEXT SELECTION (SET ON BODY WHEN DRAGGING IS OCCURRING) **/
-.aLabel {
+.flowchart-container {
+  /** Z-INDEX **/
+}
+.flowchart-container .aLabel {
   font-size: 12px;
   font-weight: bold;
   line-height: 1.5em;
@@ -11,53 +14,45 @@
   -moz-transition: background-color 0.25s ease-in;
   transition: background-color 0.25s ease-in;
 }
-.aLabel._jsPlumb_hover {
+.flowchart-container .aLabel._jsPlumb_hover {
   background: #E26F1E;
   color: white;
 }
-
-._jsPlumb_source_hover, ._jsPlumb_target_hover {
+.flowchart-container ._jsPlumb_source_hover, .flowchart-container ._jsPlumb_target_hover {
   background: #f7f8f9 !important;
   color: white;
 }
-
-path, ._jsPlumb_endpoint {
+.flowchart-container path, .flowchart-container ._jsPlumb_endpoint {
   cursor: pointer;
 }
-
-path:hover, ._jsPlumb_endpoint:hover {
+.flowchart-container path:hover, .flowchart-container ._jsPlumb_endpoint:hover {
   background-color: black;
 }
-
-.dragHover {
+.flowchart-container .dragHover {
   border: 2px solid orange;
 }
-
-path {
+.flowchart-container path {
   cursor: pointer;
 }
-
-.cmd {
+.flowchart-container .cmd {
   padding: 0.5em;
   width: 60px;
 }
-.cmd:hover {
+.flowchart-container .cmd:hover {
   border: 2px solid #5c96bc;
   background-color: #89bcde;
   color: white;
 }
-.cmd:active {
+.flowchart-container .cmd:active {
   border: 2px solid orange;
   color: orange;
 }
-
-.label {
+.flowchart-container .label {
   font-size: 13px;
   padding: 8px;
   padding: 8px;
 }
-
-._jsPlumb_drag_select * {
+.flowchart-container ._jsPlumb_drag_select * {
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   -khtml-user-select: none;
@@ -65,32 +60,24 @@ path {
   -ms-user-select: none;
   user-select: none;
 }
-
-/** Z-INDEX **/
-._jsPlumb_connector {
+.flowchart-container ._jsPlumb_connector {
   z-index: 18;
 }
-
-._jsPlumb_endpoint {
+.flowchart-container ._jsPlumb_endpoint {
   z-index: 19;
 }
-
-._jsPlumb_overlay {
+.flowchart-container ._jsPlumb_overlay {
   z-index: 20;
 }
-
-._jsPlumb_connector._jsPlumb_hover {
+.flowchart-container ._jsPlumb_connector._jsPlumb_hover {
   z-index: 21 !important;
 }
-
-._jsPlumb_endpoint._jsPlumb_hover {
+.flowchart-container ._jsPlumb_endpoint._jsPlumb_hover {
   z-index: 22 !important;
 }
-
-._jsPlumb_overlay._jsPlumb_hover {
+.flowchart-container ._jsPlumb_overlay._jsPlumb_hover {
   z-index: 23 !important;
 }
-
-._jsPlumb_endpoint {
+.flowchart-container ._jsPlumb_endpoint {
   z-index: 3;
 }

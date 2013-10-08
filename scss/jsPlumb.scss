@@ -1,98 +1,99 @@
 /** DISABLE TEXT SELECTION (SET ON BODY WHEN DRAGGING IS OCCURRING) **/
+.flowchart-container{
+	.aLabel {
+		font-size:12px;
+		font-weight:bold;
+		line-height:1.5em;
+		color: #fff;
+		background-color: #555;
+		padding: 2px 8px;
+		cursor: pointer;
+		-webkit-transition: background-color 0.25s ease-in;
+		-moz-transition: background-color 0.25s ease-in;
+		transition: background-color 0.25s ease-in;
+		&._jsPlumb_hover {
+			background: #E26F1E;
+			color: white;
+		}
+	}
 
-.aLabel {
-	font-size:12px;
-	font-weight:bold;
-	line-height:1.5em;
-	color: #fff;
-	background-color: #555;
-	padding: 2px 8px;
-	cursor: pointer;
-	-webkit-transition: background-color 0.25s ease-in;
-	-moz-transition: background-color 0.25s ease-in;
-	transition: background-color 0.25s ease-in;
-	&._jsPlumb_hover {
-		background: #E26F1E;
+	._jsPlumb_source_hover, ._jsPlumb_target_hover {
+		background: #f7f8f9 !important;
 		color: white;
 	}
-}
 
-._jsPlumb_source_hover, ._jsPlumb_target_hover {
-	background: #f7f8f9 !important;
-	color: white;
-}
-
-path, ._jsPlumb_endpoint {
-	cursor: pointer;
-}
-
-path:hover, ._jsPlumb_endpoint:hover {
-	background-color: black;
-}
-
-.dragHover {
-	border: 2px solid orange;
-}
-
-path {
-	cursor: pointer;
-}
-
-.cmd {
-	padding: 0.5em;
-	width: 60px;
-	&:hover {
-		border: 2px solid #5c96bc;
-		background-color: #89bcde;
-		color: white;
+	path, ._jsPlumb_endpoint {
+		cursor: pointer;
 	}
-	&:active {
+
+	path:hover, ._jsPlumb_endpoint:hover {
+		background-color: black;
+	}
+
+	.dragHover {
 		border: 2px solid orange;
-		color: orange;
 	}
-}
 
-.label {
-	font-size: 13px;
-	padding: 8px;
-	padding: 8px;
-}
+	path {
+		cursor: pointer;
+	}
+
+	.cmd {
+		padding: 0.5em;
+		width: 60px;
+		&:hover {
+			border: 2px solid #5c96bc;
+			background-color: #89bcde;
+			color: white;
+		}
+		&:active {
+			border: 2px solid orange;
+			color: orange;
+		}
+	}
+
+	.label {
+		font-size: 13px;
+		padding: 8px;
+		padding: 8px;
+	}
 
 
-._jsPlumb_drag_select * {
-	-webkit-touch-callout: none;
-	-webkit-user-select: none;
-	-khtml-user-select: none;
-	-moz-user-select: -moz-none;
-	-ms-user-select: none;
-	user-select: none;
-}
+	._jsPlumb_drag_select * {
+		-webkit-touch-callout: none;
+		-webkit-user-select: none;
+		-khtml-user-select: none;
+		-moz-user-select: -moz-none;
+		-ms-user-select: none;
+		user-select: none;
+	}
 
-/** Z-INDEX **/
-._jsPlumb_connector {
-	z-index: 18;
-}
+	/** Z-INDEX **/
+	._jsPlumb_connector {
+		z-index: 18;
+	}
 
-._jsPlumb_endpoint {
-	z-index: 19;
-}
+	._jsPlumb_endpoint {
+		z-index: 19;
+	}
 
-._jsPlumb_overlay {
-	z-index: 20;
-}
+	._jsPlumb_overlay {
+		z-index: 20;
+	}
 
-._jsPlumb_connector._jsPlumb_hover {
-	z-index: 21 !important;
-}
+	._jsPlumb_connector._jsPlumb_hover {
+		z-index: 21 !important;
+	}
 
-._jsPlumb_endpoint._jsPlumb_hover {
-	z-index: 22 !important;
-}
+	._jsPlumb_endpoint._jsPlumb_hover {
+		z-index: 22 !important;
+	}
 
-._jsPlumb_overlay._jsPlumb_hover {
-	z-index: 23 !important;
-}
+	._jsPlumb_overlay._jsPlumb_hover {
+		z-index: 23 !important;
+	}
 
-._jsPlumb_endpoint {
-	z-index: 3;
+	._jsPlumb_endpoint {
+		z-index: 3;
+	}
 }
