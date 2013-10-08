@@ -56,14 +56,6 @@ class FlowState extends DataObject implements PermissionProvider {
 	 * @var string
 	 * @static
 	 */
-	private static $create_table_options = array(
-		'MySQLDatabase' => 'ENGINE=MyISAM'
-	);
-
-	/**
-	 * @var string
-	 * @static
-	 */
 	private static $indexes = array(
 		"fulltext (TitleText, Content)"
 	);
