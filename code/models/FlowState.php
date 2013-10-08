@@ -53,6 +53,22 @@ class FlowState extends DataObject implements PermissionProvider {
 	private static $default_sort = 'Number';
 
 	/**
+	 * @var string
+	 * @static
+	 */
+	private static $create_table_options = array(
+		'MySQLDatabase' => 'ENGINE=MyISAM'
+	);
+
+	/**
+	 * @var string
+	 * @static
+	 */
+	private static $indexes = array(
+		"fulltext (TitleText, Content)"
+	);
+
+	/**
 	 * Returns an array of the field names for displaying FlowStates in an admin gridflield summary view
 	 *
 	 * @return array
@@ -66,14 +82,14 @@ class FlowState extends DataObject implements PermissionProvider {
 	}
 
 	/**
-	 * Get the name of the {@link FlowchartPage} parent object
+	 * Get the name of the {@link FlowchartPage} parent page
 	 * @return string
 	 */
-	public function getParentName(){
-		$parent = FlowchartPage::get()->byID($this->ParentID);
-		if($parent){
-			return $parent->Title;
+	public function getParentName() {
+		if ($this->ParentID) {
+			return $this->Parent()->Title;
 		}
+		return null;
 	}
 
 	/**
@@ -159,5 +175,52 @@ class FlowState extends DataObject implements PermissionProvider {
 				'category' => 'Flowcharts'
 			)
 		);
+	}
+
+	/**
+	 * Get a link to the parent flowchart page.
+	 * This is required by SOLR so that FlowStates can be clicked on in search results.
+	 *
+	 * @return string
+	 */
+	public function Link($action = 'show') {
+		if ($this->ParentID) {
+			return $this->Parent()->Link();
+		}
+		return null;
+	}
+
+	/**
+	 * Returns a comma separated string of field names that are searchable {@link getSearchResults()}
+	 *
+	 * @return string
+	 */
+	protected function getSearchableFields() {
+		return implode(self::$searchable_fields, ',');
+	}
+
+	/**
+	 * Returns the FlowState objects that match the search query, using a boolean mode fulltext search
+	 *
+	 * @param string $searchQuery
+	 */
+	public function getSearchResults($searchQuery) {
+		return DataObject::get("FlowState", "MATCH (". $this->getSearchableFields() .") AGAINST ('". $searchQuery ."' IN BOOLEAN MODE)");
+	}
+
+	/**
+	 * Returns a custom SearchContext that matches search queries with filters on the searchable fields in this object
+	 *
+	 * @TODO make this actually search
+	 * @return SearchContext
+	 */
+	public function getCustomSearchContext() {
+		$fields = new FieldList(self::$searchable_fields);
+		$filters = array(
+			'Number' => new PartialMatchFilter('Number'),
+			'TitleText' => new PartialMatchFilter('TitleText'),
+			'Content' => new PartialMatchFilter('Content')
+		);
+		return new SearchContext($this->class, $fields, $filters);
 	}
 }
