@@ -28,7 +28,8 @@ class GridFieldFlowchartDetailForm extends GridFieldDetailForm {
 	public function getCSSRequirements() {
 		return array(
 			'flowchart/css/jsPlumb.css',
-			'flowchart/css/flowchart.css'
+			'flowchart/css/flowchart.css',
+			'flowchart/css/flowchart-admin.css'
 		);
 	}
 
