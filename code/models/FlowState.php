@@ -15,7 +15,7 @@ class FlowState extends DataObject implements PermissionProvider {
 		'Number'=>'Varchar(255)',
 		'TitleText'=>'Text',
 		'Content'=>'HTMLText',
-		'Size'=>'Varchar(6)'
+		'Size'=>'Varchar(255)'
 	);
 
 	/**
