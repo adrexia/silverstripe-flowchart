@@ -44,10 +44,6 @@ jsPlumb.ready(function($) {
 					self.workspaceInit();
 				}
 			},
-			
-			onunmatch: function(){
-				this._super();
-			},
 
 			/**
 			 * Get the chart data from an input field, return a deserialized
