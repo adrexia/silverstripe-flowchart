@@ -245,13 +245,13 @@ jsPlumb.ready(function($) {
 					from = '', to = '', label = '',
 					height = 0, h;
 
+				//Apply jsplumb defaults
+				this.jsPlumbDefaults();
+
 				//If this is a new chart, quit out of this function
 				if(savedFlow === null){
 					return false;
 				}
-
-				//Apply jsplumb defaults
-				this.jsPlumbDefaults();
 
 				//Turns off jsPlumb listeners
 				jsPlumb.unbind();
