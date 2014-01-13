@@ -44,6 +44,10 @@ jsPlumb.ready(function($) {
 					self.workspaceInit();
 				}
 			},
+			
+			onunmatch: function(){
+				this._super();
+			},
 
 			/**
 			 * Get the chart data from an input field, return a deserialized
@@ -421,10 +425,10 @@ jsPlumb.ready(function($) {
 				var saveButton = this.find('button[name=action_doSave]'),
 					publishButton = this.find('button[name=action_publish]');
 				if(saveButton.data('button')) {
-					saveButton('option', 'showingAlternate', false).removeClass('ss-ui-action-constructive');
+					saveButton.button('option', 'showingAlternate', false).removeClass('ss-ui-action-constructive');
 				}
 				if(publishButton.data('button')) {
-					publishButton('option', 'showingAlternate', false).removeClass('ss-ui-action-constructive');
+					publishButton.button('option', 'showingAlternate', false).removeClass('ss-ui-action-constructive');
 				}
 				this._super(e);
 			}
