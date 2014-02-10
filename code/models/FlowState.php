@@ -92,6 +92,9 @@ class FlowState extends DataObject implements PermissionProvider {
 	public function getCMSFields(){
 		$fields = parent::getCMSFields();
 
+		// Remove in ordder to filter out current record ID 
+		$fields->removeByName('LinkedStateID');
+
 		$number = $fields->dataFieldByName('Number');
 		$title = $fields->dataFieldByName('TitleText');
 		$content = $fields->dataFieldByName('Content');
@@ -102,6 +105,13 @@ class FlowState extends DataObject implements PermissionProvider {
 
 		$spanOpt = array("two"=>"two","four"=>"four","six"=>"six","eight"=>"eight");
 		$fields->insertAfter(new DropdownField('Size', "Relative display width", $spanOpt),'TitleText');
+
+		$fields->insertAfter(
+			$linkedState = new DropdownField('LinkedStateID', "Linked State", FlowState::get()->exclude('ID', $this->ID)->map('ID', 'Title')),
+			'Content'
+		);
+
+		$linkedState->setRightTitle("HTML link to another State");
 
 		// If within a flowchart page remove parentID
 		if(!(Controller::curr() instanceof FlowchartAdmin)) {
