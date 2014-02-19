@@ -111,7 +111,8 @@ class FlowState extends DataObject implements PermissionProvider {
 			'Content'
 		);
 
-		$linkedState->setRightTitle("HTML link to another State");
+		$linkedState->setEmptyString(' ')
+					->setRightTitle("HTML link to another State");
 
 		// If within a flowchart page remove parentID
 		if(!(Controller::curr() instanceof FlowchartAdmin)) {
