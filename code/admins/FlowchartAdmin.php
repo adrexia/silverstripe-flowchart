@@ -45,6 +45,10 @@ class FlowchartAdmin extends ModelAdmin {
 	 * @return GridFieldDetailForm
 	 */
 	public function getEditForm($id = null, $fields = null) {
+		
+		// Fix CMS regression that filters flowcharts by live status
+		Versioned::reading_stage('Stage');
+
 		$form = parent::getEditForm($id, $fields);
 		$sanitisedClassName = $this->sanitiseClassName($this->modelClass);
 		$gridField = $form->Fields()->fieldByName($sanitisedClassName);
@@ -53,6 +57,7 @@ class FlowchartAdmin extends ModelAdmin {
 		// If editing a FlowchartPage, replace the default gridfield detail form
 		// with the custom flowchart workspace editing form
 		if($sanitisedClassName == "FlowchartPage") {
+
 			$config->removeComponentsByType('GridFieldDetailForm');
 			$config->removeComponentsByType('GridFieldAddNewButton');
 			$config->addComponent(new GridFieldFlowchartDetailForm());
