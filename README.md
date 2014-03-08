@@ -14,7 +14,10 @@ http://jsplumbtoolkit.com/
 Use composer to install via Packagist or clone repo. The module name should be flowchart.
 Run dev/build?flush=all.
 
-(Note: if the modale admin appears broken, you may need to run flush=all from within the admin (module overrides edit form within a gridfield.)
+(Note: if the flowchart admin appears broken, you may need to run flush=all from within the admin (module overrides edit form within a gridfield.)
+
+## Development
+For an overview of ticket and milestone status see: https://huboard.com/adrexia/silverstripe-flowchart/
 
 ##Screen Shots
 
