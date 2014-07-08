@@ -60,6 +60,10 @@ class FlowState extends DataObject implements PermissionProvider {
 		"fulltext (TitleText, Content)"
 	);
 
+	private static $create_table_options = array(
+		'MySQLDatabase' => 'ENGINE=MyISAM'
+	);
+
 	/**
 	 * Returns an array of the field names for displaying FlowStates in an admin gridflield summary view
 	 *
