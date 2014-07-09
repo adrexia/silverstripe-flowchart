@@ -8042,8 +8042,7 @@ jQuery.extend({
 					jQuery.event.trigger("ajaxStop");
 				}
 			}
-		}
-
+		
 		return jqXHR;
 	},
 

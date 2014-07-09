@@ -434,5 +434,93 @@ jsPlumb.ready(function($) {
 			}
 		});
 
+		/**
+		 * Handle dialogs for quickly adding states to flowcharts 
+		 */
+		$('.cms a.flowchart-add-state').entwine({
+			UUID: null,
+			onmatch: function() {
+				this._super();
+				this.setUUID(new Date().getTime());
+			},
+			onunmatch: function() {
+				this._super();
+			},
+			/*
+			 * Generate dialog, and strip of unwanted components
+			 */
+			onclick: function(e) {
+				e.preventDefault();
+
+				var self = this, 
+					url = this.attr('href'),
+					id = 'ss-ui-dialog-' + this.getUUID(),
+					dialog = $('#' + id),
+					controllerUrl = this.attr('data-controller-url');
+
+				if(!dialog.length) {
+					dialog = $('<div class="ss-ui-dialog" id="' + id + '" />');
+					$('body').append(dialog);
+				}
+				
+				dialog.ssdialog({
+					iframeUrl: url,
+					autoOpen: true,
+					dialogExtraClass: 'flowchart-add-state-dialog',
+					modal: true,
+					position: {
+						my: "center",
+						at: "center",
+						of: window
+					}
+				});
+
+				$.ajax({
+					url: url,
+					success: function(data, status, xhr) {
+						dialog.html(data); // Strip of left and main menus
+						self.setParentID(dialog);
+						self.attachSubmitHandler(dialog, controllerUrl);
+					}
+				});
+			},
+			/* 
+			* Set ParentID of State to the current flowchart
+			* 
+			* @param: dialog
+			*/
+			setParentID: function(dialog){
+				var parentID = this.attr('data-parent-id');
+				
+				dialog.contents().find("select option[value="+parentID+"]").prop("selected", true);
+			},
+			/*
+			* Handle the triggering and processing of the form
+			*
+			* @param dialog 
+			*/
+			attachSubmitHandler: function(dialog, controllerUrl){
+				var self = this,
+					contents = dialog.contents(),
+					form = dialog.find('#Form_ItemEditForm');
+
+				form.find('#Form_ItemEditForm_action_doSave').on('click', function(e){
+					e.preventDefault();
+					form.ajaxSubmit({
+						headers: {
+							"X-ControllerURL": null,
+							"X-Pjax": "StateList"
+						},
+						success: function(e, xhr, settings) {
+							dialog.empty().ssdialog("close");
+							// @todo: find a better way to render the new state
+							$('.cms-container').loadFragment(controllerUrl, 'StateList');
+							return false;
+						}
+					});
+				});
+			}
+		});
+
 	});
 });

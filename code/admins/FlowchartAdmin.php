@@ -71,6 +71,37 @@ class FlowchartAdmin extends ModelAdmin {
 		return $form;
 	}
 
+	/**
+	 * Override redirection logic to avoid redirects when adding from modal
+	 */
+	public function redirect($url, $code=302) {
+		if($this->request->isAjax()) {
+			//Return url null if this is related to adding a state from a modal
+			if($this->request->getHeader('X-Pjax') === "StateList"){
+				$this->response->addHeader('X-ControllerURL', null);
+			} else{
+				$this->response->addHeader('X-ControllerURL', $url);
+			}
+			if($this->request->getHeader('X-Pjax') && !$this->response->getHeader('X-Pjax')) {
+				$this->response->addHeader('X-Pjax', $this->request->getHeader('X-Pjax'));
+			}
+			$oldResponse = $this->response;
+			$newResponse = new LeftAndMain_HTTPResponse(
+				$oldResponse->getBody(), 
+				$oldResponse->getStatusCode(),
+				$oldResponse->getStatusDescription()
+			);
+			foreach($oldResponse->getHeaders() as $k => $v) {
+				$newResponse->addHeader($k, $v);
+			}
+			$newResponse->setIsFinished(true);
+			$this->response = $newResponse;
+			return ''; // Actual response will be re-requested by client
+		} else {
+			parent::redirect($url, $code);
+		}
+	}
+
 	public function canCreate($member = null) {
 		return Permission::check('FLOWCHART_VIEW');
 	}

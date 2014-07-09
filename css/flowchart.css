@@ -1,93 +1,21 @@
 /* Shared flowchart styles, and FE styles */
-.flowchart-zoom {
-  float: right;
-}
+.flowchart-zoom { float: right; }
 
-.flowchart-view {
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-  height: auto;
-  position: relative;
-  overflow: auto;
-  clear: both;
-}
-@media only screen and (min-width: 2880px) {
-  .flowchart-view {
-    zoom: 1.1;
-  }
-}
-@media only screen and (min-width: 768px) and (max-width: 1159px) {
-  .flowchart-view {
-    zoom: 0.8;
-  }
-}
-@media only screen and (max-width: 768px) {
-  .flowchart-view {
-    zoom: 0.8;
-  }
-}
-@media only screen and (max-width: breakpoint(768px)) {
-  .flowchart-view {
-    zoom: 0.7;
-  }
-}
-.flowchart-view .flowchart-container {
-  position: relative;
-  float: left;
-  width: 100%;
-}
-.flowchart-view .state.new-state {
-  display: none;
-}
+.flowchart-view { -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; height: auto; position: relative; overflow: auto; clear: both; }
+@media only screen and (min-width: 2880px) { .flowchart-view { zoom: 1.1; } }
+@media only screen and (min-width: 768px) and (max-width: 1159px) { .flowchart-view { zoom: 0.8; } }
+@media only screen and (max-width: 768px) { .flowchart-view { zoom: 0.8; } }
+@media only screen and (max-width: breakpoint(768px)) { .flowchart-view { zoom: 0.7; } }
+.flowchart-view .flowchart-container { position: relative; float: left; width: 100%; }
+.flowchart-view .state.new-state { display: none; }
 
-.flowchart-view a:hover .state, .flowchart-admin-wrap a:hover .state {
-  background: #f7f8f9;
-}
-.flowchart-view .state, .flowchart-admin-wrap .state {
-  z-index: 80;
-  min-height: 60px;
-  position: absolute;
-  border: 1px solid #ccc;
-  background-color: #fff;
-  color: #333;
-  font-size: 14px;
-  display: table;
-}
-.flowchart-view .state .drag-content, .flowchart-admin-wrap .state .drag-content {
-  line-height: 1.5em;
-  padding: 10px 30px 10px 5px;
-}
-.flowchart-view .state .num, .flowchart-admin-wrap .state .num {
-  font-weight: bold;
-  font-size: 1.3em;
-  color: #fff;
-  width: 55px;
-  text-align: center;
-  display: table-cell;
-  vertical-align: middle;
-}
-.flowchart-view .state .num span, .flowchart-admin-wrap .state .num span {
-  background: #333;
-  width: 45px;
-  height: 40px;
-  display: table-cell;
-  vertical-align: middle;
-}
-.flowchart-view .col.two, .flowchart-admin-wrap .col.two {
-  width: 215px;
-}
-.flowchart-view .col.four, .flowchart-admin-wrap .col.four {
-  width: 430px;
-}
-.flowchart-view .col.six, .flowchart-admin-wrap .col.six {
-  width: 645px;
-}
-.flowchart-view .col.eight, .flowchart-admin-wrap .col.eight {
-  width: 860px;
-}
-.flowchart-view .connect, .flowchart-admin-wrap .connect {
-  width: 100%;
-  height: 10px;
-  cursor: pointer;
-}
+.flowchart-view a:hover .state, .flowchart-admin-wrap a:hover .state { background: #f7f8f9; }
+.flowchart-view .state, .flowchart-admin-wrap .state { z-index: 80; min-height: 60px; position: absolute; border: 1px solid #ccc; background-color: #fff; color: #333; font-size: 14px; display: table; }
+.flowchart-view .state .drag-content, .flowchart-admin-wrap .state .drag-content { line-height: 1.5em; padding: 10px 30px 10px 5px; }
+.flowchart-view .state .num, .flowchart-admin-wrap .state .num { font-weight: bold; font-size: 1.3em; color: #fff; width: 55px; text-align: center; display: table-cell; vertical-align: middle; }
+.flowchart-view .state .num span, .flowchart-admin-wrap .state .num span { background: #333; width: 45px; height: 40px; display: table-cell; vertical-align: middle; }
+.flowchart-view .col.two, .flowchart-admin-wrap .col.two { width: 215px; }
+.flowchart-view .col.four, .flowchart-admin-wrap .col.four { width: 430px; }
+.flowchart-view .col.six, .flowchart-admin-wrap .col.six { width: 645px; }
+.flowchart-view .col.eight, .flowchart-admin-wrap .col.eight { width: 860px; }
+.flowchart-view .connect, .flowchart-admin-wrap .connect { width: 100%; height: 10px; cursor: pointer; }

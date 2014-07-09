@@ -1,83 +1,21 @@
 /** DISABLE TEXT SELECTION (SET ON BODY WHEN DRAGGING IS OCCURRING) **/
-.flowchart-container {
-  /** Z-INDEX **/
-}
-.flowchart-container .aLabel {
-  font-size: 12px;
-  font-weight: bold;
-  line-height: 1.5em;
-  color: #fff;
-  background-color: #555;
-  padding: 2px 8px;
-  cursor: pointer;
-  -webkit-transition: background-color 0.25s ease-in;
-  -moz-transition: background-color 0.25s ease-in;
-  transition: background-color 0.25s ease-in;
-}
-.flowchart-container .aLabel._jsPlumb_hover {
-  background: #E26F1E;
-  color: white;
-}
-.flowchart-container ._jsPlumb_source_hover, .flowchart-container ._jsPlumb_target_hover {
-  background: #f7f8f9 !important;
-  color: white;
-}
-.flowchart-container path, .flowchart-container ._jsPlumb_endpoint {
-  cursor: pointer;
-}
-.flowchart-container path:hover, .flowchart-container ._jsPlumb_endpoint:hover {
-  background-color: black;
-}
-.flowchart-container .dragHover {
-  border: 2px solid orange;
-}
-.flowchart-container path {
-  cursor: pointer;
-}
-.flowchart-container .cmd {
-  padding: 0.5em;
-  width: 60px;
-}
-.flowchart-container .cmd:hover {
-  border: 2px solid #5c96bc;
-  background-color: #89bcde;
-  color: white;
-}
-.flowchart-container .cmd:active {
-  border: 2px solid orange;
-  color: orange;
-}
-.flowchart-container .label {
-  font-size: 13px;
-  padding: 8px;
-  padding: 8px;
-}
-.flowchart-container ._jsPlumb_drag_select * {
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: -moz-none;
-  -ms-user-select: none;
-  user-select: none;
-}
-.flowchart-container ._jsPlumb_connector {
-  z-index: 18;
-}
-.flowchart-container ._jsPlumb_endpoint {
-  z-index: 19;
-}
-.flowchart-container ._jsPlumb_overlay {
-  z-index: 20;
-}
-.flowchart-container ._jsPlumb_connector._jsPlumb_hover {
-  z-index: 21 !important;
-}
-.flowchart-container ._jsPlumb_endpoint._jsPlumb_hover {
-  z-index: 22 !important;
-}
-.flowchart-container ._jsPlumb_overlay._jsPlumb_hover {
-  z-index: 23 !important;
-}
-.flowchart-container ._jsPlumb_endpoint {
-  z-index: 3;
-}
+.flowchart-container { /** Z-INDEX **/ }
+.flowchart-container .aLabel { font-size: 12px; font-weight: bold; line-height: 1.5em; color: #fff; background-color: #555; padding: 2px 8px; cursor: pointer; -webkit-transition: background-color 0.25s ease-in; -moz-transition: background-color 0.25s ease-in; transition: background-color 0.25s ease-in; }
+.flowchart-container .aLabel._jsPlumb_hover { background: #E26F1E; color: white; }
+.flowchart-container ._jsPlumb_source_hover, .flowchart-container ._jsPlumb_target_hover { background: #f7f8f9 !important; color: white; }
+.flowchart-container path, .flowchart-container ._jsPlumb_endpoint { cursor: pointer; }
+.flowchart-container path:hover, .flowchart-container ._jsPlumb_endpoint:hover { background-color: black; }
+.flowchart-container .dragHover { border: 2px solid orange; }
+.flowchart-container path { cursor: pointer; }
+.flowchart-container .cmd { padding: 0.5em; width: 60px; }
+.flowchart-container .cmd:hover { border: 2px solid #5c96bc; background-color: #89bcde; color: white; }
+.flowchart-container .cmd:active { border: 2px solid orange; color: orange; }
+.flowchart-container .label { font-size: 13px; padding: 8px; padding: 8px; }
+.flowchart-container ._jsPlumb_drag_select * { -webkit-touch-callout: none; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: -moz-none; -ms-user-select: none; user-select: none; }
+.flowchart-container ._jsPlumb_connector { z-index: 18; }
+.flowchart-container ._jsPlumb_endpoint { z-index: 19; }
+.flowchart-container ._jsPlumb_overlay { z-index: 20; }
+.flowchart-container ._jsPlumb_connector._jsPlumb_hover { z-index: 21 !important; }
+.flowchart-container ._jsPlumb_endpoint._jsPlumb_hover { z-index: 22 !important; }
+.flowchart-container ._jsPlumb_overlay._jsPlumb_hover { z-index: 23 !important; }
+.flowchart-container ._jsPlumb_endpoint { z-index: 3; }

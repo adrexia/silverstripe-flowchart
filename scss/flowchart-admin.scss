@@ -1,11 +1,22 @@
 @import 'compass';
 @import 'mixins';
 
-
 /*
 	Styles for the admin interface
 */
 .flowchart-admin-wrap{
+
+	.flowchart-add-state {
+		display:inline-block;
+		float:right;
+		margin-top:-1px;
+		margin-right:-10px;
+		.ui-button-text{
+			padding:1px 6px;
+		}
+	}
+
+
 
 	//Temp bug fix
 	#Form_ItemEditForm_error{
@@ -170,5 +181,43 @@
 
 	.title {
 		cursor: move;
+	}
+}
+
+/*
+* Fixes to the dialog boxes when adding states inline 
+*/
+.flowchart-add-state-dialog{
+	width:100%;
+	.cms-content{
+		width:100%;
+	}
+	.ss-ui-dialog{
+		padding:0;
+	}
+	.cms-content-header.north{
+		display:none; //we don't need this
+	}
+	.cms-edit-form{
+		height:100%;
+		overflow:auto;
+		position:relative;
+		z-index:inherit; // fix z-index issue on textfields
+	}
+	.ui-tabs-panel{
+		overflow:hidden; // the form itself will overflow
+	}
+	.cms-content-fields{
+		height:100%;
+		fieldset{
+			padding-bottom:55px; //match height of actions bar
+		}
+	}
+	.cms-content-actions{
+		@include box-sizing(border-box);
+		position:absolute;
+		bottom:0px;
+		width:100%;
+		height:55px;
 	}
 }
