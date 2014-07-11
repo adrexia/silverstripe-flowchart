@@ -11,7 +11,7 @@ class FlowchartAdmin extends ModelAdmin {
 	 * @var array
 	 * @static
 	 */
- 	private static $managed_models = array('FlowchartPage','FlowState');
+	private static $managed_models = array('FlowchartPage','FlowState');
 
 	/**
 	 * @var string
@@ -76,16 +76,25 @@ class FlowchartAdmin extends ModelAdmin {
 	 */
 	public function redirect($url, $code=302) {
 		if($this->request->isAjax()) {
-			//Return url null if this is related to adding a state from a modal
+
 			if($this->request->getHeader('X-Pjax') === "StateList"){
+				// Return url null if this is related to add a new state from flowchartadmin
 				$this->response->addHeader('X-ControllerURL', null);
+
+				// Pass the ID back to the JS. @todo, find a way to do this that isn't a hack
+				$ID =(int)substr($url, strrpos($url, '/')+1);
+				if(is_int($ID) && $ID > 0){
+					$this->response->addHeader('X-ID', $ID);
+				}
 			} else{
 				$this->response->addHeader('X-ControllerURL', $url);
 			}
 			if($this->request->getHeader('X-Pjax') && !$this->response->getHeader('X-Pjax')) {
 				$this->response->addHeader('X-Pjax', $this->request->getHeader('X-Pjax'));
 			}
+
 			$oldResponse = $this->response;
+
 			$newResponse = new LeftAndMain_HTTPResponse(
 				$oldResponse->getBody(), 
 				$oldResponse->getStatusCode(),
@@ -94,6 +103,7 @@ class FlowchartAdmin extends ModelAdmin {
 			foreach($oldResponse->getHeaders() as $k => $v) {
 				$newResponse->addHeader($k, $v);
 			}
+
 			$newResponse->setIsFinished(true);
 			$this->response = $newResponse;
 			return ''; // Actual response will be re-requested by client

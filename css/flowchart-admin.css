@@ -48,9 +48,11 @@
 .flowchart-add-state-dialog { width: 100%; }
 .flowchart-add-state-dialog .cms-content { width: 100%; }
 .flowchart-add-state-dialog .ss-ui-dialog { padding: 0; }
-.flowchart-add-state-dialog .cms-content-header.north { display: none; }
+.flowchart-add-state-dialog .cms-content-header.north { width: 100%; }
+.flowchart-add-state-dialog .cms-content-header.north .cms_backlink, .flowchart-add-state-dialog .cms-content-header.north .cms-content-header-tabs, .flowchart-add-state-dialog .cms-content-header.north a.cms-panel-link, .flowchart-add-state-dialog .cms-content-header.north .sep { display: none; }
 .flowchart-add-state-dialog .cms-edit-form { height: 100%; overflow: auto; position: relative; z-index: inherit; }
 .flowchart-add-state-dialog .ui-tabs-panel { overflow: hidden; }
 .flowchart-add-state-dialog .cms-content-fields { height: 100%; }
 .flowchart-add-state-dialog .cms-content-fields fieldset { padding-bottom: 55px; }
 .flowchart-add-state-dialog .cms-content-actions { -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; position: absolute; bottom: 0px; width: 100%; height: 55px; }
+.flowchart-add-state-dialog #Form_ItemEditForm_Content_ssmedia, .flowchart-add-state-dialog #Form_ItemEditForm_Content_sslink, .flowchart-add-state-dialog #Form_ItemEditForm_Content_unlink { display: none; }

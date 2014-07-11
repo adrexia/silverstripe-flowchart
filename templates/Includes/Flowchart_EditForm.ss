@@ -29,11 +29,18 @@
 				</fieldset>
 				<h3 class="cms-panel-header states-heading">
 					New States 
-					<a href="admin/flowcharts/FlowState/EditForm/field/FlowState/item/new" class="action flowchart-add-state ss-ui-action-constructive ss-ui-button ui-button ui-widget ui-state-default ui-corner-all new new-link" data-parent-id="$Record.ID" role="button" data-popupclass="flowchart-state-popup" aria-disabled="false" <% with $Controller %>data-controller-url="$Link"<% end_with %>>
+					<a href="admin/flowcharts/FlowState/EditForm/field/FlowState/item/new" class="action flowchart-add-state ss-ui-action-constructive ss-ui-button ui-button ui-widget ui-state-default ui-corner-all new new-link" data-parent-id="$Record.ID" role="button" data-popupclass="flowchart-state-popup" aria-disabled="false" data-controller-url="$Controller.GetAllStatesLink()">
 					+
 					</a>
 				</h3>
-				<% include StateList %>
+				<% if $Record.FlowStates %>
+					<% with $Record %>
+						<% loop $FlowStates.Reverse %>
+							<% include State %>
+						<% end_loop %>
+					<% end_with %>
+				<% end_if %>
+				
 			</div>
 			<div class="flowchart-wrap">
 				<div class="workspace">

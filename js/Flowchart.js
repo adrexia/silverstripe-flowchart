@@ -35,16 +35,18 @@ jsPlumb.ready(function($) {
 					]
 				});
 			},
-			onmatch: function(){
+			onmatch: function(e){
 				var self = this;
 				this._super();
+
+
 				self.loadFlowChart();
 
 				if(this.closest('.flowchart-admin-wrap').length > 0){
 					self.workspaceInit();
 				}
 			},
-			
+
 			onunmatch: function(){
 				this._super();
 			},
@@ -244,6 +246,8 @@ jsPlumb.ready(function($) {
 					id = 0, x = 0, y = 0,
 					from = '', to = '', label = '',
 					height = 0, h;
+
+					console.log('loadFlow');
 
 				//Apply jsplumb defaults
 				this.jsPlumbDefaults();
@@ -447,7 +451,7 @@ jsPlumb.ready(function($) {
 				this._super();
 			},
 			/*
-			 * Generate dialog, and strip of unwanted components
+			 * Save draft, generate dialog, and strip of unwanted components
 			 */
 			onclick: function(e) {
 				e.preventDefault();
@@ -457,6 +461,8 @@ jsPlumb.ready(function($) {
 					id = 'ss-ui-dialog-' + this.getUUID(),
 					dialog = $('#' + id),
 					controllerUrl = this.attr('data-controller-url');
+
+				self.addClass('quick-add-init');
 
 				if(!dialog.length) {
 					dialog = $('<div class="ss-ui-dialog" id="' + id + '" />');
@@ -479,6 +485,8 @@ jsPlumb.ready(function($) {
 					url: url,
 					success: function(data, status, xhr) {
 						dialog.html(data); // Strip of left and main menus
+						dialog.find('#Root').prepend(dialog.find('form .cms-content-header'));
+						dialog.find('form .dialog-message').addClass('message');
 						self.setParentID(dialog);
 						self.attachSubmitHandler(dialog, controllerUrl);
 					}
@@ -504,23 +512,47 @@ jsPlumb.ready(function($) {
 					contents = dialog.contents(),
 					form = dialog.find('#Form_ItemEditForm');
 
+					console.log(controllerUrl);
+
 				form.find('#Form_ItemEditForm_action_doSave').on('click', function(e){
 					e.preventDefault();
-					form.ajaxSubmit({
+					$.ajax({
+						url: form.attr('action'),
+						type: "POST",
+						data: form.serialize(), // serializes the form's elements.
 						headers: {
-							"X-ControllerURL": null,
 							"X-Pjax": "StateList"
 						},
 						success: function(e, xhr, settings) {
-							dialog.empty().ssdialog("close");
+							console.log(xhr);
+
+							var newID = settings.getResponseHeader('X-ID'),
+							getState = controllerUrl+"/"+newID;
+							
 							// @todo: find a better way to render the new state
-							$('.cms-container').loadFragment(controllerUrl, 'StateList');
+
+							$.ajax({
+								url: getState,
+								type: "GET",
+								success: function(e, xhr, settings) {
+									console.log(xhr);
+
+									dialog.empty().ssdialog("close");
+									// @todo: find a better way to render the new state
+
+
+								//	$('.cms-container').loadFragment(getState, 'StateList').success(function(data, status, xhr) {
+								//		$('.flowchart-container').loadFlowChart();
+								//		$('.flowchart-container').workspaceInit();
+								//	});
+									return false;
+								}
+							});
 							return false;
 						}
 					});
 				});
 			}
 		});
-
 	});
 });

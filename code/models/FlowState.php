@@ -113,6 +113,10 @@ class FlowState extends DataObject implements PermissionProvider {
 		$spanOpt = array("two"=>"two","four"=>"four","six"=>"six","eight"=>"eight");
 		$fields->insertAfter(new DropdownField('Size', "Relative display width", $spanOpt),'TitleText');
 
+		$fields->insertBefore(
+			new LiteralField('InfoMessage', '<p class="dialog-message notice hide">Some editor functionality is unavailable via this dialog box. To add images and links, please edit the stage directly</p>'),
+			'Content'
+		);
 		$fields->insertAfter(
 			$linkedState = new DropdownField('LinkedStateID', "Linked State", FlowState::get()->exclude('ID', $this->ID)->map('ID', 'Title')),
 			'Content'
@@ -233,4 +237,5 @@ class FlowState extends DataObject implements PermissionProvider {
 		);
 		return new SearchContext($this->class, $fields, $filters);
 	}
+
 }

@@ -16,8 +16,6 @@
 		}
 	}
 
-
-
 	//Temp bug fix
 	#Form_ItemEditForm_error{
 		display:none;
@@ -196,7 +194,14 @@
 		padding:0;
 	}
 	.cms-content-header.north{
-		display:none; //we don't need this
+		width:100%;
+		//we don't need this, hide it
+		.cms_backlink, 
+		.cms-content-header-tabs, 
+		a.cms-panel-link, 
+		.sep {
+			display:none;
+		}
 	}
 	.cms-edit-form{
 		height:100%;
@@ -220,4 +225,12 @@
 		width:100%;
 		height:55px;
 	}
+
+	// Hide all functionality requiring extra modals
+	#Form_ItemEditForm_Content_ssmedia, 
+	#Form_ItemEditForm_Content_sslink,
+	#Form_ItemEditForm_Content_unlink {
+		display:none;
+	}
+
 }

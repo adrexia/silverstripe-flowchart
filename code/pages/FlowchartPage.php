@@ -120,18 +120,4 @@ class FlowchartPage_Controller extends Page_Controller {
 			'flowchart/js/Flowchart.js'
 		);
 	}
-
-	public function getResponseNegotiator() {
-		$negotiator = parent::getResponseNegotiator();
-		$self = $this;
-		// Register a new callback
-		$negotiator->setCallback('StateList', function() use(&$self) {
-			return $self->StateList();
-		});
-		return $negotiator;
-	}
-
-	public function StateList() {
-		return $this->renderWith('StateList');
-	}
 }
