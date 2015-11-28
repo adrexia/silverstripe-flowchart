@@ -146,7 +146,7 @@ class FlowState extends DataObject implements PermissionProvider {
 	}
 
 	public function canCreate($member = null) {
-		return Permission::check('FLOWCHART_VIEW');
+		return Permission::check('FLOWCHART_CREATE');
 	}
 
 	public function canEdit($member = null) {
@@ -158,7 +158,7 @@ class FlowState extends DataObject implements PermissionProvider {
 	}
 
 	public function canView($member = null) {
-		return Permission::check('FLOWCHART_CREATE');
+		return Permission::check('FLOWCHART_VIEW');
 	}
 
 	/**
